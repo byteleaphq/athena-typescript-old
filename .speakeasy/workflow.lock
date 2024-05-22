@@ -1,0 +1,27 @@
+speakeasyVersion: 1.295.0
+sources:
+    athenacopiolet:
+        sourceNamespace: athenacopiolet
+        sourceRevisionDigest: sha256:236f637337e8d17c620b6c0dd309c945f5dd484b0dbbc07cbcf8585d2e0e27f2
+        sourceBlobDigest: sha256:2826eba1908dbaece05a6b60a47d92bd15c5b68d8524a24a14e26d2650f83010
+        tags:
+            - latest
+targets:
+    my-first-target:
+        source: athenacopiolet
+        sourceNamespace: athenacopiolet
+        sourceRevisionDigest: sha256:236f637337e8d17c620b6c0dd309c945f5dd484b0dbbc07cbcf8585d2e0e27f2
+        sourceBlobDigest: sha256:2826eba1908dbaece05a6b60a47d92bd15c5b68d8524a24a14e26d2650f83010
+        outLocation: /Users/shreyaan/Desktop/sdk/athena-copilot-typescript
+workflow:
+    workflowVersion: 1.0.0
+    sources:
+        athenacopiolet:
+            inputs:
+                - location: ../../../Downloads/openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/shreyaan/shreyaan/athenacopiolet
+    targets:
+        my-first-target:
+            target: typescript
+            source: athenacopiolet

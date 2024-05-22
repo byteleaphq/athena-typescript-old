@@ -1,0 +1,11 @@
+workflowVersion: 1.0.0
+sources:
+    athenacopiolet:
+        inputs:
+            - location: ../../../Downloads/openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/shreyaan/shreyaan/athenacopiolet
+targets:
+    my-first-target:
+        target: typescript
+        source: athenacopiolet
