@@ -5,7 +5,12 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostDocumentBrainIdUrlRequestBody = {};
+export type PostDocumentBrainIdUrlRequestBody = {
+    /**
+     * Url of the website that you want to add
+     */
+    url?: string | undefined;
+};
 
 export type PostDocumentBrainIdUrlRequest = {
     brainId: string;
@@ -32,15 +37,33 @@ export namespace PostDocumentBrainIdUrlRequestBody$ {
         PostDocumentBrainIdUrlRequestBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        url?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         PostDocumentBrainIdUrlRequestBody
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 }
 
 /** @internal */

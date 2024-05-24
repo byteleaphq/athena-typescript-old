@@ -46,11 +46,18 @@ export class Brain extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.PostBrainResponse> {
         const input$ = request;
-        void input$; // request input is unused
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.PostBrainRequestBody$.outboundSchema.optional().parse(value$),
+            "Input validation failed"
+        );
+        const body$ =
+            payload$ === undefined ? null : enc$.encodeJSON("body", payload$, { explode: true });
 
         const path$ = this.templateURLComponent("/brain/")();
 
@@ -77,6 +84,7 @@ export class Brain extends ClientSDK {
                 path: path$,
                 headers: headers$,
                 query: query$,
+                body: body$,
             },
             options
         );
@@ -84,60 +92,17 @@ export class Brain extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostBrainResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, 401, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.PostBrainResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else if (this.matchResponse(response, 500, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.PostBrainBrainResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostBrainResponse>()
+            .json(200, operations.PostBrainResponse$, { hdrs: true, key: "object" })
+            .json(401, errors.PostBrainResponseBody$, { hdrs: true, err: true })
+            .fail(["4XX", "5XX"])
+            .json(500, errors.PostBrainBrainResponseBody$, { hdrs: true, err: true })
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -180,32 +145,15 @@ export class Brain extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetBrainResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetBrainResponse>()
+            .json(200, operations.GetBrainResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -271,46 +219,16 @@ export class Brain extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PutBrainBrainIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, 500, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.PutBrainBrainIdResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PutBrainBrainIdResponse>()
+            .json(200, operations.PutBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .json(500, errors.PutBrainBrainIdResponseBody$, { hdrs: true, err: true })
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -373,46 +291,16 @@ export class Brain extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetBrainBrainIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, 404, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.GetBrainBrainIdResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetBrainBrainIdResponse>()
+            .json(200, operations.GetBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .json(404, errors.GetBrainBrainIdResponseBody$, { hdrs: true, err: true })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -475,31 +363,14 @@ export class Brain extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.DeleteBrainBrainIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.DeleteBrainBrainIdResponse>()
+            .json(200, operations.DeleteBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 }

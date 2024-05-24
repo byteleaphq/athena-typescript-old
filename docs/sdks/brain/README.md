@@ -26,7 +26,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({});
+  const result = await athenaCopilot.brain.postBrain({
+    name: "Test - brain",
+  });
 
   // Handle the result
   console.log(result)
@@ -46,7 +48,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostBrainResponse](../../models/operations/postbrainresponse.md)>**
+**Promise\<[operations.PostBrainResponse](../../models/operations/postbrainresponse.md)\>**
 ### Errors
 
 | Error Object                      | Status Code                       | Content Type                      |
@@ -91,7 +93,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetBrainResponse](../../models/operations/getbrainresponse.md)>**
+**Promise\<[operations.GetBrainResponse](../../models/operations/getbrainresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -115,7 +117,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.putBrainBrainId("<value>", {});
+  const result = await athenaCopilot.brain.putBrainBrainId("<value>", {
+    name: "Test Updated Brain",
+  });
 
   // Handle the result
   console.log(result)
@@ -136,7 +140,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PutBrainBrainIdResponse](../../models/operations/putbrainbrainidresponse.md)>**
+**Promise\<[operations.PutBrainBrainIdResponse](../../models/operations/putbrainbrainidresponse.md)\>**
 ### Errors
 
 | Error Object                       | Status Code                        | Content Type                       |
@@ -181,7 +185,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetBrainBrainIdResponse](../../models/operations/getbrainbrainidresponse.md)>**
+**Promise\<[operations.GetBrainBrainIdResponse](../../models/operations/getbrainbrainidresponse.md)\>**
 ### Errors
 
 | Error Object                       | Status Code                        | Content Type                       |
@@ -226,7 +230,7 @@ run();
 
 ### Response
 
-**Promise<[operations.DeleteBrainBrainIdResponse](../../models/operations/deletebrainbrainidresponse.md)>**
+**Promise\<[operations.DeleteBrainBrainIdResponse](../../models/operations/deletebrainbrainidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

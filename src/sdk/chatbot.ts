@@ -8,7 +8,6 @@ import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
-import * as errors from "../models/errors";
 import * as operations from "../models/operations";
 
 export class Chatbot extends ClientSDK {
@@ -46,11 +45,19 @@ export class Chatbot extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.PostChatbotCreateResponse> {
         const input$ = request;
-        void input$; // request input is unused
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) =>
+                operations.PostChatbotCreateRequestBody$.outboundSchema.optional().parse(value$),
+            "Input validation failed"
+        );
+        const body$ =
+            payload$ === undefined ? null : enc$.encodeJSON("body", payload$, { explode: true });
 
         const path$ = this.templateURLComponent("/chatbot/create")();
 
@@ -77,6 +84,7 @@ export class Chatbot extends ClientSDK {
                 path: path$,
                 headers: headers$,
                 query: query$,
+                body: body$,
             },
             options
         );
@@ -84,32 +92,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotCreateResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotCreateResponse>()
+            .json(200, operations.PostChatbotCreateResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -152,32 +143,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotListResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotListResponse>()
+            .json(200, operations.PostChatbotListResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -241,32 +215,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotGetResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotGetResponse>()
+            .json(200, operations.PostChatbotGetResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -330,32 +287,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetChatbotAnalyticsResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetChatbotAnalyticsResponse>()
+            .json(200, operations.GetChatbotAnalyticsResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -422,32 +362,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetChatbotGetMessagesResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetChatbotGetMessagesResponse>()
+            .json(200, operations.GetChatbotGetMessagesResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -458,11 +381,19 @@ export class Chatbot extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.PostChatbotUpdateResponse> {
         const input$ = request;
-        void input$; // request input is unused
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Content-Type", "application/json");
         headers$.set("Accept", "application/json");
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) =>
+                operations.PostChatbotUpdateRequestBody$.outboundSchema.optional().parse(value$),
+            "Input validation failed"
+        );
+        const body$ =
+            payload$ === undefined ? null : enc$.encodeJSON("body", payload$, { explode: true });
 
         const path$ = this.templateURLComponent("/chatbot/update")();
 
@@ -489,6 +420,7 @@ export class Chatbot extends ClientSDK {
                 path: path$,
                 headers: headers$,
                 query: query$,
+                body: body$,
             },
             options
         );
@@ -496,32 +428,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotUpdateResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotUpdateResponse>()
+            .json(200, operations.PostChatbotUpdateResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -585,32 +500,15 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotDeleteResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotDeleteResponse>()
+            .json(200, operations.PostChatbotDeleteResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -674,31 +572,14 @@ export class Chatbot extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostChatbotResetResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostChatbotResetResponse>()
+            .json(200, operations.PostChatbotResetResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 }

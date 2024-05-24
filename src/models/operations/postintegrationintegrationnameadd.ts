@@ -5,11 +5,14 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostIntegrationIntegrationNameAddRequestBody = {};
+export type PostIntegrationIntegrationNameAddRequestBody = {
+    brainId?: string | undefined;
+    pageIds?: Array<string> | undefined;
+};
 
 export type PostIntegrationIntegrationNameAddRequest = {
     /**
-     * notion / confluence
+     * Currently supported integrations are "notion" and "confluence". More integrations will be added in the future.
      */
     integrationName: string;
     requestBody?: PostIntegrationIntegrationNameAddRequestBody | undefined;
@@ -35,15 +38,38 @@ export namespace PostIntegrationIntegrationNameAddRequestBody$ {
         PostIntegrationIntegrationNameAddRequestBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            brain_id: z.string().optional(),
+            page_ids: z.array(z.string()).optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.brain_id === undefined ? null : { brainId: v.brain_id }),
+                ...(v.page_ids === undefined ? null : { pageIds: v.page_ids }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        brain_id?: string | undefined;
+        page_ids?: Array<string> | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         PostIntegrationIntegrationNameAddRequestBody
-    > = z.object({});
+    > = z
+        .object({
+            brainId: z.string().optional(),
+            pageIds: z.array(z.string()).optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.brainId === undefined ? null : { brain_id: v.brainId }),
+                ...(v.pageIds === undefined ? null : { page_ids: v.pageIds }),
+            };
+        });
 }
 
 /** @internal */

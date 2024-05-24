@@ -5,7 +5,28 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatRequestBody = {};
+/**
+ * The integration to use for the chat
+ */
+export enum Integration {
+    Files = "files",
+    DataWarehouse = "data-warehouse",
+}
+
+export type PostChatRequestBody = {
+    /**
+     * The ID of the brain to associate with the chat
+     */
+    brainId: string;
+    /**
+     * The name of the chat
+     */
+    name: string;
+    /**
+     * The integration to use for the chat
+     */
+    integration?: Integration | undefined;
+};
 
 /**
  * CREATED
@@ -22,16 +43,46 @@ export type PostChatResponse = {
 };
 
 /** @internal */
+export namespace Integration$ {
+    export const inboundSchema = z.nativeEnum(Integration);
+    export const outboundSchema = inboundSchema;
+}
+
+/** @internal */
 export namespace PostChatRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatRequestBody, z.ZodTypeDef, unknown> = z.object(
-        {}
-    );
+    export const inboundSchema: z.ZodType<PostChatRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            brain_id: z.string(),
+            name: z.string(),
+            integration: Integration$.inboundSchema.optional(),
+        })
+        .transform((v) => {
+            return {
+                brainId: v.brain_id,
+                name: v.name,
+                ...(v.integration === undefined ? null : { integration: v.integration }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        brain_id: string;
+        name: string;
+        integration?: string | undefined;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatRequestBody> = z.object(
-        {}
-    );
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatRequestBody> = z
+        .object({
+            brainId: z.string(),
+            name: z.string(),
+            integration: Integration$.outboundSchema.optional(),
+        })
+        .transform((v) => {
+            return {
+                brain_id: v.brainId,
+                name: v.name,
+                ...(v.integration === undefined ? null : { integration: v.integration }),
+            };
+        });
 }
 
 /** @internal */

@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 698fc2d5-898d-4d0b-89ca-fb7127989704
 management:
-  docChecksum: 227d2b044915b095f5f4535dd6e4dc71
+  docChecksum: 62ea32b2b7fec08902ed949c07f7fd9d
   docVersion: 1.0.0
-  speakeasyVersion: 1.295.0
-  generationVersion: 2.333.3
-  releaseVersion: 0.0.1
-  configChecksum: 3a070b73a53953e914795f3451c3d517
+  speakeasyVersion: 1.295.2
+  generationVersion: 2.335.5
+  releaseVersion: 0.0.2
+  configChecksum: cbb93f701d7cb72789b8e300dae714f0
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.9.4
+    core: 3.9.6
     flattening: 2.81.1
     globalSecurity: 2.82.9
     globalSecurityCallbacks: 0.1.0
@@ -35,6 +35,7 @@ generatedFiles:
   - src/lib/config.ts
   - src/lib/encodings.ts
   - src/lib/http.ts
+  - src/lib/primitives.ts
   - src/lib/retries.ts
   - src/lib/schemas.ts
   - src/lib/sdks.ts
@@ -130,6 +131,7 @@ generatedFiles:
   - docs/models/operations/postdocumentbrainidfilerequest.md
   - docs/models/operations/postdocumentbrainidfileresponsebody.md
   - docs/models/operations/postdocumentbrainidfileresponse.md
+  - docs/models/operations/integration.md
   - docs/models/operations/postchatrequestbody.md
   - docs/models/operations/postchatresponsebody.md
   - docs/models/operations/postchatresponse.md

@@ -5,7 +5,13 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatbotUpdateRequestBody = {};
+export type PostChatbotUpdateRequestBody = {
+    /**
+     * The name of the chatbot
+     */
+    name?: string | undefined;
+    urls?: Array<string> | undefined;
+};
 
 /**
  * OK
@@ -23,13 +29,34 @@ export type PostChatbotUpdateResponse = {
 
 /** @internal */
 export namespace PostChatbotUpdateRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotUpdateRequestBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<PostChatbotUpdateRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            name: z.string().optional(),
+            urls: z.array(z.string()).optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.urls === undefined ? null : { urls: v.urls }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        name?: string | undefined;
+        urls?: Array<string> | undefined;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateRequestBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateRequestBody> = z
+        .object({
+            name: z.string().optional(),
+            urls: z.array(z.string()).optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.urls === undefined ? null : { urls: v.urls }),
+            };
+        });
 }
 
 /** @internal */

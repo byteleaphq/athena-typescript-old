@@ -5,9 +5,7 @@
 import { SDKHooks } from "../hooks";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config";
 import { HTTPClient } from "../lib/http";
-import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
-import * as errors from "../models/errors";
 import * as operations from "../models/operations";
 
 export class Ogranisation extends ClientSDK {
@@ -77,31 +75,14 @@ export class Ogranisation extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetOrganisationResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetOrganisationResponse>()
+            .json(200, operations.GetOrganisationResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 }

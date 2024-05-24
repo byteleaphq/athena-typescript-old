@@ -28,7 +28,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdText("{{brain_id}}", {});
+  const result = await athenaCopilot.document.postDocumentBrainIdText("{{brain_id}}", {
+    content: "What is an operating system? An operating system (OS) is the program that, after being initially loaded into the computer by a boot program, manages all of the other application programs in a computer. The application programs make use of the operating system by making requests for services through a defined application program interface (API). In addition, users can interact directly with the operating system through a user interface, such as a command-line interface (CLI) or a graphical UI (GUI). Why use an operating system? An operating system brings powerful benefits to computer software and software development. Without an operating system, every application would need to include its own UI, as well as the comprehensive code needed to handle all low-level functionality of the underlying computer, such as disk storage, network interfaces and so on. Considering the vast array of underlying hardware available, this would vastly bloat the size of every application and make software development impractical. Instead, many common tasks, such as sending a network packet or displaying text on a standard output device, such as a display, can be offloaded to system software that serves as an intermediary between the applications and the hardware. The system software provides a consistent and repeatable way for applications to interact with the hardware without the applications needing to know any details about the hardware. As long as each application accesses the same resources and services in the same way, that system software -- the operating system -- can service almost any number of applications. This vastly reduces the amount of time and coding required to develop and debug an application, while ensuring that users can control, configure and manage the system hardware through a common and well-understood interface.",
+  });
 
   // Handle the result
   console.log(result)
@@ -49,7 +51,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostDocumentBrainIdTextResponse](../../models/operations/postdocumentbrainidtextresponse.md)>**
+**Promise\<[operations.PostDocumentBrainIdTextResponse](../../models/operations/postdocumentbrainidtextresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -73,7 +75,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdUrl("{{brain_id}}", {});
+  const result = await athenaCopilot.document.postDocumentBrainIdUrl("{{brain_id}}", {
+    url: "https://en.wikipedia.org/wiki/Artificial_intelligence",
+  });
 
   // Handle the result
   console.log(result)
@@ -94,7 +98,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostDocumentBrainIdUrlResponse](../../models/operations/postdocumentbrainidurlresponse.md)>**
+**Promise\<[operations.PostDocumentBrainIdUrlResponse](../../models/operations/postdocumentbrainidurlresponse.md)\>**
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
@@ -140,7 +144,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetDocumentBrainIdDocumentIdDownloadResponse](../../models/operations/getdocumentbrainiddocumentiddownloadresponse.md)>**
+**Promise\<[operations.GetDocumentBrainIdDocumentIdDownloadResponse](../../models/operations/getdocumentbrainiddocumentiddownloadresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -184,7 +188,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetDocumentBrainIdResponse](../../models/operations/getdocumentbrainidresponse.md)>**
+**Promise\<[operations.GetDocumentBrainIdResponse](../../models/operations/getdocumentbrainidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -229,7 +233,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetDocumentBrainIdDocumentIdResponse](../../models/operations/getdocumentbrainiddocumentidresponse.md)>**
+**Promise\<[operations.GetDocumentBrainIdDocumentIdResponse](../../models/operations/getdocumentbrainiddocumentidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -274,7 +278,7 @@ run();
 
 ### Response
 
-**Promise<[operations.DeleteDocumentBrainIdDocumentIdResponse](../../models/operations/deletedocumentbrainiddocumentidresponse.md)>**
+**Promise\<[operations.DeleteDocumentBrainIdDocumentIdResponse](../../models/operations/deletedocumentbrainiddocumentidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -319,7 +323,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostDocumentBrainIdFileResponse](../../models/operations/postdocumentbrainidfileresponse.md)>**
+**Promise\<[operations.PostDocumentBrainIdFileResponse](../../models/operations/postdocumentbrainidfileresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

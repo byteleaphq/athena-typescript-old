@@ -10,7 +10,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-    const result = await athenaCopilot.brain.postBrain({});
+    const result = await athenaCopilot.brain.postBrain({
+        name: "Test - brain",
+    });
 
     // Handle the result
     console.log(result);

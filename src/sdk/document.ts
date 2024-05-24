@@ -102,32 +102,15 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostDocumentBrainIdTextResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostDocumentBrainIdTextResponse>()
+            .json(200, operations.PostDocumentBrainIdTextResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -193,46 +176,16 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostDocumentBrainIdUrlResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else if (this.matchResponse(response, 500, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return errors.PostDocumentBrainIdUrlResponseBody$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        ...val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            throw result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostDocumentBrainIdUrlResponse>()
+            .json(200, operations.PostDocumentBrainIdUrlResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .json(500, errors.PostDocumentBrainIdUrlResponseBody$, { hdrs: true, err: true })
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -306,34 +259,19 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetDocumentBrainIdDocumentIdDownloadResponse$.inboundSchema.parse(
-                        {
-                            ...responseFields$,
-                            Headers: this.unpackHeaders(response.headers),
-                            object: val$,
-                        }
-                    );
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] =
+            await this.matcher<operations.GetDocumentBrainIdDocumentIdDownloadResponse>()
+                .json(200, operations.GetDocumentBrainIdDocumentIdDownloadResponse$, {
+                    hdrs: true,
+                    key: "object",
+                })
+                .fail(["4XX", "5XX"])
+                .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -396,32 +334,15 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetDocumentBrainIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetDocumentBrainIdResponse>()
+            .json(200, operations.GetDocumentBrainIdResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -491,32 +412,18 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetDocumentBrainIdDocumentIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetDocumentBrainIdDocumentIdResponse>()
+            .json(200, operations.GetDocumentBrainIdDocumentIdResponse$, {
+                hdrs: true,
+                key: "object",
+            })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -586,32 +493,18 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.DeleteDocumentBrainIdDocumentIdResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.DeleteDocumentBrainIdDocumentIdResponse>()
+            .json(200, operations.DeleteDocumentBrainIdDocumentIdResponse$, {
+                hdrs: true,
+                key: "object",
+            })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -691,31 +584,14 @@ export class Document extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostDocumentBrainIdFileResponse$.inboundSchema.parse({
-                        ...responseFields$,
-                        Headers: this.unpackHeaders(response.headers),
-                        object: val$,
-                    });
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostDocumentBrainIdFileResponse>()
+            .json(200, operations.PostDocumentBrainIdFileResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 }

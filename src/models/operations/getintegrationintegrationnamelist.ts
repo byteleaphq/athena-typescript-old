@@ -7,7 +7,7 @@ import * as z from "zod";
 
 export type GetIntegrationIntegrationNameListRequest = {
     /**
-     * notion / confluence
+     * Currently supported integrations are "notion" and "confluence". More integrations will be added in the future.
      */
     integrationName: string;
 };

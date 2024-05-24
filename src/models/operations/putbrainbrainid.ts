@@ -5,7 +5,12 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PutBrainBrainIdRequestBody = {};
+export type PutBrainBrainIdRequestBody = {
+    /**
+     * Updated name of the brain
+     */
+    name: string;
+};
 
 export type PutBrainBrainIdRequest = {
     brainId: string;
@@ -28,13 +33,29 @@ export type PutBrainBrainIdResponse = {
 
 /** @internal */
 export namespace PutBrainBrainIdRequestBody$ {
-    export const inboundSchema: z.ZodType<PutBrainBrainIdRequestBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<PutBrainBrainIdRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            name: z.string(),
+        })
+        .transform((v) => {
+            return {
+                name: v.name,
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        name: string;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutBrainBrainIdRequestBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutBrainBrainIdRequestBody> = z
+        .object({
+            name: z.string(),
+        })
+        .transform((v) => {
+            return {
+                name: v.name,
+            };
+        });
 }
 
 /** @internal */

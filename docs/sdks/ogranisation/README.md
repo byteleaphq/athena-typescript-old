@@ -41,7 +41,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetOrganisationResponse](../../models/operations/getorganisationresponse.md)>**
+**Promise\<[operations.GetOrganisationResponse](../../models/operations/getorganisationresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

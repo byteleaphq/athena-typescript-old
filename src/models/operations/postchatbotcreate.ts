@@ -5,7 +5,17 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatbotCreateRequestBody = {};
+export type PostChatbotCreateRequestBody = {
+    /**
+     * The name of the chatbot
+     */
+    name: string;
+    /**
+     * The ID of the brain associated with the chatbot
+     */
+    brainId: string;
+    urls: Array<string>;
+};
 
 /**
  * OK
@@ -23,13 +33,39 @@ export type PostChatbotCreateResponse = {
 
 /** @internal */
 export namespace PostChatbotCreateRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotCreateRequestBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<PostChatbotCreateRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            name: z.string(),
+            brain_id: z.string(),
+            urls: z.array(z.string()),
+        })
+        .transform((v) => {
+            return {
+                name: v.name,
+                brainId: v.brain_id,
+                urls: v.urls,
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        name: string;
+        brain_id: string;
+        urls: Array<string>;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotCreateRequestBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotCreateRequestBody> = z
+        .object({
+            name: z.string(),
+            brainId: z.string(),
+            urls: z.array(z.string()),
+        })
+        .transform((v) => {
+            return {
+                name: v.name,
+                brain_id: v.brainId,
+                urls: v.urls,
+            };
+        });
 }
 
 /** @internal */

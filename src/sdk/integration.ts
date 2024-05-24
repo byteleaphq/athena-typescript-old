@@ -8,7 +8,6 @@ import * as enc$ from "../lib/encodings";
 import { HTTPClient } from "../lib/http";
 import * as schemas$ from "../lib/schemas";
 import { ClientSDK, RequestOptions } from "../lib/sdks";
-import * as errors from "../models/errors";
 import * as operations from "../models/operations";
 
 export class Integration extends ClientSDK {
@@ -103,34 +102,19 @@ export class Integration extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetIntegrationIntegrationNameConnectResponse$.inboundSchema.parse(
-                        {
-                            ...responseFields$,
-                            Headers: this.unpackHeaders(response.headers),
-                            object: val$,
-                        }
-                    );
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] =
+            await this.matcher<operations.GetIntegrationIntegrationNameConnectResponse>()
+                .json(200, operations.GetIntegrationIntegrationNameConnectResponse$, {
+                    hdrs: true,
+                    key: "object",
+                })
+                .fail(["4XX", "5XX"])
+                .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -198,29 +182,16 @@ export class Integration extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchStatusCode(response, 200)) {
-            // fallthrough
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] =
+            await this.matcher<operations.GetIntegrationIntegrationNameDisconnectResponse>()
+                .void(200, operations.GetIntegrationIntegrationNameDisconnectResponse$)
+                .fail(["4XX", "5XX"])
+                .match(response, request$, { extraFields: responseFields$ });
 
-        return schemas$.parse(
-            undefined,
-            () =>
-                operations.GetIntegrationIntegrationNameDisconnectResponse$.inboundSchema.parse(
-                    responseFields$
-                ),
-            "Response validation failed"
-        );
+        return result$;
     }
 
     /**
@@ -289,34 +260,18 @@ export class Integration extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.GetIntegrationIntegrationNameListResponse$.inboundSchema.parse(
-                        {
-                            ...responseFields$,
-                            Headers: this.unpackHeaders(response.headers),
-                            object: val$,
-                        }
-                    );
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.GetIntegrationIntegrationNameListResponse>()
+            .json(200, operations.GetIntegrationIntegrationNameListResponse$, {
+                hdrs: true,
+                key: "object",
+            })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 
     /**
@@ -386,33 +341,17 @@ export class Integration extends ClientSDK {
         const response = await this.do$(request$, doOptions);
 
         const responseFields$ = {
-            HttpMeta: {
-                Response: response,
-                Request: request$,
-            },
+            HttpMeta: { Response: response, Request: request$ },
         };
 
-        if (this.matchResponse(response, 200, "application/json")) {
-            const responseBody = await response.json();
-            const result = schemas$.parse(
-                responseBody,
-                (val$) => {
-                    return operations.PostIntegrationIntegrationNameAddResponse$.inboundSchema.parse(
-                        {
-                            ...responseFields$,
-                            Headers: this.unpackHeaders(response.headers),
-                            object: val$,
-                        }
-                    );
-                },
-                "Response validation failed"
-            );
-            return result;
-        } else {
-            throw new errors.SDKError("Unexpected API response status or content-type", {
-                response,
-                request: request$,
-            });
-        }
+        const [result$] = await this.matcher<operations.PostIntegrationIntegrationNameAddResponse>()
+            .json(200, operations.PostIntegrationIntegrationNameAddResponse$, {
+                hdrs: true,
+                key: "object",
+            })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
     }
 }

@@ -5,7 +5,17 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PutChatChatIdRequestBody = {};
+export type PutChatChatIdRequestBody = {
+    /**
+     * between 1 and 0
+     */
+    temperature?: number | undefined;
+    /**
+     * The updated name of the chat
+     */
+    name?: string | undefined;
+    systemMessage?: string | undefined;
+};
 
 export type PutChatChatIdRequest = {
     chatId: string;
@@ -28,13 +38,39 @@ export type PutChatChatIdResponse = {
 
 /** @internal */
 export namespace PutChatChatIdRequestBody$ {
-    export const inboundSchema: z.ZodType<PutChatChatIdRequestBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<PutChatChatIdRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            temperature: z.number().optional(),
+            name: z.string().optional(),
+            system_message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.temperature === undefined ? null : { temperature: v.temperature }),
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.system_message === undefined ? null : { systemMessage: v.system_message }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        temperature?: number | undefined;
+        name?: string | undefined;
+        system_message?: string | undefined;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutChatChatIdRequestBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutChatChatIdRequestBody> = z
+        .object({
+            temperature: z.number().optional(),
+            name: z.string().optional(),
+            systemMessage: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.temperature === undefined ? null : { temperature: v.temperature }),
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.systemMessage === undefined ? null : { system_message: v.systemMessage }),
+            };
+        });
 }
 
 /** @internal */

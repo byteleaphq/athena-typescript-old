@@ -5,7 +5,16 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatListInteractionsRequestBody = {};
+export type PostChatListInteractionsRequestBody = {
+    /**
+     * Id of chat to which you want to send message
+     */
+    chatThreadId?: string | undefined;
+    /**
+     * message
+     */
+    text?: string | undefined;
+};
 
 /**
  * OK
@@ -27,15 +36,38 @@ export namespace PostChatListInteractionsRequestBody$ {
         PostChatListInteractionsRequestBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            chat_thread_id: z.string().optional(),
+            text: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.chat_thread_id === undefined ? null : { chatThreadId: v.chat_thread_id }),
+                ...(v.text === undefined ? null : { text: v.text }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        chat_thread_id?: string | undefined;
+        text?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         PostChatListInteractionsRequestBody
-    > = z.object({});
+    > = z
+        .object({
+            chatThreadId: z.string().optional(),
+            text: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.chatThreadId === undefined ? null : { chat_thread_id: v.chatThreadId }),
+                ...(v.text === undefined ? null : { text: v.text }),
+            };
+        });
 }
 
 /** @internal */

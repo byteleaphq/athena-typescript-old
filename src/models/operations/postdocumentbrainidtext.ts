@@ -5,7 +5,12 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostDocumentBrainIdTextRequestBody = {};
+export type PostDocumentBrainIdTextRequestBody = {
+    /**
+     * Text that is to be added to the brain
+     */
+    content?: string | undefined;
+};
 
 export type PostDocumentBrainIdTextRequest = {
     brainId: string;
@@ -32,15 +37,33 @@ export namespace PostDocumentBrainIdTextRequestBody$ {
         PostDocumentBrainIdTextRequestBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            content: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.content === undefined ? null : { content: v.content }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        content?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         PostDocumentBrainIdTextRequestBody
-    > = z.object({});
+    > = z
+        .object({
+            content: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.content === undefined ? null : { content: v.content }),
+            };
+        });
 }
 
 /** @internal */

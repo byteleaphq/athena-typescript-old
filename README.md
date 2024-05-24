@@ -54,7 +54,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-    const result = await athenaCopilot.brain.postBrain({});
+    const result = await athenaCopilot.brain.postBrain({
+        name: "Test - brain",
+    });
 
     // Handle the result
     console.log(result);
@@ -183,7 +185,9 @@ const athenaCopilot = new AthenaCopilot({
 async function run() {
     let result;
     try {
-        result = await athenaCopilot.brain.postBrain({});
+        result = await athenaCopilot.brain.postBrain({
+            name: "Test - brain",
+        });
     } catch (err) {
         switch (true) {
             case err instanceof errors.SDKValidationError: {
@@ -225,7 +229,7 @@ You can override the default server globally by passing a server index to the `s
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `http://backend.athenacopilot.ai` | None |
+| 0 | `https://backend.athenacopilot.ai` | None |
 
 ```typescript
 import { AthenaCopilot } from "athena-copilot";
@@ -239,7 +243,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-    const result = await athenaCopilot.brain.postBrain({});
+    const result = await athenaCopilot.brain.postBrain({
+        name: "Test - brain",
+    });
 
     // Handle the result
     console.log(result);
@@ -258,7 +264,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { AthenaCopilot } from "athena-copilot";
 
 const athenaCopilot = new AthenaCopilot({
-    serverURL: "http://backend.athenacopilot.ai",
+    serverURL: "https://backend.athenacopilot.ai",
     security: {
         username: "<YOUR_USERNAME_HERE>",
         password: "<YOUR_PASSWORD_HERE>",
@@ -266,7 +272,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-    const result = await athenaCopilot.brain.postBrain({});
+    const result = await athenaCopilot.brain.postBrain({
+        name: "Test - brain",
+    });
 
     // Handle the result
     console.log(result);
@@ -349,7 +357,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-    const result = await athenaCopilot.brain.postBrain({});
+    const result = await athenaCopilot.brain.postBrain({
+        name: "Test - brain",
+    });
 
     // Handle the result
     console.log(result);

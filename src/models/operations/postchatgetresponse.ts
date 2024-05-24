@@ -5,7 +5,16 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatGetResponseRequestBody = {};
+export type PostChatGetResponseRequestBody = {
+    /**
+     * Id of chat to which you want to send message
+     */
+    chatThreadId?: string | undefined;
+    /**
+     * message
+     */
+    text?: string | undefined;
+};
 
 /**
  * OK
@@ -23,13 +32,35 @@ export type PostChatGetResponseResponse = {
 
 /** @internal */
 export namespace PostChatGetResponseRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatGetResponseRequestBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<PostChatGetResponseRequestBody, z.ZodTypeDef, unknown> = z
+        .object({
+            chat_thread_id: z.string().optional(),
+            text: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.chat_thread_id === undefined ? null : { chatThreadId: v.chat_thread_id }),
+                ...(v.text === undefined ? null : { text: v.text }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        chat_thread_id?: string | undefined;
+        text?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatGetResponseRequestBody> =
-        z.object({});
+        z
+            .object({
+                chatThreadId: z.string().optional(),
+                text: z.string().optional(),
+            })
+            .transform((v) => {
+                return {
+                    ...(v.chatThreadId === undefined ? null : { chat_thread_id: v.chatThreadId }),
+                    ...(v.text === undefined ? null : { text: v.text }),
+                };
+            });
 }
 
 /** @internal */

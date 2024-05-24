@@ -19,6 +19,7 @@ integration - defaults to files (superpowered). supported values - files | data-
 
 ```typescript
 import { AthenaCopilot } from "athena-copilot";
+import { Integration } from "athena-copilot/models/operations";
 
 const athenaCopilot = new AthenaCopilot({
   security: {
@@ -28,7 +29,11 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChat({});
+  const result = await athenaCopilot.chat.postChat({
+    brainId: "{{brain_id}}",
+    name: "Test_chat2",
+    integration: Integration.Files,
+  });
 
   // Handle the result
   console.log(result)
@@ -48,7 +53,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostChatResponse](../../models/operations/postchatresponse.md)>**
+**Promise\<[operations.PostChatResponse](../../models/operations/postchatresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -91,7 +96,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetChatResponse](../../models/operations/getchatresponse.md)>**
+**Promise\<[operations.GetChatResponse](../../models/operations/getchatresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -135,7 +140,7 @@ run();
 
 ### Response
 
-**Promise<[operations.GetChatChatIdResponse](../../models/operations/getchatchatidresponse.md)>**
+**Promise\<[operations.GetChatChatIdResponse](../../models/operations/getchatchatidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -159,7 +164,11 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.putChatChatId("{{chat_id}}", {});
+  const result = await athenaCopilot.chat.putChatChatId("{{chat_id}}", {
+    temperature: null,
+    name: "Test_chat2",
+    systemMessage: "test system message",
+  });
 
   // Handle the result
   console.log(result)
@@ -180,7 +189,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PutChatChatIdResponse](../../models/operations/putchatchatidresponse.md)>**
+**Promise\<[operations.PutChatChatIdResponse](../../models/operations/putchatchatidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -224,7 +233,7 @@ run();
 
 ### Response
 
-**Promise<[operations.DeleteChatChatIdResponse](../../models/operations/deletechatchatidresponse.md)>**
+**Promise\<[operations.DeleteChatChatIdResponse](../../models/operations/deletechatchatidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -248,7 +257,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChatGetResponse({});
+  const result = await athenaCopilot.chat.postChatGetResponse({
+    chatThreadId: "d504386d-6cba-4e38-96f0-aa16b83e1cd8",
+    text: "hi",
+  });
 
   // Handle the result
   console.log(result)
@@ -268,7 +280,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostChatGetResponseResponse](../../models/operations/postchatgetresponseresponse.md)>**
+**Promise\<[operations.PostChatGetResponseResponse](../../models/operations/postchatgetresponseresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -292,7 +304,9 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChatListInteractions({});
+  const result = await athenaCopilot.chat.postChatListInteractions({
+    chatThreadId: "d504386d-6cba-4e38-96f0-aa16b83e1cd8",
+  });
 
   // Handle the result
   console.log(result)
@@ -312,7 +326,7 @@ run();
 
 ### Response
 
-**Promise<[operations.PostChatListInteractionsResponse](../../models/operations/postchatlistinteractionsresponse.md)>**
+**Promise\<[operations.PostChatListInteractionsResponse](../../models/operations/postchatlistinteractionsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
