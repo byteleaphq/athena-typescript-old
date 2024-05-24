@@ -17,17 +17,12 @@ export type PostDocumentBrainIdUrlRequest = {
     requestBody?: PostDocumentBrainIdUrlRequestBody | undefined;
 };
 
-/**
- * OK
- */
-export type PostDocumentBrainIdUrlResponseBody = {};
-
 export type PostDocumentBrainIdUrlResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PostDocumentBrainIdUrlResponseBody | undefined;
+    document?: components.Document | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -102,41 +97,24 @@ export namespace PostDocumentBrainIdUrlRequest$ {
 }
 
 /** @internal */
-export namespace PostDocumentBrainIdUrlResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        PostDocumentBrainIdUrlResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostDocumentBrainIdUrlResponseBody
-    > = z.object({});
-}
-
-/** @internal */
 export namespace PostDocumentBrainIdUrlResponse$ {
     export const inboundSchema: z.ZodType<PostDocumentBrainIdUrlResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => PostDocumentBrainIdUrlResponseBody$.inboundSchema).optional(),
+            Document: components.Document$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.Document === undefined ? null : { document: v.Document }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostDocumentBrainIdUrlResponseBody$.Outbound | undefined;
+        Document?: components.Document$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
@@ -144,13 +122,13 @@ export namespace PostDocumentBrainIdUrlResponse$ {
         z
             .object({
                 httpMeta: components.HTTPMetadata$.outboundSchema,
-                object: z.lazy(() => PostDocumentBrainIdUrlResponseBody$.outboundSchema).optional(),
+                document: components.Document$.outboundSchema.optional(),
                 headers: z.record(z.array(z.string())),
             })
             .transform((v) => {
                 return {
                     HttpMeta: v.httpMeta,
-                    ...(v.object === undefined ? null : { object: v.object }),
+                    ...(v.document === undefined ? null : { Document: v.document }),
                     Headers: v.headers,
                 };
             });

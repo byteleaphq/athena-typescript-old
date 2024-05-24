@@ -13,7 +13,12 @@ export type GetDocumentBrainIdDocumentIdDownloadRequest = {
 /**
  * OK
  */
-export type GetDocumentBrainIdDocumentIdDownloadResponseBody = {};
+export type GetDocumentBrainIdDocumentIdDownloadResponseBody = {
+    /**
+     * The URL to download the document file. This URL is a pre-signed URL that provides temporary access to the document file hosted on a cloud storage service.
+     */
+    url?: string | undefined;
+};
 
 export type GetDocumentBrainIdDocumentIdDownloadResponse = {
     httpMeta: components.HTTPMetadata;
@@ -70,15 +75,33 @@ export namespace GetDocumentBrainIdDocumentIdDownloadResponseBody$ {
         GetDocumentBrainIdDocumentIdDownloadResponseBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        url?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         GetDocumentBrainIdDocumentIdDownloadResponseBody
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 }
 
 /** @internal */

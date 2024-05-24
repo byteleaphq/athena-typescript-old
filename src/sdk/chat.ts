@@ -98,7 +98,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatResponse>()
-            .json(201, operations.PostChatResponse$, { hdrs: true, key: "object" })
+            .json(201, operations.PostChatResponse$, { hdrs: true, key: "Chat" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -149,7 +149,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetChatResponse>()
-            .json(200, operations.GetChatResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetChatResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -220,7 +220,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetChatChatIdResponse>()
-            .json(200, operations.GetChatChatIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetChatChatIdResponse$, { hdrs: true, key: "Chat" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -294,7 +294,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PutChatChatIdResponse>()
-            .json(200, operations.PutChatChatIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PutChatChatIdResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -431,7 +431,10 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatGetResponseResponse>()
-            .json(200, operations.PostChatGetResponseResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatGetResponseResponse$, {
+                hdrs: true,
+                key: "ChatInteraction",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -499,7 +502,10 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatListInteractionsResponse>()
-            .json(200, operations.PostChatListInteractionsResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatListInteractionsResponse$, {
+                hdrs: true,
+                key: "ChatInteractions",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

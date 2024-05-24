@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 698fc2d5-898d-4d0b-89ca-fb7127989704
 management:
-  docChecksum: c3f188f5c5f5308c6fcc257096f184d8
+  docChecksum: 64b9acc6d368191610559ae85866737a
   docVersion: 1.0.0
   speakeasyVersion: 1.295.2
   generationVersion: 2.335.5
-  releaseVersion: 0.1.0
-  configChecksum: f6eeb3fc4c46ad1f9ae6416d5d874eda
+  releaseVersion: 0.2.0
+  configChecksum: fa011b1642b78ee9b2d67fe838e38474
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -18,6 +18,7 @@ features:
     nullables: 0.1.0
     responseFormat: 0.2.3
     sdkHooks: 0.1.0
+    unions: 2.85.5
 generatedFiles:
   - src/sdk/brain.ts
   - src/sdk/document.ts
@@ -85,6 +86,9 @@ generatedFiles:
   - src/models/operations/getorganisation.ts
   - src/models/components/brain.ts
   - src/models/components/httpmetadata.ts
+  - src/models/components/document.ts
+  - src/models/components/chat.ts
+  - src/models/components/chatinteraction.ts
   - src/models/components/security.ts
   - src/models/errors/postbrain.ts
   - src/models/errors/putbrainbrainid.ts
@@ -106,20 +110,16 @@ generatedFiles:
   - docs/models/operations/deletebrainbrainidresponse.md
   - docs/models/operations/postdocumentbrainidtextrequestbody.md
   - docs/models/operations/postdocumentbrainidtextrequest.md
-  - docs/models/operations/postdocumentbrainidtextresponsebody.md
   - docs/models/operations/postdocumentbrainidtextresponse.md
   - docs/models/operations/postdocumentbrainidurlrequestbody.md
   - docs/models/operations/postdocumentbrainidurlrequest.md
-  - docs/models/operations/postdocumentbrainidurlresponsebody.md
   - docs/models/operations/postdocumentbrainidurlresponse.md
   - docs/models/operations/getdocumentbrainiddocumentiddownloadrequest.md
   - docs/models/operations/getdocumentbrainiddocumentiddownloadresponsebody.md
   - docs/models/operations/getdocumentbrainiddocumentiddownloadresponse.md
   - docs/models/operations/getdocumentbrainidrequest.md
-  - docs/models/operations/getdocumentbrainidresponsebody.md
   - docs/models/operations/getdocumentbrainidresponse.md
   - docs/models/operations/getdocumentbrainiddocumentidrequest.md
-  - docs/models/operations/getdocumentbrainiddocumentidresponsebody.md
   - docs/models/operations/getdocumentbrainiddocumentidresponse.md
   - docs/models/operations/deletedocumentbrainiddocumentidrequest.md
   - docs/models/operations/deletedocumentbrainiddocumentidresponsebody.md
@@ -127,29 +127,22 @@ generatedFiles:
   - docs/models/operations/filet.md
   - docs/models/operations/postdocumentbrainidfilerequestbody.md
   - docs/models/operations/postdocumentbrainidfilerequest.md
-  - docs/models/operations/postdocumentbrainidfileresponsebody.md
   - docs/models/operations/postdocumentbrainidfileresponse.md
   - docs/models/operations/integration.md
   - docs/models/operations/postchatrequestbody.md
-  - docs/models/operations/postchatresponsebody.md
   - docs/models/operations/postchatresponse.md
-  - docs/models/operations/getchatresponsebody.md
   - docs/models/operations/getchatresponse.md
   - docs/models/operations/getchatchatidrequest.md
-  - docs/models/operations/getchatchatidresponsebody.md
   - docs/models/operations/getchatchatidresponse.md
   - docs/models/operations/putchatchatidrequestbody.md
   - docs/models/operations/putchatchatidrequest.md
-  - docs/models/operations/putchatchatidresponsebody.md
   - docs/models/operations/putchatchatidresponse.md
   - docs/models/operations/deletechatchatidrequest.md
   - docs/models/operations/deletechatchatidresponsebody.md
   - docs/models/operations/deletechatchatidresponse.md
   - docs/models/operations/postchatgetresponserequestbody.md
-  - docs/models/operations/postchatgetresponseresponsebody.md
   - docs/models/operations/postchatgetresponseresponse.md
   - docs/models/operations/postchatlistinteractionsrequestbody.md
-  - docs/models/operations/postchatlistinteractionsresponsebody.md
   - docs/models/operations/postchatlistinteractionsresponse.md
   - docs/models/operations/postchatbotcreaterequestbody.md
   - docs/models/operations/postchatbotcreateresponsebody.md
@@ -192,6 +185,17 @@ generatedFiles:
   - docs/models/components/metadataschema.md
   - docs/models/components/brain.md
   - docs/models/components/httpmetadata.md
+  - docs/models/components/document.md
+  - docs/models/components/modelresponse.md
+  - docs/models/components/userinput.md
+  - docs/models/components/recentchathistory.md
+  - docs/models/components/defaultoptions.md
+  - docs/models/components/chat.md
+  - docs/models/components/dwdata.md
+  - docs/models/components/metadata.md
+  - docs/models/components/two.md
+  - docs/models/components/reference.md
+  - docs/models/components/chatinteraction.md
   - docs/models/components/security.md
   - docs/models/errors/postbrainbrainresponsebody.md
   - docs/models/errors/postbrainresponsebody.md

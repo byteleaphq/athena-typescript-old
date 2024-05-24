@@ -12,7 +12,9 @@ export type DeleteChatChatIdRequest = {
 /**
  * OK
  */
-export type DeleteChatChatIdResponseBody = {};
+export type DeleteChatChatIdResponseBody = {
+    message?: string | undefined;
+};
 
 export type DeleteChatChatIdResponse = {
     httpMeta: components.HTTPMetadata;
@@ -52,13 +54,29 @@ export namespace DeleteChatChatIdRequest$ {
 
 /** @internal */
 export namespace DeleteChatChatIdResponseBody$ {
-    export const inboundSchema: z.ZodType<DeleteChatChatIdResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<DeleteChatChatIdResponseBody, z.ZodTypeDef, unknown> = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        message?: string | undefined;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteChatChatIdResponseBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteChatChatIdResponseBody> = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 }
 
 /** @internal */

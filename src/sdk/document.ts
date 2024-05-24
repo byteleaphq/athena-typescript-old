@@ -106,7 +106,7 @@ export class Document extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostDocumentBrainIdTextResponse>()
-            .json(200, operations.PostDocumentBrainIdTextResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostDocumentBrainIdTextResponse$, { hdrs: true, key: "Document" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -180,7 +180,7 @@ export class Document extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostDocumentBrainIdUrlResponse>()
-            .json(200, operations.PostDocumentBrainIdUrlResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostDocumentBrainIdUrlResponse$, { hdrs: true, key: "Document" })
             .fail(["4XX", "5XX"])
             .json(500, errors.PostDocumentBrainIdUrlResponseBody$, { hdrs: true, err: true })
             .match(response, request$, { extraFields: responseFields$ });
@@ -338,7 +338,7 @@ export class Document extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetDocumentBrainIdResponse>()
-            .json(200, operations.GetDocumentBrainIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetDocumentBrainIdResponse$, { hdrs: true, key: "Documents" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -418,7 +418,7 @@ export class Document extends ClientSDK {
         const [result$] = await this.matcher<operations.GetDocumentBrainIdDocumentIdResponse>()
             .json(200, operations.GetDocumentBrainIdDocumentIdResponse$, {
                 hdrs: true,
-                key: "object",
+                key: "Document",
             })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
@@ -588,7 +588,7 @@ export class Document extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostDocumentBrainIdFileResponse>()
-            .json(200, operations.PostDocumentBrainIdFileResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostDocumentBrainIdFileResponse$, { hdrs: true, key: "Document" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

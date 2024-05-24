@@ -22,17 +22,12 @@ export type PutChatChatIdRequest = {
     requestBody?: PutChatChatIdRequestBody | undefined;
 };
 
-/**
- * OK
- */
-export type PutChatChatIdResponseBody = {};
-
 export type PutChatChatIdResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PutChatChatIdResponseBody | undefined;
+    chats?: Array<components.Chat> | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -106,48 +101,37 @@ export namespace PutChatChatIdRequest$ {
 }
 
 /** @internal */
-export namespace PutChatChatIdResponseBody$ {
-    export const inboundSchema: z.ZodType<PutChatChatIdResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutChatChatIdResponseBody> =
-        z.object({});
-}
-
-/** @internal */
 export namespace PutChatChatIdResponse$ {
     export const inboundSchema: z.ZodType<PutChatChatIdResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => PutChatChatIdResponseBody$.inboundSchema).optional(),
+            Chats: z.array(components.Chat$.inboundSchema).optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.Chats === undefined ? null : { chats: v.Chats }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PutChatChatIdResponseBody$.Outbound | undefined;
+        Chats?: Array<components.Chat$.Outbound> | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutChatChatIdResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => PutChatChatIdResponseBody$.outboundSchema).optional(),
+            chats: z.array(components.Chat$.outboundSchema).optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.chats === undefined ? null : { Chats: v.chats }),
                 Headers: v.headers,
             };
         });

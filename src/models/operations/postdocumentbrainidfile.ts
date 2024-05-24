@@ -21,17 +21,12 @@ export type PostDocumentBrainIdFileRequest = {
     requestBody?: PostDocumentBrainIdFileRequestBody | undefined;
 };
 
-/**
- * OK
- */
-export type PostDocumentBrainIdFileResponseBody = {};
-
 export type PostDocumentBrainIdFileResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PostDocumentBrainIdFileResponseBody | undefined;
+    document?: components.Document | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -141,42 +136,25 @@ export namespace PostDocumentBrainIdFileRequest$ {
 }
 
 /** @internal */
-export namespace PostDocumentBrainIdFileResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        PostDocumentBrainIdFileResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostDocumentBrainIdFileResponseBody
-    > = z.object({});
-}
-
-/** @internal */
 export namespace PostDocumentBrainIdFileResponse$ {
     export const inboundSchema: z.ZodType<PostDocumentBrainIdFileResponse, z.ZodTypeDef, unknown> =
         z
             .object({
                 HttpMeta: components.HTTPMetadata$.inboundSchema,
-                object: z.lazy(() => PostDocumentBrainIdFileResponseBody$.inboundSchema).optional(),
+                Document: components.Document$.inboundSchema.optional(),
                 Headers: z.record(z.array(z.string())),
             })
             .transform((v) => {
                 return {
                     httpMeta: v.HttpMeta,
-                    ...(v.object === undefined ? null : { object: v.object }),
+                    ...(v.Document === undefined ? null : { document: v.Document }),
                     headers: v.Headers,
                 };
             });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostDocumentBrainIdFileResponseBody$.Outbound | undefined;
+        Document?: components.Document$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
@@ -187,13 +165,13 @@ export namespace PostDocumentBrainIdFileResponse$ {
     > = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => PostDocumentBrainIdFileResponseBody$.outboundSchema).optional(),
+            document: components.Document$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.document === undefined ? null : { Document: v.document }),
                 Headers: v.headers,
             };
         });

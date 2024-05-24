@@ -13,7 +13,9 @@ export type DeleteDocumentBrainIdDocumentIdRequest = {
 /**
  * OK
  */
-export type DeleteDocumentBrainIdDocumentIdResponseBody = {};
+export type DeleteDocumentBrainIdDocumentIdResponseBody = {
+    message?: string | undefined;
+};
 
 export type DeleteDocumentBrainIdDocumentIdResponse = {
     httpMeta: components.HTTPMetadata;
@@ -70,15 +72,33 @@ export namespace DeleteDocumentBrainIdDocumentIdResponseBody$ {
         DeleteDocumentBrainIdDocumentIdResponseBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        message?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         DeleteDocumentBrainIdDocumentIdResponseBody
-    > = z.object({});
+    > = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 }
 
 /** @internal */

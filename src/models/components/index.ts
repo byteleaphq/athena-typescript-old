@@ -3,5 +3,8 @@
  */
 
 export * from "./brain";
+export * from "./chat";
+export * from "./chatinteraction";
+export * from "./document";
 export * from "./httpmetadata";
 export * from "./security";

@@ -9,17 +9,12 @@ export type GetDocumentBrainIdRequest = {
     brainId: string;
 };
 
-/**
- * OK
- */
-export type GetDocumentBrainIdResponseBody = {};
-
 export type GetDocumentBrainIdResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: GetDocumentBrainIdResponseBody | undefined;
+    documents?: Array<components.Document> | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -51,48 +46,37 @@ export namespace GetDocumentBrainIdRequest$ {
 }
 
 /** @internal */
-export namespace GetDocumentBrainIdResponseBody$ {
-    export const inboundSchema: z.ZodType<GetDocumentBrainIdResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetDocumentBrainIdResponseBody> =
-        z.object({});
-}
-
-/** @internal */
 export namespace GetDocumentBrainIdResponse$ {
     export const inboundSchema: z.ZodType<GetDocumentBrainIdResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => GetDocumentBrainIdResponseBody$.inboundSchema).optional(),
+            Documents: z.array(components.Document$.inboundSchema).optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.Documents === undefined ? null : { documents: v.Documents }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetDocumentBrainIdResponseBody$.Outbound | undefined;
+        Documents?: Array<components.Document$.Outbound> | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetDocumentBrainIdResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => GetDocumentBrainIdResponseBody$.outboundSchema).optional(),
+            documents: z.array(components.Document$.outboundSchema).optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.documents === undefined ? null : { Documents: v.documents }),
                 Headers: v.headers,
             };
         });
