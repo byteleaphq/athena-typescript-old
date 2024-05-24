@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 698fc2d5-898d-4d0b-89ca-fb7127989704
 management:
-  docChecksum: 62ea32b2b7fec08902ed949c07f7fd9d
+  docChecksum: c3f188f5c5f5308c6fcc257096f184d8
   docVersion: 1.0.0
   speakeasyVersion: 1.295.2
   generationVersion: 2.335.5
-  releaseVersion: 0.0.2
-  configChecksum: cbb93f701d7cb72789b8e300dae714f0
+  releaseVersion: 0.1.0
+  configChecksum: f6eeb3fc4c46ad1f9ae6416d5d874eda
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -15,6 +15,7 @@ features:
     globalSecurity: 2.82.9
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.4
+    nullables: 0.1.0
     responseFormat: 0.2.3
     sdkHooks: 0.1.0
 generatedFiles:
@@ -82,6 +83,7 @@ generatedFiles:
   - src/models/operations/getintegrationintegrationnamelist.ts
   - src/models/operations/postintegrationintegrationnameadd.ts
   - src/models/operations/getorganisation.ts
+  - src/models/components/brain.ts
   - src/models/components/httpmetadata.ts
   - src/models/components/security.ts
   - src/models/errors/postbrain.ts
@@ -92,16 +94,12 @@ generatedFiles:
   - src/models/operations/index.ts
   - src/models/components/index.ts
   - docs/models/operations/postbrainrequestbody.md
-  - docs/models/operations/postbrainresponsebody.md
   - docs/models/operations/postbrainresponse.md
-  - docs/models/operations/getbrainresponsebody.md
   - docs/models/operations/getbrainresponse.md
   - docs/models/operations/putbrainbrainidrequestbody.md
   - docs/models/operations/putbrainbrainidrequest.md
-  - docs/models/operations/putbrainbrainidresponsebody.md
   - docs/models/operations/putbrainbrainidresponse.md
   - docs/models/operations/getbrainbrainidrequest.md
-  - docs/models/operations/getbrainbrainidresponsebody.md
   - docs/models/operations/getbrainbrainidresponse.md
   - docs/models/operations/deletebrainbrainidrequest.md
   - docs/models/operations/deletebrainbrainidresponsebody.md
@@ -190,6 +188,9 @@ generatedFiles:
   - docs/models/operations/postintegrationintegrationnameaddresponse.md
   - docs/models/operations/getorganisationresponsebody.md
   - docs/models/operations/getorganisationresponse.md
+  - docs/models/components/activefeatures.md
+  - docs/models/components/metadataschema.md
+  - docs/models/components/brain.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/security.md
   - docs/models/errors/postbrainbrainresponsebody.md

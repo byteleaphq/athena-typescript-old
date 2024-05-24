@@ -1,6 +1,6 @@
-# GetBrainBrainIdResponseBody
+# MetadataSchema
 
-OK
+Metadata schema for the brain
 
 
 ## Fields

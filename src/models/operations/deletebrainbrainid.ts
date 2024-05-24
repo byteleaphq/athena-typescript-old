@@ -12,7 +12,9 @@ export type DeleteBrainBrainIdRequest = {
 /**
  * OK
  */
-export type DeleteBrainBrainIdResponseBody = {};
+export type DeleteBrainBrainIdResponseBody = {
+    message?: string | undefined;
+};
 
 export type DeleteBrainBrainIdResponse = {
     httpMeta: components.HTTPMetadata;
@@ -52,13 +54,30 @@ export namespace DeleteBrainBrainIdRequest$ {
 
 /** @internal */
 export namespace DeleteBrainBrainIdResponseBody$ {
-    export const inboundSchema: z.ZodType<DeleteBrainBrainIdResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<DeleteBrainBrainIdResponseBody, z.ZodTypeDef, unknown> = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        message?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteBrainBrainIdResponseBody> =
-        z.object({});
+        z
+            .object({
+                message: z.string().optional(),
+            })
+            .transform((v) => {
+                return {
+                    ...(v.message === undefined ? null : { message: v.message }),
+                };
+            });
 }
 
 /** @internal */

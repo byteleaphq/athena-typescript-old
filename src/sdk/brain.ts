@@ -96,7 +96,7 @@ export class Brain extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostBrainResponse>()
-            .json(200, operations.PostBrainResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostBrainResponse$, { hdrs: true, key: "Brain" })
             .json(401, errors.PostBrainResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .json(500, errors.PostBrainBrainResponseBody$, { hdrs: true, err: true })
@@ -149,7 +149,7 @@ export class Brain extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetBrainResponse>()
-            .json(200, operations.GetBrainResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetBrainResponse$, { hdrs: true, key: "Brains" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -223,7 +223,7 @@ export class Brain extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PutBrainBrainIdResponse>()
-            .json(200, operations.PutBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PutBrainBrainIdResponse$, { hdrs: true, key: "Brain" })
             .fail(["4XX", "5XX"])
             .json(500, errors.PutBrainBrainIdResponseBody$, { hdrs: true, err: true })
             .match(response, request$, { extraFields: responseFields$ });
@@ -295,7 +295,7 @@ export class Brain extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetBrainBrainIdResponse>()
-            .json(200, operations.GetBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetBrainBrainIdResponse$, { hdrs: true, key: "Brain" })
             .json(404, errors.GetBrainBrainIdResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });

@@ -12,17 +12,12 @@ export type PostBrainRequestBody = {
     name: string;
 };
 
-/**
- * OK
- */
-export type PostBrainResponseBody = {};
-
 export type PostBrainResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PostBrainResponseBody | undefined;
+    brain?: components.Brain | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -54,49 +49,37 @@ export namespace PostBrainRequestBody$ {
 }
 
 /** @internal */
-export namespace PostBrainResponseBody$ {
-    export const inboundSchema: z.ZodType<PostBrainResponseBody, z.ZodTypeDef, unknown> = z.object(
-        {}
-    );
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostBrainResponseBody> =
-        z.object({});
-}
-
-/** @internal */
 export namespace PostBrainResponse$ {
     export const inboundSchema: z.ZodType<PostBrainResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => PostBrainResponseBody$.inboundSchema).optional(),
+            Brain: components.Brain$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.Brain === undefined ? null : { brain: v.Brain }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostBrainResponseBody$.Outbound | undefined;
+        Brain?: components.Brain$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostBrainResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => PostBrainResponseBody$.outboundSchema).optional(),
+            brain: components.Brain$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.brain === undefined ? null : { Brain: v.brain }),
                 Headers: v.headers,
             };
         });

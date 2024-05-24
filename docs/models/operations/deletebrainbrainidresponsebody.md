@@ -5,5 +5,6 @@ OK
 
 ## Fields
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| Field                   | Type                    | Required                | Description             | Example                 |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| `message`               | *string*                | :heavy_minus_sign:      | N/A                     | Knowledge base deleted. |
