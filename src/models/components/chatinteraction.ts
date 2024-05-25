@@ -27,7 +27,7 @@ export type ChatInteraction = {
     /**
      * The timestamp when the interaction was created
      */
-    createdAt?: Date | undefined;
+    createdAt?: string | undefined;
     /**
      * The data related to the data warehouse integration
      */
@@ -59,7 +59,7 @@ export type ChatInteraction = {
     /**
      * The timestamp when the interaction occurred
      */
-    timestamp?: Date | undefined;
+    timestamp?: string | undefined;
     /**
      * The number of credits used by the user for the interaction
      */
@@ -112,11 +112,7 @@ export namespace ChatInteraction$ {
     export const inboundSchema: z.ZodType<ChatInteraction, z.ZodTypeDef, unknown> = z
         .object({
             actor: z.string().optional(),
-            created_at: z
-                .string()
-                .datetime({ offset: true })
-                .transform((v) => new Date(v))
-                .optional(),
+            created_at: z.string().optional(),
             dw_data: z.nullable(z.lazy(() => DwData$.inboundSchema)).optional(),
             id: z.number().int().optional(),
             message: z.string().optional(),
@@ -128,11 +124,7 @@ export namespace ChatInteraction$ {
                 )
                 .optional(),
             thread_id: z.string().optional(),
-            timestamp: z
-                .string()
-                .datetime({ offset: true })
-                .transform((v) => new Date(v))
-                .optional(),
+            timestamp: z.string().optional(),
             user_credits: z.nullable(z.number().int()).optional(),
         })
         .transform((v) => {
@@ -168,10 +160,7 @@ export namespace ChatInteraction$ {
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ChatInteraction> = z
         .object({
             actor: z.string().optional(),
-            createdAt: z
-                .date()
-                .transform((v) => v.toISOString())
-                .optional(),
+            createdAt: z.string().optional(),
             dwData: z.nullable(z.lazy(() => DwData$.outboundSchema)).optional(),
             id: z.number().int().optional(),
             message: z.string().optional(),
@@ -183,10 +172,7 @@ export namespace ChatInteraction$ {
                 )
                 .optional(),
             threadId: z.string().optional(),
-            timestamp: z
-                .date()
-                .transform((v) => v.toISOString())
-                .optional(),
+            timestamp: z.string().optional(),
             userCredits: z.nullable(z.number().int()).optional(),
         })
         .transform((v) => {

@@ -41,7 +41,7 @@ export type Chat = {
     /**
      * The timestamp when the chat was created
      */
-    createdAt?: Date | undefined;
+    createdAt?: string | undefined;
     /**
      * The unique identifier of the chat record
      */
@@ -49,7 +49,7 @@ export type Chat = {
     /**
      * The timestamp when the chat was last updated
      */
-    lastUpdated?: Date | null | undefined;
+    lastUpdated?: string | null | undefined;
     /**
      * The name of the model used for the chat
      */
@@ -232,20 +232,9 @@ export namespace Chat$ {
         .object({
             brain_id: z.nullable(z.string()).optional(),
             chat_id: z.string().optional(),
-            created_at: z
-                .string()
-                .datetime({ offset: true })
-                .transform((v) => new Date(v))
-                .optional(),
+            created_at: z.string().optional(),
             id: z.number().int().optional(),
-            last_updated: z
-                .nullable(
-                    z
-                        .string()
-                        .datetime({ offset: true })
-                        .transform((v) => new Date(v))
-                )
-                .optional(),
+            last_updated: z.nullable(z.string()).optional(),
             model: z.string().optional(),
             recent_chat_history: z.array(z.lazy(() => RecentChatHistory$.inboundSchema)).optional(),
             system_message: z.nullable(z.string()).optional(),
@@ -292,12 +281,9 @@ export namespace Chat$ {
         .object({
             brainId: z.nullable(z.string()).optional(),
             chatId: z.string().optional(),
-            createdAt: z
-                .date()
-                .transform((v) => v.toISOString())
-                .optional(),
+            createdAt: z.string().optional(),
             id: z.number().int().optional(),
-            lastUpdated: z.nullable(z.date().transform((v) => v.toISOString())).optional(),
+            lastUpdated: z.nullable(z.string()).optional(),
             model: z.string().optional(),
             recentChatHistory: z.array(z.lazy(() => RecentChatHistory$.outboundSchema)).optional(),
             systemMessage: z.nullable(z.string()).optional(),

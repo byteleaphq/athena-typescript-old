@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 698fc2d5-898d-4d0b-89ca-fb7127989704
 management:
-  docChecksum: 64b9acc6d368191610559ae85866737a
+  docChecksum: d379a025da94e0678e11f0ea7277cf07
   docVersion: 1.0.0
-  speakeasyVersion: 1.295.2
-  generationVersion: 2.335.5
-  releaseVersion: 0.2.0
-  configChecksum: fa011b1642b78ee9b2d67fe838e38474
+  speakeasyVersion: 1.296.1
+  generationVersion: 2.338.1
+  releaseVersion: 0.2.1
+  configChecksum: 21f3281ced2738806441243ace085ce2
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.9.6
+    core: 3.9.9
     flattening: 2.81.1
     globalSecurity: 2.82.9
     globalSecurityCallbacks: 0.1.0
@@ -37,7 +37,7 @@ generatedFiles:
   - src/lib/config.ts
   - src/lib/encodings.ts
   - src/lib/http.ts
-  - src/lib/primitives.ts
+  - src/lib/is-plain-object.ts
   - src/lib/retries.ts
   - src/lib/schemas.ts
   - src/lib/sdks.ts
