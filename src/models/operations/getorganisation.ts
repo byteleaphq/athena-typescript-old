@@ -8,7 +8,44 @@ import * as z from "zod";
 /**
  * OK
  */
-export type GetOrganisationResponseBody = {};
+export type GetOrganisationResponseBody = {
+    /**
+     * Creation timestamp of the organization
+     */
+    createdAt?: string | undefined;
+    /**
+     * Email associated with the organization
+     */
+    email?: string | undefined;
+    /**
+     * ID of the organization
+     */
+    id?: number | undefined;
+    /**
+     * Name of the organization
+     */
+    name?: string | undefined;
+    /**
+     * Name of the organization (same as 'name')
+     */
+    orgName?: string | null | undefined;
+    /**
+     * UUID of the organization
+     */
+    orgUuid?: string | undefined;
+    /**
+     * Role of the user in the organization
+     */
+    role?: string | undefined;
+    /**
+     * Invite token for the organization
+     */
+    token?: string | undefined;
+    /**
+     * UUID of the user
+     */
+    userUuid?: string | undefined;
+};
 
 export type GetOrganisationResponse = {
     httpMeta: components.HTTPMetadata;
@@ -21,13 +58,69 @@ export type GetOrganisationResponse = {
 
 /** @internal */
 export namespace GetOrganisationResponseBody$ {
-    export const inboundSchema: z.ZodType<GetOrganisationResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
+    export const inboundSchema: z.ZodType<GetOrganisationResponseBody, z.ZodTypeDef, unknown> = z
+        .object({
+            created_at: z.string().optional(),
+            email: z.string().optional(),
+            id: z.number().int().optional(),
+            name: z.string().optional(),
+            org_name: z.nullable(z.string()).optional(),
+            org_uuid: z.string().optional(),
+            role: z.string().optional(),
+            token: z.string().optional(),
+            user_uuid: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.created_at === undefined ? null : { createdAt: v.created_at }),
+                ...(v.email === undefined ? null : { email: v.email }),
+                ...(v.id === undefined ? null : { id: v.id }),
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.org_name === undefined ? null : { orgName: v.org_name }),
+                ...(v.org_uuid === undefined ? null : { orgUuid: v.org_uuid }),
+                ...(v.role === undefined ? null : { role: v.role }),
+                ...(v.token === undefined ? null : { token: v.token }),
+                ...(v.user_uuid === undefined ? null : { userUuid: v.user_uuid }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        created_at?: string | undefined;
+        email?: string | undefined;
+        id?: number | undefined;
+        name?: string | undefined;
+        org_name?: string | null | undefined;
+        org_uuid?: string | undefined;
+        role?: string | undefined;
+        token?: string | undefined;
+        user_uuid?: string | undefined;
+    };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetOrganisationResponseBody> =
-        z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetOrganisationResponseBody> = z
+        .object({
+            createdAt: z.string().optional(),
+            email: z.string().optional(),
+            id: z.number().int().optional(),
+            name: z.string().optional(),
+            orgName: z.nullable(z.string()).optional(),
+            orgUuid: z.string().optional(),
+            role: z.string().optional(),
+            token: z.string().optional(),
+            userUuid: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.createdAt === undefined ? null : { created_at: v.createdAt }),
+                ...(v.email === undefined ? null : { email: v.email }),
+                ...(v.id === undefined ? null : { id: v.id }),
+                ...(v.name === undefined ? null : { name: v.name }),
+                ...(v.orgName === undefined ? null : { org_name: v.orgName }),
+                ...(v.orgUuid === undefined ? null : { org_uuid: v.orgUuid }),
+                ...(v.role === undefined ? null : { role: v.role }),
+                ...(v.token === undefined ? null : { token: v.token }),
+                ...(v.userUuid === undefined ? null : { user_uuid: v.userUuid }),
+            };
+        });
 }
 
 /** @internal */

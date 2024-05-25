@@ -129,7 +129,7 @@ export class Integration extends ClientSDK {
         };
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "*/*");
+        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
@@ -187,7 +187,9 @@ export class Integration extends ClientSDK {
 
         const [result$] =
             await this.matcher<operations.GetIntegrationIntegrationNameDisconnectResponse>()
-                .void(200, operations.GetIntegrationIntegrationNameDisconnectResponse$)
+                .json(200, operations.GetIntegrationIntegrationNameDisconnectResponse$, {
+                    key: "object",
+                })
                 .fail(["4XX", "5XX"])
                 .match(response, request$, { extraFields: responseFields$ });
 
@@ -266,7 +268,7 @@ export class Integration extends ClientSDK {
         const [result$] = await this.matcher<operations.GetIntegrationIntegrationNameListResponse>()
             .json(200, operations.GetIntegrationIntegrationNameListResponse$, {
                 hdrs: true,
-                key: "object",
+                key: "responseBodies",
             })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });

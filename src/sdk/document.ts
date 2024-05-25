@@ -499,7 +499,7 @@ export class Document extends ClientSDK {
         const [result$] = await this.matcher<operations.DeleteDocumentBrainIdDocumentIdResponse>()
             .json(200, operations.DeleteDocumentBrainIdDocumentIdResponse$, {
                 hdrs: true,
-                key: "object",
+                key: "DeleteResponse",
             })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });

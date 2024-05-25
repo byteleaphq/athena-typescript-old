@@ -24,9 +24,10 @@ export type RecentChatHistory = {
  * The default options for the chat
  */
 export type DefaultOptions = {
-    autoQueryGuidance?: string | undefined;
-    knowledgeBaseIds?: Array<string> | undefined;
-    model?: string | undefined;
+    autoQueryGuidance?: string | null | undefined;
+    knowledgeBaseIds?: Array<string> | null | undefined;
+    model?: string | null | undefined;
+    additionalProperties: { [k: string]: any };
 };
 
 export type Chat = {
@@ -185,11 +186,14 @@ export namespace RecentChatHistory$ {
 export namespace DefaultOptions$ {
     export const inboundSchema: z.ZodType<DefaultOptions, z.ZodTypeDef, unknown> = z
         .object({
-            auto_query_guidance: z.string().optional(),
-            knowledge_base_ids: z.array(z.string()).optional(),
-            model: z.string().optional(),
+            auto_query_guidance: z.nullable(z.string()).optional(),
+            knowledge_base_ids: z.nullable(z.array(z.string())).optional(),
+            model: z.nullable(z.string()).optional(),
         })
+        .catchall(z.any())
         .transform((v) => {
+            const { auto_query_guidance, knowledge_base_ids, model, ...additionalProperties } = v;
+
             return {
                 ...(v.auto_query_guidance === undefined
                     ? null
@@ -198,23 +202,27 @@ export namespace DefaultOptions$ {
                     ? null
                     : { knowledgeBaseIds: v.knowledge_base_ids }),
                 ...(v.model === undefined ? null : { model: v.model }),
+                additionalProperties,
             };
         });
 
     export type Outbound = {
-        auto_query_guidance?: string | undefined;
-        knowledge_base_ids?: Array<string> | undefined;
-        model?: string | undefined;
+        auto_query_guidance?: string | null | undefined;
+        knowledge_base_ids?: Array<string> | null | undefined;
+        model?: string | null | undefined;
+        [additionalProperties: string]: unknown;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DefaultOptions> = z
         .object({
-            autoQueryGuidance: z.string().optional(),
-            knowledgeBaseIds: z.array(z.string()).optional(),
-            model: z.string().optional(),
+            autoQueryGuidance: z.nullable(z.string()).optional(),
+            knowledgeBaseIds: z.nullable(z.array(z.string())).optional(),
+            model: z.nullable(z.string()).optional(),
+            additionalProperties: z.record(z.any()),
         })
         .transform((v) => {
             return {
+                ...v.additionalProperties,
                 ...(v.autoQueryGuidance === undefined
                     ? null
                     : { auto_query_guidance: v.autoQueryGuidance }),

@@ -96,7 +96,10 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatbotCreateResponse>()
-            .json(200, operations.PostChatbotCreateResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatbotCreateResponse$, {
+                hdrs: true,
+                key: "ChatbotResponses",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -106,14 +109,34 @@ export class Chatbot extends ClientSDK {
     /**
      * List Chatbots
      */
-    async postChatbotList(options?: RequestOptions): Promise<operations.PostChatbotListResponse> {
+    async getChatbotList(
+        brainId?: string | undefined,
+        options?: RequestOptions
+    ): Promise<operations.GetChatbotListResponse> {
+        const input$: operations.GetChatbotListRequest = {
+            brainId: brainId,
+        };
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
 
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.GetChatbotListRequest$.outboundSchema.parse(value$),
+            "Input validation failed"
+        );
+        const body$ = null;
+
         const path$ = this.templateURLComponent("/chatbot/list")();
 
-        const query$ = "";
+        const query$ = [
+            enc$.encodeForm("brain_id", payload$.brain_id, {
+                explode: true,
+                charEncoding: "percent",
+            }),
+        ]
+            .filter(Boolean)
+            .join("&");
 
         const security$ =
             typeof this.options$.security === "function"
@@ -121,7 +144,7 @@ export class Chatbot extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/chatbot/list",
+            operationID: "get_/chatbot/list",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -132,10 +155,11 @@ export class Chatbot extends ClientSDK {
             context,
             {
                 security: securitySettings$,
-                method: "POST",
+                method: "GET",
                 path: path$,
                 headers: headers$,
                 query: query$,
+                body: body$,
             },
             options
         );
@@ -146,8 +170,8 @@ export class Chatbot extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostChatbotListResponse>()
-            .json(200, operations.PostChatbotListResponse$, { hdrs: true, key: "object" })
+        const [result$] = await this.matcher<operations.GetChatbotListResponse>()
+            .json(200, operations.GetChatbotListResponse$, { hdrs: true, key: "ChatbotResponses" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -219,7 +243,7 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatbotGetResponse>()
-            .json(200, operations.PostChatbotGetResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatbotGetResponse$, { hdrs: true, key: "ChatbotResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -291,7 +315,10 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetChatbotAnalyticsResponse>()
-            .json(200, operations.GetChatbotAnalyticsResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetChatbotAnalyticsResponse$, {
+                hdrs: true,
+                key: "ChatbotAnalytics",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -366,7 +393,10 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.GetChatbotGetMessagesResponse>()
-            .json(200, operations.GetChatbotGetMessagesResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.GetChatbotGetMessagesResponse$, {
+                hdrs: true,
+                key: "ChatbotMessages",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -432,7 +462,10 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatbotUpdateResponse>()
-            .json(200, operations.PostChatbotUpdateResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatbotUpdateResponse$, {
+                hdrs: true,
+                key: "ChatbotResponses",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -504,7 +537,7 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatbotDeleteResponse>()
-            .json(200, operations.PostChatbotDeleteResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatbotDeleteResponse$, { hdrs: true, key: "DeleteResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -576,7 +609,7 @@ export class Chatbot extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatbotResetResponse>()
-            .json(200, operations.PostChatbotResetResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.PostChatbotResetResponse$, { hdrs: true, key: "ChatbotResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

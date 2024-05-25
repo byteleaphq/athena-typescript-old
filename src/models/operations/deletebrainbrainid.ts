@@ -9,19 +9,12 @@ export type DeleteBrainBrainIdRequest = {
     brainId: string;
 };
 
-/**
- * OK
- */
-export type DeleteBrainBrainIdResponseBody = {
-    message?: string | undefined;
-};
-
 export type DeleteBrainBrainIdResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: DeleteBrainBrainIdResponseBody | undefined;
+    deleteResponse?: components.DeleteResponse | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -53,65 +46,37 @@ export namespace DeleteBrainBrainIdRequest$ {
 }
 
 /** @internal */
-export namespace DeleteBrainBrainIdResponseBody$ {
-    export const inboundSchema: z.ZodType<DeleteBrainBrainIdResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            message: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.message === undefined ? null : { message: v.message }),
-            };
-        });
-
-    export type Outbound = {
-        message?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteBrainBrainIdResponseBody> =
-        z
-            .object({
-                message: z.string().optional(),
-            })
-            .transform((v) => {
-                return {
-                    ...(v.message === undefined ? null : { message: v.message }),
-                };
-            });
-}
-
-/** @internal */
 export namespace DeleteBrainBrainIdResponse$ {
     export const inboundSchema: z.ZodType<DeleteBrainBrainIdResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => DeleteBrainBrainIdResponseBody$.inboundSchema).optional(),
+            DeleteResponse: components.DeleteResponse$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.DeleteResponse === undefined ? null : { deleteResponse: v.DeleteResponse }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: DeleteBrainBrainIdResponseBody$.Outbound | undefined;
+        DeleteResponse?: components.DeleteResponse$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteBrainBrainIdResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => DeleteBrainBrainIdResponseBody$.outboundSchema).optional(),
+            deleteResponse: components.DeleteResponse$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.deleteResponse === undefined ? null : { DeleteResponse: v.deleteResponse }),
                 Headers: v.headers,
             };
         });

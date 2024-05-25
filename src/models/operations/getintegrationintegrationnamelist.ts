@@ -13,16 +13,43 @@ export type GetIntegrationIntegrationNameListRequest = {
 };
 
 /**
- * OK
+ * Content of the page
  */
-export type GetIntegrationIntegrationNameListResponseBody = {};
+export type Content = {};
+
+export type ResponseBody = {
+    /**
+     * Content of the page
+     */
+    content?: Content | undefined;
+    /**
+     * Creation timestamp of the page
+     */
+    createdAt?: string | undefined;
+    /**
+     * ID of the page
+     */
+    id?: string | undefined;
+    /**
+     * Title of the page
+     */
+    title?: string | undefined;
+    /**
+     * Last updated timestamp of the page
+     */
+    updatedAt?: string | undefined;
+    /**
+     * URL of the page
+     */
+    url?: string | undefined;
+};
 
 export type GetIntegrationIntegrationNameListResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: GetIntegrationIntegrationNameListResponseBody | undefined;
+    responseBodies?: Array<ResponseBody> | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -62,20 +89,64 @@ export namespace GetIntegrationIntegrationNameListRequest$ {
 }
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameListResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameListResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z.object({});
+export namespace Content$ {
+    export const inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> = z.object({});
 
     export type Outbound = {};
 
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GetIntegrationIntegrationNameListResponseBody
-    > = z.object({});
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Content> = z.object({});
+}
+
+/** @internal */
+export namespace ResponseBody$ {
+    export const inboundSchema: z.ZodType<ResponseBody, z.ZodTypeDef, unknown> = z
+        .object({
+            content: z.lazy(() => Content$.inboundSchema).optional(),
+            created_at: z.string().optional(),
+            id: z.string().optional(),
+            title: z.string().optional(),
+            updated_at: z.string().optional(),
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.content === undefined ? null : { content: v.content }),
+                ...(v.created_at === undefined ? null : { createdAt: v.created_at }),
+                ...(v.id === undefined ? null : { id: v.id }),
+                ...(v.title === undefined ? null : { title: v.title }),
+                ...(v.updated_at === undefined ? null : { updatedAt: v.updated_at }),
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
+
+    export type Outbound = {
+        content?: Content$.Outbound | undefined;
+        created_at?: string | undefined;
+        id?: string | undefined;
+        title?: string | undefined;
+        updated_at?: string | undefined;
+        url?: string | undefined;
+    };
+
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ResponseBody> = z
+        .object({
+            content: z.lazy(() => Content$.outboundSchema).optional(),
+            createdAt: z.string().optional(),
+            id: z.string().optional(),
+            title: z.string().optional(),
+            updatedAt: z.string().optional(),
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.content === undefined ? null : { content: v.content }),
+                ...(v.createdAt === undefined ? null : { created_at: v.createdAt }),
+                ...(v.id === undefined ? null : { id: v.id }),
+                ...(v.title === undefined ? null : { title: v.title }),
+                ...(v.updatedAt === undefined ? null : { updated_at: v.updatedAt }),
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 }
 
 /** @internal */
@@ -87,22 +158,20 @@ export namespace GetIntegrationIntegrationNameListResponse$ {
     > = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z
-                .lazy(() => GetIntegrationIntegrationNameListResponseBody$.inboundSchema)
-                .optional(),
+            responseBodies: z.array(z.lazy(() => ResponseBody$.inboundSchema)).optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.responseBodies === undefined ? null : { responseBodies: v.responseBodies }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetIntegrationIntegrationNameListResponseBody$.Outbound | undefined;
+        responseBodies?: Array<ResponseBody$.Outbound> | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
@@ -113,15 +182,13 @@ export namespace GetIntegrationIntegrationNameListResponse$ {
     > = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z
-                .lazy(() => GetIntegrationIntegrationNameListResponseBody$.outboundSchema)
-                .optional(),
+            responseBodies: z.array(z.lazy(() => ResponseBody$.outboundSchema)).optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.responseBodies === undefined ? null : { responseBodies: v.responseBodies }),
                 Headers: v.headers,
             };
         });

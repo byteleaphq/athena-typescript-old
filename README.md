@@ -107,7 +107,7 @@ run();
 ### [chatbot](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md)
 
 - [postChatbotCreate](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#postchatbotcreate) - Create Chatbot
-- [postChatbotList](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#postchatbotlist) - List Chatbots
+- [getChatbotList](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#getchatbotlist) - List Chatbots
 - [postChatbotGet](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#postchatbotget) - Get Chatbot
 - [getChatbotAnalytics](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#getchatbotanalytics) - Get Chatbot analytics
 - [getChatbotGetMessages](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md#getchatbotgetmessages) - Get Chatbot messages

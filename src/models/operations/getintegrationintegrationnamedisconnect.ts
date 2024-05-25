@@ -12,8 +12,17 @@ export type GetIntegrationIntegrationNameDisconnectRequest = {
     integrationName: string;
 };
 
+/**
+ * Empty object
+ */
+export type GetIntegrationIntegrationNameDisconnectResponseBody = {};
+
 export type GetIntegrationIntegrationNameDisconnectResponse = {
     httpMeta: components.HTTPMetadata;
+    /**
+     * Successful response
+     */
+    object?: GetIntegrationIntegrationNameDisconnectResponseBody | undefined;
 };
 
 /** @internal */
@@ -52,6 +61,23 @@ export namespace GetIntegrationIntegrationNameDisconnectRequest$ {
 }
 
 /** @internal */
+export namespace GetIntegrationIntegrationNameDisconnectResponseBody$ {
+    export const inboundSchema: z.ZodType<
+        GetIntegrationIntegrationNameDisconnectResponseBody,
+        z.ZodTypeDef,
+        unknown
+    > = z.object({});
+
+    export type Outbound = {};
+
+    export const outboundSchema: z.ZodType<
+        Outbound,
+        z.ZodTypeDef,
+        GetIntegrationIntegrationNameDisconnectResponseBody
+    > = z.object({});
+}
+
+/** @internal */
 export namespace GetIntegrationIntegrationNameDisconnectResponse$ {
     export const inboundSchema: z.ZodType<
         GetIntegrationIntegrationNameDisconnectResponse,
@@ -60,15 +86,20 @@ export namespace GetIntegrationIntegrationNameDisconnectResponse$ {
     > = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
+            object: z
+                .lazy(() => GetIntegrationIntegrationNameDisconnectResponseBody$.inboundSchema)
+                .optional(),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
+                ...(v.object === undefined ? null : { object: v.object }),
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
+        object?: GetIntegrationIntegrationNameDisconnectResponseBody$.Outbound | undefined;
     };
 
     export const outboundSchema: z.ZodType<
@@ -78,10 +109,14 @@ export namespace GetIntegrationIntegrationNameDisconnectResponse$ {
     > = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
+            object: z
+                .lazy(() => GetIntegrationIntegrationNameDisconnectResponseBody$.outboundSchema)
+                .optional(),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
+                ...(v.object === undefined ? null : { object: v.object }),
             };
         });
 }

@@ -1,6 +1,6 @@
-# GetChatbotAnalyticsResponseBody
+# Content
 
-OK
+Content of the page
 
 
 ## Fields

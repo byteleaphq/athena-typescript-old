@@ -1,6 +1,6 @@
-# PostChatbotCreateResponseBody
+# GetIntegrationIntegrationNameDisconnectResponseBody
 
-OK
+Empty object
 
 
 ## Fields

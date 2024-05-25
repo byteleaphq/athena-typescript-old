@@ -4,7 +4,11 @@
 
 export * from "./brain";
 export * from "./chat";
+export * from "./chatbotanalytics";
+export * from "./chatbotmessages";
+export * from "./chatbotresponse";
 export * from "./chatinteraction";
+export * from "./deleteresponse";
 export * from "./document";
 export * from "./httpmetadata";
 export * from "./security";

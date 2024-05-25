@@ -9,19 +9,12 @@ export type DeleteChatChatIdRequest = {
     chatId: string;
 };
 
-/**
- * OK
- */
-export type DeleteChatChatIdResponseBody = {
-    message?: string | undefined;
-};
-
 export type DeleteChatChatIdResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: DeleteChatChatIdResponseBody | undefined;
+    deleteResponse?: components.DeleteResponse | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -53,64 +46,37 @@ export namespace DeleteChatChatIdRequest$ {
 }
 
 /** @internal */
-export namespace DeleteChatChatIdResponseBody$ {
-    export const inboundSchema: z.ZodType<DeleteChatChatIdResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            message: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.message === undefined ? null : { message: v.message }),
-            };
-        });
-
-    export type Outbound = {
-        message?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteChatChatIdResponseBody> = z
-        .object({
-            message: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.message === undefined ? null : { message: v.message }),
-            };
-        });
-}
-
-/** @internal */
 export namespace DeleteChatChatIdResponse$ {
     export const inboundSchema: z.ZodType<DeleteChatChatIdResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => DeleteChatChatIdResponseBody$.inboundSchema).optional(),
+            DeleteResponse: components.DeleteResponse$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.DeleteResponse === undefined ? null : { deleteResponse: v.DeleteResponse }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: DeleteChatChatIdResponseBody$.Outbound | undefined;
+        DeleteResponse?: components.DeleteResponse$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteChatChatIdResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => DeleteChatChatIdResponseBody$.outboundSchema).optional(),
+            deleteResponse: components.DeleteResponse$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.deleteResponse === undefined ? null : { DeleteResponse: v.deleteResponse }),
                 Headers: v.headers,
             };
         });

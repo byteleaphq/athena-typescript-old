@@ -9,12 +9,13 @@ export type PutChatChatIdRequestBody = {
     /**
      * between 1 and 0
      */
-    temperature?: number | undefined;
+    temperature?: number | null | undefined;
     /**
      * The updated name of the chat
      */
-    name?: string | undefined;
-    systemMessage?: string | undefined;
+    name?: string | null | undefined;
+    systemMessage?: string | null | undefined;
+    additionalProperties: { [k: string]: any };
 };
 
 export type PutChatChatIdRequest = {
@@ -35,32 +36,39 @@ export type PutChatChatIdResponse = {
 export namespace PutChatChatIdRequestBody$ {
     export const inboundSchema: z.ZodType<PutChatChatIdRequestBody, z.ZodTypeDef, unknown> = z
         .object({
-            temperature: z.number().optional(),
-            name: z.string().optional(),
-            system_message: z.string().optional(),
+            temperature: z.nullable(z.number()).optional(),
+            name: z.nullable(z.string()).optional(),
+            system_message: z.nullable(z.string()).optional(),
         })
+        .catchall(z.any())
         .transform((v) => {
+            const { temperature, name, system_message, ...additionalProperties } = v;
+
             return {
                 ...(v.temperature === undefined ? null : { temperature: v.temperature }),
                 ...(v.name === undefined ? null : { name: v.name }),
                 ...(v.system_message === undefined ? null : { systemMessage: v.system_message }),
+                additionalProperties,
             };
         });
 
     export type Outbound = {
-        temperature?: number | undefined;
-        name?: string | undefined;
-        system_message?: string | undefined;
+        temperature?: number | null | undefined;
+        name?: string | null | undefined;
+        system_message?: string | null | undefined;
+        [additionalProperties: string]: unknown;
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PutChatChatIdRequestBody> = z
         .object({
-            temperature: z.number().optional(),
-            name: z.string().optional(),
-            systemMessage: z.string().optional(),
+            temperature: z.nullable(z.number()).optional(),
+            name: z.nullable(z.string()).optional(),
+            systemMessage: z.nullable(z.string()).optional(),
+            additionalProperties: z.record(z.any()),
         })
         .transform((v) => {
             return {
+                ...v.additionalProperties,
                 ...(v.temperature === undefined ? null : { temperature: v.temperature }),
                 ...(v.name === undefined ? null : { name: v.name }),
                 ...(v.systemMessage === undefined ? null : { system_message: v.systemMessage }),

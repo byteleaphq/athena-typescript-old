@@ -168,6 +168,9 @@ async function run() {
     temperature: null,
     name: "Test_chat2",
     systemMessage: "test system message",
+    additionalProperties: {
+  
+    },
   });
 
   // Handle the result

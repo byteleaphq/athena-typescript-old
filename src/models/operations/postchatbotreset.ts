@@ -9,17 +9,12 @@ export type PostChatbotResetRequest = {
     chatbotId?: string | undefined;
 };
 
-/**
- * OK
- */
-export type PostChatbotResetResponseBody = {};
-
 export type PostChatbotResetResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PostChatbotResetResponseBody | undefined;
+    chatbotResponse?: components.ChatbotResponse | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -51,48 +46,41 @@ export namespace PostChatbotResetRequest$ {
 }
 
 /** @internal */
-export namespace PostChatbotResetResponseBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotResetResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotResetResponseBody> =
-        z.object({});
-}
-
-/** @internal */
 export namespace PostChatbotResetResponse$ {
     export const inboundSchema: z.ZodType<PostChatbotResetResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => PostChatbotResetResponseBody$.inboundSchema).optional(),
+            ChatbotResponse: components.ChatbotResponse$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.ChatbotResponse === undefined
+                    ? null
+                    : { chatbotResponse: v.ChatbotResponse }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostChatbotResetResponseBody$.Outbound | undefined;
+        ChatbotResponse?: components.ChatbotResponse$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotResetResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => PostChatbotResetResponseBody$.outboundSchema).optional(),
+            chatbotResponse: components.ChatbotResponse$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.chatbotResponse === undefined
+                    ? null
+                    : { ChatbotResponse: v.chatbotResponse }),
                 Headers: v.headers,
             };
         });

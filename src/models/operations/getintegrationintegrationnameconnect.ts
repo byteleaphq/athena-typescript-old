@@ -15,7 +15,12 @@ export type GetIntegrationIntegrationNameConnectRequest = {
 /**
  * OK
  */
-export type GetIntegrationIntegrationNameConnectResponseBody = {};
+export type GetIntegrationIntegrationNameConnectResponseBody = {
+    /**
+     * URL to connect to the integration
+     */
+    url?: string | undefined;
+};
 
 export type GetIntegrationIntegrationNameConnectResponse = {
     httpMeta: components.HTTPMetadata;
@@ -67,15 +72,33 @@ export namespace GetIntegrationIntegrationNameConnectResponseBody$ {
         GetIntegrationIntegrationNameConnectResponseBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        url?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         GetIntegrationIntegrationNameConnectResponseBody
-    > = z.object({});
+    > = z
+        .object({
+            url: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.url === undefined ? null : { url: v.url }),
+            };
+        });
 }
 
 /** @internal */

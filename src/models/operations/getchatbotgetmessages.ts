@@ -9,17 +9,12 @@ export type GetChatbotGetMessagesRequest = {
     chatbotId?: string | undefined;
 };
 
-/**
- * OK
- */
-export type GetChatbotGetMessagesResponseBody = {};
-
 export type GetChatbotGetMessagesResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: GetChatbotGetMessagesResponseBody | undefined;
+    chatbotMessages?: components.ChatbotMessages | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -51,41 +46,26 @@ export namespace GetChatbotGetMessagesRequest$ {
 }
 
 /** @internal */
-export namespace GetChatbotGetMessagesResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        GetChatbotGetMessagesResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GetChatbotGetMessagesResponseBody
-    > = z.object({});
-}
-
-/** @internal */
 export namespace GetChatbotGetMessagesResponse$ {
     export const inboundSchema: z.ZodType<GetChatbotGetMessagesResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => GetChatbotGetMessagesResponseBody$.inboundSchema).optional(),
+            ChatbotMessages: components.ChatbotMessages$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.ChatbotMessages === undefined
+                    ? null
+                    : { chatbotMessages: v.ChatbotMessages }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetChatbotGetMessagesResponseBody$.Outbound | undefined;
+        ChatbotMessages?: components.ChatbotMessages$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
@@ -93,13 +73,15 @@ export namespace GetChatbotGetMessagesResponse$ {
         z
             .object({
                 httpMeta: components.HTTPMetadata$.outboundSchema,
-                object: z.lazy(() => GetChatbotGetMessagesResponseBody$.outboundSchema).optional(),
+                chatbotMessages: components.ChatbotMessages$.outboundSchema.optional(),
                 headers: z.record(z.array(z.string())),
             })
             .transform((v) => {
                 return {
                     HttpMeta: v.httpMeta,
-                    ...(v.object === undefined ? null : { object: v.object }),
+                    ...(v.chatbotMessages === undefined
+                        ? null
+                        : { ChatbotMessages: v.chatbotMessages }),
                     Headers: v.headers,
                 };
             });

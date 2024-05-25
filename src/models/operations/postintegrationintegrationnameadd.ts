@@ -6,7 +6,13 @@ import * as components from "../components";
 import * as z from "zod";
 
 export type PostIntegrationIntegrationNameAddRequestBody = {
+    /**
+     * ID of the brain to add pages to
+     */
     brainId?: string | undefined;
+    /**
+     * Array of page IDs to add to the brain
+     */
     pageIds?: Array<string> | undefined;
 };
 
@@ -21,7 +27,12 @@ export type PostIntegrationIntegrationNameAddRequest = {
 /**
  * OK
  */
-export type PostIntegrationIntegrationNameAddResponseBody = {};
+export type PostIntegrationIntegrationNameAddResponseBody = {
+    /**
+     * Message indicating the pages are being added to the brain
+     */
+    message?: string | undefined;
+};
 
 export type PostIntegrationIntegrationNameAddResponse = {
     httpMeta: components.HTTPMetadata;
@@ -122,15 +133,33 @@ export namespace PostIntegrationIntegrationNameAddResponseBody$ {
         PostIntegrationIntegrationNameAddResponseBody,
         z.ZodTypeDef,
         unknown
-    > = z.object({});
+    > = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 
-    export type Outbound = {};
+    export type Outbound = {
+        message?: string | undefined;
+    };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
         PostIntegrationIntegrationNameAddResponseBody
-    > = z.object({});
+    > = z
+        .object({
+            message: z.string().optional(),
+        })
+        .transform((v) => {
+            return {
+                ...(v.message === undefined ? null : { message: v.message }),
+            };
+        });
 }
 
 /** @internal */

@@ -367,7 +367,10 @@ export class Brain extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.DeleteBrainBrainIdResponse>()
-            .json(200, operations.DeleteBrainBrainIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.DeleteBrainBrainIdResponse$, {
+                hdrs: true,
+                key: "DeleteResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

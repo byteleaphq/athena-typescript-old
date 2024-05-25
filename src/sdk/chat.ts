@@ -365,7 +365,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.DeleteChatChatIdResponse>()
-            .json(200, operations.DeleteChatChatIdResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.DeleteChatChatIdResponse$, { hdrs: true, key: "DeleteResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

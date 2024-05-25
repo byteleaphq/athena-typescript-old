@@ -4,7 +4,7 @@
 ### Available Operations
 
 * [postChatbotCreate](#postchatbotcreate) - Create Chatbot
-* [postChatbotList](#postchatbotlist) - List Chatbots
+* [getChatbotList](#getchatbotlist) - List Chatbots
 * [postChatbotGet](#postchatbotget) - Get Chatbot
 * [getChatbotAnalytics](#getchatbotanalytics) - Get Chatbot analytics
 * [getChatbotGetMessages](#getchatbotgetmessages) - Get Chatbot messages
@@ -63,7 +63,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## postChatbotList
+## getChatbotList
 
 List Chatbots
 
@@ -80,7 +80,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chatbot.postChatbotList();
+  const result = await athenaCopilot.chatbot.getChatbotList("<value>");
 
   // Handle the result
   console.log(result)
@@ -93,13 +93,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | The ID of the brain to filter chatbots                                                                                                                                         |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostChatbotListResponse](../../models/operations/postchatbotlistresponse.md)\>**
+**Promise\<[operations.GetChatbotListResponse](../../models/operations/getchatbotlistresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -256,6 +257,7 @@ const athenaCopilot = new AthenaCopilot({
 
 async function run() {
   const result = await athenaCopilot.chatbot.postChatbotUpdate({
+    chatbotId: "1a718a80-71c0-414b-915c-5c5991597ac7",
     name: "Chatbot -1",
     urls: [
       "https://byteleap.co",

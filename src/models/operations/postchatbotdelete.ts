@@ -9,17 +9,12 @@ export type PostChatbotDeleteRequest = {
     chatbotId?: string | undefined;
 };
 
-/**
- * OK
- */
-export type PostChatbotDeleteResponseBody = {};
-
 export type PostChatbotDeleteResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: PostChatbotDeleteResponseBody | undefined;
+    deleteResponse?: components.DeleteResponse | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -51,48 +46,37 @@ export namespace PostChatbotDeleteRequest$ {
 }
 
 /** @internal */
-export namespace PostChatbotDeleteResponseBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotDeleteResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotDeleteResponseBody> =
-        z.object({});
-}
-
-/** @internal */
 export namespace PostChatbotDeleteResponse$ {
     export const inboundSchema: z.ZodType<PostChatbotDeleteResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => PostChatbotDeleteResponseBody$.inboundSchema).optional(),
+            DeleteResponse: components.DeleteResponse$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.DeleteResponse === undefined ? null : { deleteResponse: v.DeleteResponse }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostChatbotDeleteResponseBody$.Outbound | undefined;
+        DeleteResponse?: components.DeleteResponse$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotDeleteResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => PostChatbotDeleteResponseBody$.outboundSchema).optional(),
+            deleteResponse: components.DeleteResponse$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.deleteResponse === undefined ? null : { DeleteResponse: v.deleteResponse }),
                 Headers: v.headers,
             };
         });

@@ -9,17 +9,12 @@ export type GetChatbotAnalyticsRequest = {
     chatbotId?: string | undefined;
 };
 
-/**
- * OK
- */
-export type GetChatbotAnalyticsResponseBody = {};
-
 export type GetChatbotAnalyticsResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: GetChatbotAnalyticsResponseBody | undefined;
+    chatbotAnalytics?: components.ChatbotAnalytics | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -51,51 +46,41 @@ export namespace GetChatbotAnalyticsRequest$ {
 }
 
 /** @internal */
-export namespace GetChatbotAnalyticsResponseBody$ {
-    export const inboundSchema: z.ZodType<GetChatbotAnalyticsResponseBody, z.ZodTypeDef, unknown> =
-        z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GetChatbotAnalyticsResponseBody
-    > = z.object({});
-}
-
-/** @internal */
 export namespace GetChatbotAnalyticsResponse$ {
     export const inboundSchema: z.ZodType<GetChatbotAnalyticsResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z.lazy(() => GetChatbotAnalyticsResponseBody$.inboundSchema).optional(),
+            ChatbotAnalytics: components.ChatbotAnalytics$.inboundSchema.optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 httpMeta: v.HttpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.ChatbotAnalytics === undefined
+                    ? null
+                    : { chatbotAnalytics: v.ChatbotAnalytics }),
                 headers: v.Headers,
             };
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetChatbotAnalyticsResponseBody$.Outbound | undefined;
+        ChatbotAnalytics?: components.ChatbotAnalytics$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatbotAnalyticsResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z.lazy(() => GetChatbotAnalyticsResponseBody$.outboundSchema).optional(),
+            chatbotAnalytics: components.ChatbotAnalytics$.outboundSchema.optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return {
                 HttpMeta: v.httpMeta,
-                ...(v.object === undefined ? null : { object: v.object }),
+                ...(v.chatbotAnalytics === undefined
+                    ? null
+                    : { ChatbotAnalytics: v.chatbotAnalytics }),
                 Headers: v.headers,
             };
         });

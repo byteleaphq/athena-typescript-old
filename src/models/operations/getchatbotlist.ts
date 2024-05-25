@@ -5,19 +5,14 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type PostChatbotUpdateRequestBody = {
+export type GetChatbotListRequest = {
     /**
-     * The id of the chatbot
+     * The ID of the brain to filter chatbots
      */
-    chatbotId?: string | undefined;
-    /**
-     * The name of the chatbot
-     */
-    name?: string | null | undefined;
-    urls?: Array<string> | null | undefined;
+    brainId?: string | undefined;
 };
 
-export type PostChatbotUpdateResponse = {
+export type GetChatbotListResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
@@ -27,45 +22,35 @@ export type PostChatbotUpdateResponse = {
 };
 
 /** @internal */
-export namespace PostChatbotUpdateRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotUpdateRequestBody, z.ZodTypeDef, unknown> = z
+export namespace GetChatbotListRequest$ {
+    export const inboundSchema: z.ZodType<GetChatbotListRequest, z.ZodTypeDef, unknown> = z
         .object({
-            chatbot_id: z.string().optional(),
-            name: z.nullable(z.string()).optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
+            brain_id: z.string().optional(),
         })
         .transform((v) => {
             return {
-                ...(v.chatbot_id === undefined ? null : { chatbotId: v.chatbot_id }),
-                ...(v.name === undefined ? null : { name: v.name }),
-                ...(v.urls === undefined ? null : { urls: v.urls }),
+                ...(v.brain_id === undefined ? null : { brainId: v.brain_id }),
             };
         });
 
     export type Outbound = {
-        chatbot_id?: string | undefined;
-        name?: string | null | undefined;
-        urls?: Array<string> | null | undefined;
+        brain_id?: string | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateRequestBody> = z
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatbotListRequest> = z
         .object({
-            chatbotId: z.string().optional(),
-            name: z.nullable(z.string()).optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
+            brainId: z.string().optional(),
         })
         .transform((v) => {
             return {
-                ...(v.chatbotId === undefined ? null : { chatbot_id: v.chatbotId }),
-                ...(v.name === undefined ? null : { name: v.name }),
-                ...(v.urls === undefined ? null : { urls: v.urls }),
+                ...(v.brainId === undefined ? null : { brain_id: v.brainId }),
             };
         });
 }
 
 /** @internal */
-export namespace PostChatbotUpdateResponse$ {
-    export const inboundSchema: z.ZodType<PostChatbotUpdateResponse, z.ZodTypeDef, unknown> = z
+export namespace GetChatbotListResponse$ {
+    export const inboundSchema: z.ZodType<GetChatbotListResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
             ChatbotResponses: z.array(components.ChatbotResponse$.inboundSchema).optional(),
@@ -87,7 +72,7 @@ export namespace PostChatbotUpdateResponse$ {
         Headers: { [k: string]: Array<string> };
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateResponse> = z
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatbotListResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
             chatbotResponses: z.array(components.ChatbotResponse$.outboundSchema).optional(),
