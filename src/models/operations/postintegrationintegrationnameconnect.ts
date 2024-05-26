@@ -5,7 +5,7 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type GetIntegrationIntegrationNameConnectRequest = {
+export type PostIntegrationIntegrationNameConnectRequest = {
     /**
      * Currently supported integrations are "notion" and "confluence". More integrations will be added in the future.
      */
@@ -15,26 +15,26 @@ export type GetIntegrationIntegrationNameConnectRequest = {
 /**
  * OK
  */
-export type GetIntegrationIntegrationNameConnectResponseBody = {
+export type PostIntegrationIntegrationNameConnectResponseBody = {
     /**
      * URL to connect to the integration
      */
     url?: string | undefined;
 };
 
-export type GetIntegrationIntegrationNameConnectResponse = {
+export type PostIntegrationIntegrationNameConnectResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
      */
-    object?: GetIntegrationIntegrationNameConnectResponseBody | undefined;
+    object?: PostIntegrationIntegrationNameConnectResponseBody | undefined;
     headers: { [k: string]: Array<string> };
 };
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameConnectRequest$ {
+export namespace PostIntegrationIntegrationNameConnectRequest$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameConnectRequest,
+        PostIntegrationIntegrationNameConnectRequest,
         z.ZodTypeDef,
         unknown
     > = z
@@ -54,7 +54,7 @@ export namespace GetIntegrationIntegrationNameConnectRequest$ {
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameConnectRequest
+        PostIntegrationIntegrationNameConnectRequest
     > = z
         .object({
             integrationName: z.string(),
@@ -67,9 +67,9 @@ export namespace GetIntegrationIntegrationNameConnectRequest$ {
 }
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameConnectResponseBody$ {
+export namespace PostIntegrationIntegrationNameConnectResponseBody$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameConnectResponseBody,
+        PostIntegrationIntegrationNameConnectResponseBody,
         z.ZodTypeDef,
         unknown
     > = z
@@ -89,7 +89,7 @@ export namespace GetIntegrationIntegrationNameConnectResponseBody$ {
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameConnectResponseBody
+        PostIntegrationIntegrationNameConnectResponseBody
     > = z
         .object({
             url: z.string().optional(),
@@ -102,16 +102,16 @@ export namespace GetIntegrationIntegrationNameConnectResponseBody$ {
 }
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameConnectResponse$ {
+export namespace PostIntegrationIntegrationNameConnectResponse$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameConnectResponse,
+        PostIntegrationIntegrationNameConnectResponse,
         z.ZodTypeDef,
         unknown
     > = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
             object: z
-                .lazy(() => GetIntegrationIntegrationNameConnectResponseBody$.inboundSchema)
+                .lazy(() => PostIntegrationIntegrationNameConnectResponseBody$.inboundSchema)
                 .optional(),
             Headers: z.record(z.array(z.string())),
         })
@@ -125,19 +125,19 @@ export namespace GetIntegrationIntegrationNameConnectResponse$ {
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetIntegrationIntegrationNameConnectResponseBody$.Outbound | undefined;
+        object?: PostIntegrationIntegrationNameConnectResponseBody$.Outbound | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameConnectResponse
+        PostIntegrationIntegrationNameConnectResponse
     > = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
             object: z
-                .lazy(() => GetIntegrationIntegrationNameConnectResponseBody$.outboundSchema)
+                .lazy(() => PostIntegrationIntegrationNameConnectResponseBody$.outboundSchema)
                 .optional(),
             headers: z.record(z.array(z.string())),
         })

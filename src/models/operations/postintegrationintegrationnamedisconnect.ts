@@ -5,7 +5,7 @@
 import * as components from "../components";
 import * as z from "zod";
 
-export type GetIntegrationIntegrationNameDisconnectRequest = {
+export type PostIntegrationIntegrationNameDisconnectRequest = {
     /**
      * Currently supported integrations are "notion" and "confluence". More integrations will be added in the future.
      */
@@ -15,20 +15,20 @@ export type GetIntegrationIntegrationNameDisconnectRequest = {
 /**
  * Empty object
  */
-export type GetIntegrationIntegrationNameDisconnectResponseBody = {};
+export type PostIntegrationIntegrationNameDisconnectResponseBody = {};
 
-export type GetIntegrationIntegrationNameDisconnectResponse = {
+export type PostIntegrationIntegrationNameDisconnectResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * Successful response
      */
-    object?: GetIntegrationIntegrationNameDisconnectResponseBody | undefined;
+    object?: PostIntegrationIntegrationNameDisconnectResponseBody | undefined;
 };
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameDisconnectRequest$ {
+export namespace PostIntegrationIntegrationNameDisconnectRequest$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameDisconnectRequest,
+        PostIntegrationIntegrationNameDisconnectRequest,
         z.ZodTypeDef,
         unknown
     > = z
@@ -48,7 +48,7 @@ export namespace GetIntegrationIntegrationNameDisconnectRequest$ {
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameDisconnectRequest
+        PostIntegrationIntegrationNameDisconnectRequest
     > = z
         .object({
             integrationName: z.string(),
@@ -61,9 +61,9 @@ export namespace GetIntegrationIntegrationNameDisconnectRequest$ {
 }
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameDisconnectResponseBody$ {
+export namespace PostIntegrationIntegrationNameDisconnectResponseBody$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameDisconnectResponseBody,
+        PostIntegrationIntegrationNameDisconnectResponseBody,
         z.ZodTypeDef,
         unknown
     > = z.object({});
@@ -73,21 +73,21 @@ export namespace GetIntegrationIntegrationNameDisconnectResponseBody$ {
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameDisconnectResponseBody
+        PostIntegrationIntegrationNameDisconnectResponseBody
     > = z.object({});
 }
 
 /** @internal */
-export namespace GetIntegrationIntegrationNameDisconnectResponse$ {
+export namespace PostIntegrationIntegrationNameDisconnectResponse$ {
     export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameDisconnectResponse,
+        PostIntegrationIntegrationNameDisconnectResponse,
         z.ZodTypeDef,
         unknown
     > = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
             object: z
-                .lazy(() => GetIntegrationIntegrationNameDisconnectResponseBody$.inboundSchema)
+                .lazy(() => PostIntegrationIntegrationNameDisconnectResponseBody$.inboundSchema)
                 .optional(),
         })
         .transform((v) => {
@@ -99,18 +99,18 @@ export namespace GetIntegrationIntegrationNameDisconnectResponse$ {
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: GetIntegrationIntegrationNameDisconnectResponseBody$.Outbound | undefined;
+        object?: PostIntegrationIntegrationNameDisconnectResponseBody$.Outbound | undefined;
     };
 
     export const outboundSchema: z.ZodType<
         Outbound,
         z.ZodTypeDef,
-        GetIntegrationIntegrationNameDisconnectResponse
+        PostIntegrationIntegrationNameDisconnectResponse
     > = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
             object: z
-                .lazy(() => GetIntegrationIntegrationNameDisconnectResponseBody$.outboundSchema)
+                .lazy(() => PostIntegrationIntegrationNameDisconnectResponseBody$.outboundSchema)
                 .optional(),
         })
         .transform((v) => {

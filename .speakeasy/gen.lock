@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 698fc2d5-898d-4d0b-89ca-fb7127989704
 management:
-  docChecksum: 8abce4bf0435061baee4ff5352c3c3d1
+  docChecksum: 739bfcd32cc23581516fdd5cf2bc9b82
   docVersion: 1.0.0
   speakeasyVersion: 1.296.1
   generationVersion: 2.338.1
-  releaseVersion: 0.3.0
-  configChecksum: bc0d6d90c4e1f90e5593441bdccd3d5e
+  releaseVersion: 0.3.1
+  configChecksum: 49c1d21936e7facfabe639707f1fa807
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -80,8 +80,8 @@ generatedFiles:
   - src/models/operations/postchatbotupdate.ts
   - src/models/operations/postchatbotdelete.ts
   - src/models/operations/postchatbotreset.ts
-  - src/models/operations/getintegrationintegrationnameconnect.ts
-  - src/models/operations/getintegrationintegrationnamedisconnect.ts
+  - src/models/operations/postintegrationintegrationnameconnect.ts
+  - src/models/operations/postintegrationintegrationnamedisconnect.ts
   - src/models/operations/getintegrationintegrationnamelist.ts
   - src/models/operations/postintegrationintegrationnameadd.ts
   - src/models/operations/getorganisation.ts
@@ -162,12 +162,12 @@ generatedFiles:
   - docs/models/operations/postchatbotdeleteresponse.md
   - docs/models/operations/postchatbotresetrequest.md
   - docs/models/operations/postchatbotresetresponse.md
-  - docs/models/operations/getintegrationintegrationnameconnectrequest.md
-  - docs/models/operations/getintegrationintegrationnameconnectresponsebody.md
-  - docs/models/operations/getintegrationintegrationnameconnectresponse.md
-  - docs/models/operations/getintegrationintegrationnamedisconnectrequest.md
-  - docs/models/operations/getintegrationintegrationnamedisconnectresponsebody.md
-  - docs/models/operations/getintegrationintegrationnamedisconnectresponse.md
+  - docs/models/operations/postintegrationintegrationnameconnectrequest.md
+  - docs/models/operations/postintegrationintegrationnameconnectresponsebody.md
+  - docs/models/operations/postintegrationintegrationnameconnectresponse.md
+  - docs/models/operations/postintegrationintegrationnamedisconnectrequest.md
+  - docs/models/operations/postintegrationintegrationnamedisconnectresponsebody.md
+  - docs/models/operations/postintegrationintegrationnamedisconnectresponse.md
   - docs/models/operations/getintegrationintegrationnamelistrequest.md
   - docs/models/operations/content.md
   - docs/models/operations/responsebody.md

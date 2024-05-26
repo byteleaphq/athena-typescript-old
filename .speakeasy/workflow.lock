@@ -2,16 +2,16 @@ speakeasyVersion: 1.296.1
 sources:
     athenacopiolet:
         sourceNamespace: athenacopiolet
-        sourceRevisionDigest: sha256:ea70a36036cdd2f21227b7ac4d8f75c79a2daed6d2f93cd2c573aee34ef09869
-        sourceBlobDigest: sha256:403ba6e6e8fafd15706e35b24a236b453fa96dfddfb753f42f161224d703bdc5
+        sourceRevisionDigest: sha256:06383d83248a66bb3061a2433a730d60ddaa4cec82347f7160e84902867b201d
+        sourceBlobDigest: sha256:86e216703ba7b4e5a5a59092552e2cfb7f6cf616e2e788f86b44b3b54e89b509
         tags:
             - latest
 targets:
     my-first-target:
         source: athenacopiolet
         sourceNamespace: athenacopiolet
-        sourceRevisionDigest: sha256:ea70a36036cdd2f21227b7ac4d8f75c79a2daed6d2f93cd2c573aee34ef09869
-        sourceBlobDigest: sha256:403ba6e6e8fafd15706e35b24a236b453fa96dfddfb753f42f161224d703bdc5
+        sourceRevisionDigest: sha256:06383d83248a66bb3061a2433a730d60ddaa4cec82347f7160e84902867b201d
+        sourceBlobDigest: sha256:86e216703ba7b4e5a5a59092552e2cfb7f6cf616e2e788f86b44b3b54e89b509
         outLocation: /Users/shreyaan/Desktop/sdk/athena-copilot-typescript
 workflow:
     workflowVersion: 1.0.0

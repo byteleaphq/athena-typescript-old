@@ -1,4 +1,4 @@
-# GetIntegrationIntegrationNameDisconnectRequest
+# PostIntegrationIntegrationNameDisconnectRequest
 
 
 ## Fields

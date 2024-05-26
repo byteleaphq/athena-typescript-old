@@ -3,12 +3,12 @@
 
 ### Available Operations
 
-* [getIntegrationIntegrationNameConnect](#getintegrationintegrationnameconnect) - Connect
-* [getIntegrationIntegrationNameDisconnect](#getintegrationintegrationnamedisconnect) - Disconnect
+* [postIntegrationIntegrationNameConnect](#postintegrationintegrationnameconnect) - Connect
+* [postIntegrationIntegrationNameDisconnect](#postintegrationintegrationnamedisconnect) - Disconnect
 * [getIntegrationIntegrationNameList](#getintegrationintegrationnamelist) - List
 * [postIntegrationIntegrationNameAdd](#postintegrationintegrationnameadd) - Add To Brain
 
-## getIntegrationIntegrationNameConnect
+## postIntegrationIntegrationNameConnect
 
 Connect
 
@@ -25,7 +25,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.integration.getIntegrationIntegrationNameConnect("notion");
+  const result = await athenaCopilot.integration.postIntegrationIntegrationNameConnect("notion");
 
   // Handle the result
   console.log(result)
@@ -45,14 +45,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetIntegrationIntegrationNameConnectResponse](../../models/operations/getintegrationintegrationnameconnectresponse.md)\>**
+**Promise\<[operations.PostIntegrationIntegrationNameConnectResponse](../../models/operations/postintegrationintegrationnameconnectresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## getIntegrationIntegrationNameDisconnect
+## postIntegrationIntegrationNameDisconnect
 
 Disconnect
 
@@ -69,7 +69,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.integration.getIntegrationIntegrationNameDisconnect("notion");
+  const result = await athenaCopilot.integration.postIntegrationIntegrationNameDisconnect("notion");
 
   // Handle the result
   console.log(result)
@@ -89,7 +89,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetIntegrationIntegrationNameDisconnectResponse](../../models/operations/getintegrationintegrationnamedisconnectresponse.md)\>**
+**Promise\<[operations.PostIntegrationIntegrationNameDisconnectResponse](../../models/operations/postintegrationintegrationnamedisconnectresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

@@ -40,11 +40,11 @@ export class Integration extends ClientSDK {
     /**
      * Connect
      */
-    async getIntegrationIntegrationNameConnect(
+    async postIntegrationIntegrationNameConnect(
         integrationName: string,
         options?: RequestOptions
-    ): Promise<operations.GetIntegrationIntegrationNameConnectResponse> {
-        const input$: operations.GetIntegrationIntegrationNameConnectRequest = {
+    ): Promise<operations.PostIntegrationIntegrationNameConnectResponse> {
+        const input$: operations.PostIntegrationIntegrationNameConnectRequest = {
             integrationName: integrationName,
         };
         const headers$ = new Headers();
@@ -54,7 +54,7 @@ export class Integration extends ClientSDK {
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.GetIntegrationIntegrationNameConnectRequest$.outboundSchema.parse(
+                operations.PostIntegrationIntegrationNameConnectRequest$.outboundSchema.parse(
                     value$
                 ),
             "Input validation failed"
@@ -67,7 +67,7 @@ export class Integration extends ClientSDK {
                 charEncoding: "percent",
             }),
         };
-        const path$ = this.templateURLComponent("/integration/{integration_name}/connect")(
+        const path$ = this.templateURLComponent("/integration/{integration_name}/connect/")(
             pathParams$
         );
 
@@ -79,7 +79,7 @@ export class Integration extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/integration/{integration_name}/connect",
+            operationID: "post_/integration/{integration_name}/connect/",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -90,7 +90,7 @@ export class Integration extends ClientSDK {
             context,
             {
                 security: securitySettings$,
-                method: "GET",
+                method: "POST",
                 path: path$,
                 headers: headers$,
                 query: query$,
@@ -106,8 +106,8 @@ export class Integration extends ClientSDK {
         };
 
         const [result$] =
-            await this.matcher<operations.GetIntegrationIntegrationNameConnectResponse>()
-                .json(200, operations.GetIntegrationIntegrationNameConnectResponse$, {
+            await this.matcher<operations.PostIntegrationIntegrationNameConnectResponse>()
+                .json(200, operations.PostIntegrationIntegrationNameConnectResponse$, {
                     hdrs: true,
                     key: "object",
                 })
@@ -120,11 +120,11 @@ export class Integration extends ClientSDK {
     /**
      * Disconnect
      */
-    async getIntegrationIntegrationNameDisconnect(
+    async postIntegrationIntegrationNameDisconnect(
         integrationName: string,
         options?: RequestOptions
-    ): Promise<operations.GetIntegrationIntegrationNameDisconnectResponse> {
-        const input$: operations.GetIntegrationIntegrationNameDisconnectRequest = {
+    ): Promise<operations.PostIntegrationIntegrationNameDisconnectResponse> {
+        const input$: operations.PostIntegrationIntegrationNameDisconnectRequest = {
             integrationName: integrationName,
         };
         const headers$ = new Headers();
@@ -134,7 +134,7 @@ export class Integration extends ClientSDK {
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.GetIntegrationIntegrationNameDisconnectRequest$.outboundSchema.parse(
+                operations.PostIntegrationIntegrationNameDisconnectRequest$.outboundSchema.parse(
                     value$
                 ),
             "Input validation failed"
@@ -147,7 +147,7 @@ export class Integration extends ClientSDK {
                 charEncoding: "percent",
             }),
         };
-        const path$ = this.templateURLComponent("/integration/{integration_name}/disconnect")(
+        const path$ = this.templateURLComponent("/integration/{integration_name}/disconnect/")(
             pathParams$
         );
 
@@ -159,7 +159,7 @@ export class Integration extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/integration/{integration_name}/disconnect",
+            operationID: "post_/integration/{integration_name}/disconnect/",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -170,7 +170,7 @@ export class Integration extends ClientSDK {
             context,
             {
                 security: securitySettings$,
-                method: "GET",
+                method: "POST",
                 path: path$,
                 headers: headers$,
                 query: query$,
@@ -186,8 +186,8 @@ export class Integration extends ClientSDK {
         };
 
         const [result$] =
-            await this.matcher<operations.GetIntegrationIntegrationNameDisconnectResponse>()
-                .json(200, operations.GetIntegrationIntegrationNameDisconnectResponse$, {
+            await this.matcher<operations.PostIntegrationIntegrationNameDisconnectResponse>()
+                .json(200, operations.PostIntegrationIntegrationNameDisconnectResponse$, {
                     key: "object",
                 })
                 .fail(["4XX", "5XX"])

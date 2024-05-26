@@ -1,4 +1,4 @@
-# GetIntegrationIntegrationNameConnectRequest
+# PostIntegrationIntegrationNameConnectRequest
 
 
 ## Fields

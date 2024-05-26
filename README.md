@@ -117,8 +117,8 @@ run();
 
 ### [integration](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md)
 
-- [getIntegrationIntegrationNameConnect](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#getintegrationintegrationnameconnect) - Connect
-- [getIntegrationIntegrationNameDisconnect](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#getintegrationintegrationnamedisconnect) - Disconnect
+- [postIntegrationIntegrationNameConnect](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#postintegrationintegrationnameconnect) - Connect
+- [postIntegrationIntegrationNameDisconnect](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#postintegrationintegrationnamedisconnect) - Disconnect
 - [getIntegrationIntegrationNameList](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#getintegrationintegrationnamelist) - List
 - [postIntegrationIntegrationNameAdd](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/integration/README.md#postintegrationintegrationnameadd) - Add To Brain
 

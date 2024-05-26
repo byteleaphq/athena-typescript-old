@@ -1,4 +1,4 @@
-# GetIntegrationIntegrationNameConnectResponseBody
+# PostIntegrationIntegrationNameConnectResponseBody
 
 OK
 
