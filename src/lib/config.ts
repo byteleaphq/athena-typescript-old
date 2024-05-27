@@ -13,47 +13,47 @@ import { Params, pathToFunc } from "./url";
 export const ServerList = ["https://backend.athenacopilot.ai"] as const;
 
 export type SDKOptions = {
-    /**
-     * The security details required to authenticate the SDK
-     */
-    security?: components.Security | (() => Promise<components.Security>);
+  /**
+   * The security details required to authenticate the SDK
+   */
+  security?: components.Security | (() => Promise<components.Security>);
 
-    httpClient?: HTTPClient;
-    /**
-     * Allows overriding the default server used by the SDK
-     */
-    serverIdx?: number;
-    /**
-     * Allows overriding the default server URL used by the SDK
-     */
-    serverURL?: string;
-    /**
-     * Allows overriding the default retry config used by the SDK
-     */
-    retryConfig?: RetryConfig;
+  httpClient?: HTTPClient;
+  /**
+   * Allows overriding the default server used by the SDK
+   */
+  serverIdx?: number;
+  /**
+   * Allows overriding the default server URL used by the SDK
+   */
+  serverURL?: string;
+  /**
+   * Allows overriding the default retry config used by the SDK
+   */
+  retryConfig?: RetryConfig;
 };
 
 export function serverURLFromOptions(options: SDKOptions): URL | null {
-    let serverURL = options.serverURL;
+  let serverURL = options.serverURL;
 
-    const params: Params = {};
+  const params: Params = {};
 
-    if (!serverURL) {
-        const serverIdx = options.serverIdx ?? 0;
-        if (serverIdx < 0 || serverIdx >= ServerList.length) {
-            throw new Error(`Invalid server index ${serverIdx}`);
-        }
-        serverURL = ServerList[serverIdx] || "";
+  if (!serverURL) {
+    const serverIdx = options.serverIdx ?? 0;
+    if (serverIdx < 0 || serverIdx >= ServerList.length) {
+      throw new Error(`Invalid server index ${serverIdx}`);
     }
+    serverURL = ServerList[serverIdx] || "";
+  }
 
-    const u = pathToFunc(serverURL)(params);
-    return new URL(u);
+  const u = pathToFunc(serverURL)(params);
+  return new URL(u);
 }
 
 export const SDK_METADATA = {
-    language: "typescript",
-    openapiDocVersion: "1.0.0",
-    sdkVersion: "0.3.1",
-    genVersion: "2.338.1",
-    userAgent: "speakeasy-sdk/typescript 0.3.1 2.338.1 1.0.0 athena-copilot",
+  language: "typescript",
+  openapiDocVersion: "1.0.0",
+  sdkVersion: "0.3.1",
+  genVersion: "2.338.1",
+  userAgent: "speakeasy-sdk/typescript 0.3.1 2.338.1 1.0.0 @athena-ai/sdk",
 } as const;

@@ -1,35 +1,17 @@
-# athena-copilot
-
-<div align="left">
-    <a href="https://speakeasyapi.dev/"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
-    </a>
-</div>
-
-## 🏗 **Welcome to your new SDK!** 🏗
-
-It has been generated successfully based on your OpenAPI spec. However, it is not yet ready for production use. Here are some next steps:
-
-- [ ] 🛠 Make your SDK feel handcrafted by [customizing it](https://www.speakeasyapi.dev/docs/customize-sdks)
-- [ ] ♻️ Refine your SDK quickly by iterating locally with the [Speakeasy CLI](https://github.com/speakeasy-api/speakeasy)
-- [ ] 🎁 Publish your SDK to package managers by [configuring automatic publishing](https://www.speakeasyapi.dev/docs/advanced-setup/publish-sdks)
-- [ ] ✨ When ready to productionize, delete this section from the README
-
-<!-- Start SDK Installation [installation] -->
+# @athena-ai/sdk
 
 ## SDK Installation
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add @athena-ai/sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET>
+yarn add @athena-ai/sdk
 ```
 
 <!-- End SDK Installation [installation] -->
@@ -49,7 +31,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](https://github.c
 ### Example
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
+import { AthenaCopilot } from "@athena-ai/sdk";
 
 const athenaCopilot = new AthenaCopilot({
   security: {
@@ -143,7 +125,7 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
+import { AthenaCopilot } from "@athena-ai/sdk";
 
 const athenaCopilot = new AthenaCopilot({
   security: {
@@ -182,8 +164,8 @@ All SDK methods return a response object or throw an error. If Error objects are
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
-import * as errors from "athena-copilot/models/errors";
+import { AthenaCopilot } from "@athena-ai/sdk";
+import * as errors from "@athena-ai/sdk/models/errors";
 
 const athenaCopilot = new AthenaCopilot({
   security: {
@@ -243,7 +225,7 @@ You can override the default server globally by passing a server index to the `s
 | 0   | `https://backend.athenacopilot.ai` | None      |
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
+import { AthenaCopilot } from "@athena-ai/sdk";
 
 const athenaCopilot = new AthenaCopilot({
   serverIdx: 0,
@@ -270,7 +252,7 @@ run();
 The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
+import { AthenaCopilot } from "@athena-ai/sdk";
 
 const athenaCopilot = new AthenaCopilot({
   serverURL: "https://backend.athenacopilot.ai",
@@ -313,8 +295,8 @@ custom header and a timeout to requests and how to use the `"requestError"` hook
 to log errors:
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
-import { HTTPClient } from "athena-copilot/lib/http";
+import { AthenaCopilot } from "@athena-ai/sdk";
+import { HTTPClient } from "@athena-ai/sdk/lib/http";
 
 const httpClient = new HTTPClient({
   // fetcher takes a function that has the same signature as native `fetch`.
@@ -360,7 +342,7 @@ This SDK supports the following security scheme globally:
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. For example:
 
 ```typescript
-import { AthenaCopilot } from "athena-copilot";
+import { AthenaCopilot } from "@athena-ai/sdk";
 
 const athenaCopilot = new AthenaCopilot({
   security: {

@@ -12,7 +12,7 @@ targets:
         sourceNamespace: athenacopiolet
         sourceRevisionDigest: sha256:06383d83248a66bb3061a2433a730d60ddaa4cec82347f7160e84902867b201d
         sourceBlobDigest: sha256:86e216703ba7b4e5a5a59092552e2cfb7f6cf616e2e788f86b44b3b54e89b509
-        outLocation: /Users/shreyaan/Desktop/sdk/athena-copilot-typescript
+        outLocation: /Users/shreyaan/Desktop/sdk/@athena-ai/sdk-typescript
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
