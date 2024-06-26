@@ -432,7 +432,7 @@ export class Chat extends ClientSDK {
         };
 
         const [result$] = await this.matcher<operations.PostChatNewChatResponse>()
-            .json(200, operations.PostChatNewChatResponse$, { hdrs: true, key: "ChatInteraction" })
+            .json(200, operations.PostChatNewChatResponse$, { hdrs: true, key: "ChatInteractions" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -500,7 +500,7 @@ export class Chat extends ClientSDK {
         const [result$] = await this.matcher<operations.PostChatGetResponseResponse>()
             .json(200, operations.PostChatGetResponseResponse$, {
                 hdrs: true,
-                key: "ChatInteraction",
+                key: "ChatInteractions",
             })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });

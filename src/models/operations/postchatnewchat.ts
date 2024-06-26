@@ -26,7 +26,7 @@ export type PostChatNewChatResponse = {
     /**
      * OK
      */
-    chatInteraction?: components.ChatInteraction | undefined;
+    chatInteractions?: Array<components.ChatInteraction> | undefined;
     headers: { [k: string]: Array<string> };
 };
 
@@ -68,33 +68,33 @@ export namespace PostChatNewChatResponse$ {
     export const inboundSchema: z.ZodType<PostChatNewChatResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
-            ChatInteraction: components.ChatInteraction$.inboundSchema.optional(),
+            ChatInteractions: z.array(components.ChatInteraction$.inboundSchema).optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return remap$(v, {
                 HttpMeta: "httpMeta",
-                ChatInteraction: "chatInteraction",
+                ChatInteractions: "chatInteractions",
                 Headers: "headers",
             });
         });
 
     export type Outbound = {
         HttpMeta: components.HTTPMetadata$.Outbound;
-        ChatInteraction?: components.ChatInteraction$.Outbound | undefined;
+        ChatInteractions?: Array<components.ChatInteraction$.Outbound> | undefined;
         Headers: { [k: string]: Array<string> };
     };
 
     export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatNewChatResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
-            chatInteraction: components.ChatInteraction$.outboundSchema.optional(),
+            chatInteractions: z.array(components.ChatInteraction$.outboundSchema).optional(),
             headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
             return remap$(v, {
                 httpMeta: "HttpMeta",
-                chatInteraction: "ChatInteraction",
+                chatInteractions: "ChatInteractions",
                 headers: "Headers",
             });
         });
