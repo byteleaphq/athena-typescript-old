@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 typescript:
-  version: 0.3.1
+  version: 0.1.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -34,6 +34,7 @@ typescript:
   maxMethodParams: 4
   methodArguments: require-security-and-request
   outputModelSuffix: output
-  packageName: @athena-ai/sdk
+  packageName: '@athena-ai/sdk'
   responseFormat: envelope-http
   templateVersion: v2
+  useIndexModules: true

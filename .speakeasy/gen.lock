@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
-id: 698fc2d5-898d-4d0b-89ca-fb7127989704
+id: 62a35f71-bc15-4ba2-850e-b9f50c174edf
 management:
-  docChecksum: 739bfcd32cc23581516fdd5cf2bc9b82
+  docChecksum: 01a9c15a34763d16e19ec89c6af275f5
   docVersion: 1.0.0
-  speakeasyVersion: 1.296.1
-  generationVersion: 2.338.1
-  releaseVersion: 0.3.1
-  configChecksum: 49c1d21936e7facfabe639707f1fa807
+  speakeasyVersion: 1.318.0
+  generationVersion: 2.352.0
+  releaseVersion: 0.1.0
+  configChecksum: 658087aba40927774fc88e779519e7d3
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
-    core: 3.9.9
+    core: 3.10.2
     flattening: 2.81.1
     globalSecurity: 2.82.9
     globalSecurityCallbacks: 0.1.0
@@ -28,7 +28,7 @@ generatedFiles:
   - src/sdk/integration.ts
   - src/sdk/ogranisation.ts
   - src/sdk/sdk.ts
-  - .eslintrc.js
+  - .eslintrc.cjs
   - .npmignore
   - RUNTIMES.md
   - jsr.json
@@ -39,6 +39,7 @@ generatedFiles:
   - src/lib/encodings.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
+  - src/lib/primitives.ts
   - src/lib/retries.ts
   - src/lib/schemas.ts
   - src/lib/sdks.ts
@@ -70,6 +71,7 @@ generatedFiles:
   - src/models/operations/getchatchatid.ts
   - src/models/operations/putchatchatid.ts
   - src/models/operations/deletechatchatid.ts
+  - src/models/operations/postchatnewchat.ts
   - src/models/operations/postchatgetresponse.ts
   - src/models/operations/postchatlistinteractions.ts
   - src/models/operations/postchatbotcreate.ts
@@ -142,6 +144,8 @@ generatedFiles:
   - docs/models/operations/putchatchatidresponse.md
   - docs/models/operations/deletechatchatidrequest.md
   - docs/models/operations/deletechatchatidresponse.md
+  - docs/models/operations/postchatnewchatrequestbody.md
+  - docs/models/operations/postchatnewchatresponse.md
   - docs/models/operations/postchatgetresponserequestbody.md
   - docs/models/operations/postchatgetresponseresponse.md
   - docs/models/operations/postchatlistinteractionsrequestbody.md

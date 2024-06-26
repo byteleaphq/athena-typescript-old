@@ -1,28 +1,28 @@
-speakeasyVersion: 1.296.1
+speakeasyVersion: 1.318.0
 sources:
-    athenacopiolet:
-        sourceNamespace: athenacopiolet
-        sourceRevisionDigest: sha256:06383d83248a66bb3061a2433a730d60ddaa4cec82347f7160e84902867b201d
-        sourceBlobDigest: sha256:86e216703ba7b4e5a5a59092552e2cfb7f6cf616e2e788f86b44b3b54e89b509
+    athenaCopilot:
+        sourceNamespace: athena-copilot
+        sourceRevisionDigest: sha256:ea8b12147e0d5e62f8bebf153c4959d1bd2de7c17b9423c55acd92f053dbb948
+        sourceBlobDigest: sha256:113b4063ce5c5915ab5d7b15e83c525b4a6b3f89f36b08f6fb9373957f12868d
         tags:
             - latest
 targets:
     my-first-target:
-        source: athenacopiolet
-        sourceNamespace: athenacopiolet
-        sourceRevisionDigest: sha256:06383d83248a66bb3061a2433a730d60ddaa4cec82347f7160e84902867b201d
-        sourceBlobDigest: sha256:86e216703ba7b4e5a5a59092552e2cfb7f6cf616e2e788f86b44b3b54e89b509
-        outLocation: /Users/shreyaan/Desktop/sdk/@athena-ai/sdk-typescript
+        source: athenaCopilot
+        sourceNamespace: athena-copilot
+        sourceRevisionDigest: sha256:ea8b12147e0d5e62f8bebf153c4959d1bd2de7c17b9423c55acd92f053dbb948
+        sourceBlobDigest: sha256:113b4063ce5c5915ab5d7b15e83c525b4a6b3f89f36b08f6fb9373957f12868d
+        outLocation: /Users/shreyaan/Desktop/sdk/athena-copilot-typescript
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        athenacopiolet:
+        athenaCopilot:
             inputs:
                 - location: ../../../Downloads/openapi.yaml
             registry:
-                location: registry.speakeasyapi.dev/shreyaan/shreyaan/athenacopiolet
+                location: registry.speakeasyapi.dev/shreyaan/shreyaan/athena-copilot
     targets:
         my-first-target:
             target: typescript
-            source: athenacopiolet
+            source: athenaCopilot

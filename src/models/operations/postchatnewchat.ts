@@ -6,18 +6,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 import * as z from "zod";
 
-export type PostChatGetResponseRequestBody = {
+export type PostChatNewChatRequestBody = {
     /**
-     * Id of chat to which you want to send message
+     * The IDs of the brains to associate with the chat
      */
-    chatThreadId?: string | undefined;
+    brainIds: Array<string>;
     /**
-     * message
+     * The name of the chat
      */
-    text?: string | undefined;
+    name: string;
+    /**
+     * The initial message to start the chat
+     */
+    message: string;
 };
 
-export type PostChatGetResponseResponse = {
+export type PostChatNewChatResponse = {
     httpMeta: components.HTTPMetadata;
     /**
      * OK
@@ -27,39 +31,41 @@ export type PostChatGetResponseResponse = {
 };
 
 /** @internal */
-export namespace PostChatGetResponseRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatGetResponseRequestBody, z.ZodTypeDef, unknown> = z
+export namespace PostChatNewChatRequestBody$ {
+    export const inboundSchema: z.ZodType<PostChatNewChatRequestBody, z.ZodTypeDef, unknown> = z
         .object({
-            chat_thread_id: z.string().optional(),
-            text: z.string().optional(),
+            brain_ids: z.array(z.string()),
+            name: z.string(),
+            message: z.string(),
         })
         .transform((v) => {
             return remap$(v, {
-                chat_thread_id: "chatThreadId",
+                brain_ids: "brainIds",
             });
         });
 
     export type Outbound = {
-        chat_thread_id?: string | undefined;
-        text?: string | undefined;
+        brain_ids: Array<string>;
+        name: string;
+        message: string;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatGetResponseRequestBody> =
-        z
-            .object({
-                chatThreadId: z.string().optional(),
-                text: z.string().optional(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    chatThreadId: "chat_thread_id",
-                });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatNewChatRequestBody> = z
+        .object({
+            brainIds: z.array(z.string()),
+            name: z.string(),
+            message: z.string(),
+        })
+        .transform((v) => {
+            return remap$(v, {
+                brainIds: "brain_ids",
             });
+        });
 }
 
 /** @internal */
-export namespace PostChatGetResponseResponse$ {
-    export const inboundSchema: z.ZodType<PostChatGetResponseResponse, z.ZodTypeDef, unknown> = z
+export namespace PostChatNewChatResponse$ {
+    export const inboundSchema: z.ZodType<PostChatNewChatResponse, z.ZodTypeDef, unknown> = z
         .object({
             HttpMeta: components.HTTPMetadata$.inboundSchema,
             ChatInteraction: components.ChatInteraction$.inboundSchema.optional(),
@@ -79,7 +85,7 @@ export namespace PostChatGetResponseResponse$ {
         Headers: { [k: string]: Array<string> };
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatGetResponseResponse> = z
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatNewChatResponse> = z
         .object({
             httpMeta: components.HTTPMetadata$.outboundSchema,
             chatInteraction: components.ChatInteraction$.outboundSchema.optional(),

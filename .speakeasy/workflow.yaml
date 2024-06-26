@@ -1,12 +1,12 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    athenacopiolet:
+    athenaCopilot:
         inputs:
             - location: ../../../Downloads/openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/shreyaan/shreyaan/athenacopiolet
+            location: registry.speakeasyapi.dev/shreyaan/shreyaan/athena-copilot
 targets:
     my-first-target:
         target: typescript
-        source: athenacopiolet
+        source: athenaCopilot

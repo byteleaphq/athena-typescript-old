@@ -83,6 +83,7 @@ run();
 - [getChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#getchatchatid) - Get Chat
 - [putChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#putchatchatid) - Update Chat
 - [deleteChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#deletechatchatid) - Delete Chat
+- [postChatNewChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatnewchat) - Create New Chat
 - [postChatGetResponse](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatgetresponse) - Get Response
 - [postChatListInteractions](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatlistinteractions) - List Interactions
 
@@ -165,7 +166,7 @@ Validation errors can also occur when either method arguments or data returned f
 
 ```typescript
 import { AthenaCopilot } from "@athena-ai/sdk";
-import * as errors from "@athena-ai/sdk/models/errors";
+import { SDKValidationError } from "@athena-ai/sdk/models/errors";
 
 const athenaCopilot = new AthenaCopilot({
   security: {
@@ -182,7 +183,7 @@ async function run() {
     });
   } catch (err) {
     switch (true) {
-      case err instanceof errors.SDKValidationError: {
+      case err instanceof SDKValidationError: {
         // Validation errors can be pretty-printed
         console.error(err.pretty());
         // Raw value may also be inspected

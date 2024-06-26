@@ -1,16 +1,15 @@
 # Document
-
-(_document_)
+(*document*)
 
 ### Available Operations
 
-- [postDocumentBrainIdText](#postdocumentbrainidtext) - Create Text Document
-- [postDocumentBrainIdUrl](#postdocumentbrainidurl) - Create Document by URL
-- [getDocumentBrainIdDocumentIdDownload](#getdocumentbrainiddocumentiddownload) - Download
-- [getDocumentBrainId](#getdocumentbrainid) - List Documents
-- [getDocumentBrainIdDocumentId](#getdocumentbrainiddocumentid) - Get Document
-- [deleteDocumentBrainIdDocumentId](#deletedocumentbrainiddocumentid) - Delete Document
-- [postDocumentBrainIdFile](#postdocumentbrainidfile) - Upload Document
+* [postDocumentBrainIdText](#postdocumentbrainidtext) - Create Text Document
+* [postDocumentBrainIdUrl](#postdocumentbrainidurl) - Create Document by URL
+* [getDocumentBrainIdDocumentIdDownload](#getdocumentbrainiddocumentiddownload) - Download
+* [getDocumentBrainId](#getdocumentbrainid) - List Documents
+* [getDocumentBrainIdDocumentId](#getdocumentbrainiddocumentid) - Get Document
+* [deleteDocumentBrainIdDocumentId](#deletedocumentbrainiddocumentid) - Delete Document
+* [postDocumentBrainIdFile](#postdocumentbrainidfile) - Upload Document
 
 ## postDocumentBrainIdText
 
@@ -29,16 +28,12 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdText(
-    "{{brain_id}}",
-    {
-      content:
-        "What is an operating system? An operating system (OS) is the program that, after being initially loaded into the computer by a boot program, manages all of the other application programs in a computer............",
-    }
-  );
+  const result = await athenaCopilot.document.postDocumentBrainIdText("{{brain_id}}", {
+    content: "What is an operating system? An operating system (OS) is the program that, after being initially loaded into the computer by a boot program, manages all of the other application programs in a computer............",
+  });
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -46,22 +41,22 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                                           | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                                       | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `requestBody`          | [operations.PostDocumentBrainIdTextRequestBody](../../models/operations/postdocumentbrainidtextrequestbody.md) | :heavy_minus_sign: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                                                 | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                        | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.PostDocumentBrainIdTextRequestBody](../../models/operations/postdocumentbrainidtextrequestbody.md)                                                                 | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.PostDocumentBrainIdTextResponse](../../models/operations/postdocumentbrainidtextresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## postDocumentBrainIdUrl
 
@@ -80,15 +75,12 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdUrl(
-    "{{brain_id}}",
-    {
-      url: "https://en.wikipedia.org/wiki/Artificial_intelligence",
-    }
-  );
+  const result = await athenaCopilot.document.postDocumentBrainIdUrl("{{brain_id}}", {
+    url: "https://en.wikipedia.org/wiki/Artificial_intelligence",
+  });
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -96,23 +88,23 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                                         | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                                     | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `requestBody`          | [operations.PostDocumentBrainIdUrlRequestBody](../../models/operations/postdocumentbrainidurlrequestbody.md) | :heavy_minus_sign: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                                               | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                      | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.PostDocumentBrainIdUrlRequestBody](../../models/operations/postdocumentbrainidurlrequestbody.md)                                                                   | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.PostDocumentBrainIdUrlResponse](../../models/operations/postdocumentbrainidurlresponse.md)\>**
-
 ### Errors
 
-| Error Object                              | Status Code | Content Type     |
-| ----------------------------------------- | ----------- | ---------------- |
-| errors.PostDocumentBrainIdUrlResponseBody | 500         | application/json |
-| errors.SDKError                           | 4xx-5xx     | _/_              |
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| errors.PostDocumentBrainIdUrlResponseBody | 500                                       | application/json                          |
+| errors.SDKError                           | 4xx-5xx                                   | */*                                       |
 
 ## getDocumentBrainIdDocumentIdDownload
 
@@ -131,14 +123,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result =
-    await athenaCopilot.document.getDocumentBrainIdDocumentIdDownload(
-      "{{brain_id}}",
-      "a00f07cb-c04c-4824-9b26-5b7eb5c274ae"
-    );
+  const result = await athenaCopilot.document.getDocumentBrainIdDocumentIdDownload("{{brain_id}}", "a00f07cb-c04c-4824-9b26-5b7eb5c274ae");
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -146,22 +134,22 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                    | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `documentId`           | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                          | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `documentId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.GetDocumentBrainIdDocumentIdDownloadResponse](../../models/operations/getdocumentbrainiddocumentiddownloadresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## getDocumentBrainId
 
@@ -180,12 +168,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.getDocumentBrainId(
-    "{{brain_id}}"
-  );
+  const result = await athenaCopilot.document.getDocumentBrainId("{{brain_id}}");
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -193,21 +179,21 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                    | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                          | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.GetDocumentBrainIdResponse](../../models/operations/getdocumentbrainidresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## getDocumentBrainIdDocumentId
 
@@ -226,13 +212,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.getDocumentBrainIdDocumentId(
-    "{{brain_id}}",
-    "020d69cb-197b-47ef-911b-ee45ee260839"
-  );
+  const result = await athenaCopilot.document.getDocumentBrainIdDocumentId("{{brain_id}}", "020d69cb-197b-47ef-911b-ee45ee260839");
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -240,22 +223,22 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                    | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `documentId`           | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                          | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `documentId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.GetDocumentBrainIdDocumentIdResponse](../../models/operations/getdocumentbrainiddocumentidresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## deleteDocumentBrainIdDocumentId
 
@@ -274,13 +257,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.deleteDocumentBrainIdDocumentId(
-    "{{brain_id}}",
-    "5ca417c0-6d74-4752-a9cd-e2813ea67fd6"
-  );
+  const result = await athenaCopilot.document.deleteDocumentBrainIdDocumentId("{{brain_id}}", "5ca417c0-6d74-4752-a9cd-e2813ea67fd6");
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -288,22 +268,22 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                    | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `documentId`           | _string_                                                                                | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `options`              | RequestOptions                                                                          | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `documentId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.DeleteDocumentBrainIdDocumentIdResponse](../../models/operations/deletedocumentbrainiddocumentidresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## postDocumentBrainIdFile
 
@@ -322,13 +302,10 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdFile(
-    "{{brain_id}}",
-    {}
-  );
+  const result = await athenaCopilot.document.postDocumentBrainIdFile("{{brain_id}}", {});
 
   // Handle the result
-  console.log(result);
+  console.log(result)
 }
 
 run();
@@ -336,19 +313,19 @@ run();
 
 ### Parameters
 
-| Parameter              | Type                                                                                                           | Required           | Description                                                                                                                                                                    | Example         |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `brainId`              | _string_                                                                                                       | :heavy_check_mark: | N/A                                                                                                                                                                            | [object Object] |
-| `requestBody`          | [operations.PostDocumentBrainIdFileRequestBody](../../models/operations/postdocumentbrainidfilerequestbody.md) | :heavy_minus_sign: | N/A                                                                                                                                                                            |                 |
-| `options`              | RequestOptions                                                                                                 | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |                 |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                        | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                 |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.PostDocumentBrainIdFileRequestBody](../../models/operations/postdocumentbrainidfilerequestbody.md)                                                                 | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+
 
 ### Response
 
 **Promise\<[operations.PostDocumentBrainIdFileResponse](../../models/operations/postdocumentbrainidfileresponse.md)\>**
-
 ### Errors
 
-| Error Object    | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | _/_          |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

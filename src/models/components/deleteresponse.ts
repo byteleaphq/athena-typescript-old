@@ -13,27 +13,15 @@ export type DeleteResponse = {
 
 /** @internal */
 export namespace DeleteResponse$ {
-    export const inboundSchema: z.ZodType<DeleteResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            message: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.message === undefined ? null : { message: v.message }),
-            };
-        });
+    export const inboundSchema: z.ZodType<DeleteResponse, z.ZodTypeDef, unknown> = z.object({
+        message: z.string().optional(),
+    });
 
     export type Outbound = {
         message?: string | undefined;
     };
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteResponse> = z
-        .object({
-            message: z.string().optional(),
-        })
-        .transform((v) => {
-            return {
-                ...(v.message === undefined ? null : { message: v.message }),
-            };
-        });
+    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteResponse> = z.object({
+        message: z.string().optional(),
+    });
 }
