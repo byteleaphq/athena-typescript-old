@@ -43,10 +43,10 @@ export class Chat extends ClientSDK {
      * @remarks
      * integration - defaults to files (superpowered). supported values - files | data-warehouse
      */
-    async postChat(
-        request?: operations.PostChatRequestBody | undefined,
+    async createNewChat(
+        request?: operations.CreateNewChatRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostChatResponse> {
+    ): Promise<operations.CreateNewChatResponse> {
         const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -55,7 +55,8 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostChatRequestBody$.outboundSchema.optional().parse(value$),
+            (value$) =>
+                operations.CreateNewChatRequestBody$.outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -71,7 +72,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/chat/",
+            operationID: "create_new_chat",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -97,8 +98,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostChatResponse>()
-            .json(200, operations.PostChatResponse$, { hdrs: true, key: "Chat" })
+        const [result$] = await this.matcher<operations.CreateNewChatResponse>()
+            .json(200, operations.CreateNewChatResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -108,7 +109,7 @@ export class Chat extends ClientSDK {
     /**
      * List Chats
      */
-    async getChat(options?: RequestOptions): Promise<operations.GetChatResponse> {
+    async listChats(options?: RequestOptions): Promise<operations.ListChatsResponse> {
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
@@ -123,7 +124,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/chat/",
+            operationID: "list_chats",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -148,8 +149,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetChatResponse>()
-            .json(200, operations.GetChatResponse$, { hdrs: true, key: "Chats" })
+        const [result$] = await this.matcher<operations.ListChatsResponse>()
+            .json(200, operations.ListChatsResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -159,11 +160,11 @@ export class Chat extends ClientSDK {
     /**
      * Get Chat
      */
-    async getChatChatId(
+    async getChatById(
         chatId: string,
         options?: RequestOptions
-    ): Promise<operations.GetChatChatIdResponse> {
-        const input$: operations.GetChatChatIdRequest = {
+    ): Promise<operations.GetChatByIdResponse> {
+        const input$: operations.GetChatByIdRequest = {
             chatId: chatId,
         };
         const headers$ = new Headers();
@@ -172,7 +173,7 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetChatChatIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetChatByIdRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -193,7 +194,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/chat/{chat_id}",
+            operationID: "get_chat_by_id",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -219,8 +220,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetChatChatIdResponse>()
-            .json(200, operations.GetChatChatIdResponse$, { hdrs: true, key: "Chat" })
+        const [result$] = await this.matcher<operations.GetChatByIdResponse>()
+            .json(200, operations.GetChatByIdResponse$, { hdrs: true, key: "Chat" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -230,12 +231,12 @@ export class Chat extends ClientSDK {
     /**
      * Update Chat
      */
-    async putChatChatId(
+    async updateChat(
         chatId: string,
-        requestBody?: operations.PutChatChatIdRequestBody | undefined,
+        requestBody?: operations.UpdateChatRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PutChatChatIdResponse> {
-        const input$: operations.PutChatChatIdRequest = {
+    ): Promise<operations.UpdateChatResponse> {
+        const input$: operations.UpdateChatRequest = {
             chatId: chatId,
             requestBody: requestBody,
         };
@@ -246,7 +247,7 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PutChatChatIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.UpdateChatRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -267,7 +268,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "put_/chat/{chat_id}",
+            operationID: "update_chat",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -293,8 +294,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PutChatChatIdResponse>()
-            .json(200, operations.PutChatChatIdResponse$, { hdrs: true, key: "Chats" })
+        const [result$] = await this.matcher<operations.UpdateChatResponse>()
+            .json(200, operations.UpdateChatResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -304,11 +305,11 @@ export class Chat extends ClientSDK {
     /**
      * Delete Chat
      */
-    async deleteChatChatId(
+    async deleteChat(
         chatId: string,
         options?: RequestOptions
-    ): Promise<operations.DeleteChatChatIdResponse> {
-        const input$: operations.DeleteChatChatIdRequest = {
+    ): Promise<operations.DeleteChatResponse> {
+        const input$: operations.DeleteChatRequest = {
             chatId: chatId,
         };
         const headers$ = new Headers();
@@ -317,7 +318,7 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.DeleteChatChatIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DeleteChatRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -338,7 +339,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "delete_/chat/{chat_id}",
+            operationID: "delete_chat",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -364,8 +365,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.DeleteChatChatIdResponse>()
-            .json(200, operations.DeleteChatChatIdResponse$, { hdrs: true, key: "DeleteResponse" })
+        const [result$] = await this.matcher<operations.DeleteChatResponse>()
+            .json(200, operations.DeleteChatResponse$, { hdrs: true, key: "Chats" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -373,15 +374,15 @@ export class Chat extends ClientSDK {
     }
 
     /**
-     * Create New Chat
+     * Create New Chat With Message
      *
      * @remarks
      * Create a new chat with the specified brain and message.
      */
-    async postChatNewChat(
-        request: operations.PostChatNewChatRequestBody,
+    async createNewChatWithMsg(
+        request: operations.CreateNewChatWithMsgRequestBody,
         options?: RequestOptions
-    ): Promise<operations.PostChatNewChatResponse> {
+    ): Promise<operations.CreateNewChatWithMsgResponse> {
         const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -390,7 +391,7 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostChatNewChatRequestBody$.outboundSchema.parse(value$),
+            (value$) => operations.CreateNewChatWithMsgRequestBody$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$, { explode: true });
@@ -405,7 +406,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/chat/new-chat",
+            operationID: "create_new_chat_with_msg",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -431,8 +432,11 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostChatNewChatResponse>()
-            .json(200, operations.PostChatNewChatResponse$, { hdrs: true, key: "ChatInteractions" })
+        const [result$] = await this.matcher<operations.CreateNewChatWithMsgResponse>()
+            .json(200, operations.CreateNewChatWithMsgResponse$, {
+                hdrs: true,
+                key: "ChatInteractions",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -442,10 +446,10 @@ export class Chat extends ClientSDK {
     /**
      * Get Response
      */
-    async postChatGetResponse(
-        request?: operations.PostChatGetResponseRequestBody | undefined,
+    async getResponse(
+        request?: operations.GetResponseRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostChatGetResponseResponse> {
+    ): Promise<operations.GetResponseResponse> {
         const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -454,8 +458,7 @@ export class Chat extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) =>
-                operations.PostChatGetResponseRequestBody$.outboundSchema.optional().parse(value$),
+            (value$) => operations.GetResponseRequestBody$.outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -471,7 +474,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/chat/get-response",
+            operationID: "get_response",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -497,11 +500,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostChatGetResponseResponse>()
-            .json(200, operations.PostChatGetResponseResponse$, {
-                hdrs: true,
-                key: "ChatInteractions",
-            })
+        const [result$] = await this.matcher<operations.GetResponseResponse>()
+            .json(200, operations.GetResponseResponse$, { hdrs: true, key: "ChatInteractions" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -511,10 +511,10 @@ export class Chat extends ClientSDK {
     /**
      * List Interactions
      */
-    async postChatListInteractions(
-        request?: operations.PostChatListInteractionsRequestBody | undefined,
+    async listInteractions(
+        request?: operations.ListInteractionsRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostChatListInteractionsResponse> {
+    ): Promise<operations.ListInteractionsResponse> {
         const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -524,9 +524,7 @@ export class Chat extends ClientSDK {
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostChatListInteractionsRequestBody$.outboundSchema
-                    .optional()
-                    .parse(value$),
+                operations.ListInteractionsRequestBody$.outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -542,7 +540,7 @@ export class Chat extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/chat/list-interactions",
+            operationID: "list_interactions",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -568,8 +566,8 @@ export class Chat extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostChatListInteractionsResponse>()
-            .json(200, operations.PostChatListInteractionsResponse$, {
+        const [result$] = await this.matcher<operations.ListInteractionsResponse>()
+            .json(200, operations.ListInteractionsResponse$, {
                 hdrs: true,
                 key: "ChatInteractions",
             })

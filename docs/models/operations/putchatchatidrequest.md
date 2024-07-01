@@ -1,9 +1,0 @@
-# PutChatChatIdRequest
-
-
-## Fields
-
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `chatId`                                                                                   | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        | {{chat_id}}                                                                                |
-| `requestBody`                                                                              | [operations.PutChatChatIdRequestBody](../../models/operations/putchatchatidrequestbody.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        | {<br/>"temperature": null,<br/>"system_message": "test system message"<br/>}               |

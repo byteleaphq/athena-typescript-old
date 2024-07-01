@@ -3,16 +3,16 @@
 
 ### Available Operations
 
-* [postChat](#postchat) - Create New Chat
-* [getChat](#getchat) - List Chats
-* [getChatChatId](#getchatchatid) - Get Chat
-* [putChatChatId](#putchatchatid) - Update Chat
-* [deleteChatChatId](#deletechatchatid) - Delete Chat
-* [postChatNewChat](#postchatnewchat) - Create New Chat
-* [postChatGetResponse](#postchatgetresponse) - Get Response
-* [postChatListInteractions](#postchatlistinteractions) - List Interactions
+* [createNewChat](#createnewchat) - Create New Chat
+* [listChats](#listchats) - List Chats
+* [getChatById](#getchatbyid) - Get Chat
+* [updateChat](#updatechat) - Update Chat
+* [deleteChat](#deletechat) - Delete Chat
+* [createNewChatWithMsg](#createnewchatwithmsg) - Create New Chat With Message
+* [getResponse](#getresponse) - Get Response
+* [listInteractions](#listinteractions) - List Interactions
 
-## postChat
+## createNewChat
 
 integration - defaults to files (superpowered). supported values - files | data-warehouse
 
@@ -30,7 +30,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChat({
+  const result = await athenaCopilot.chat.createNewChat({
     brainId: "{{brain_id}}",
     name: "Test_chat2",
     integration: Integration.Files,
@@ -47,21 +47,21 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostChatRequestBody](../../models/operations/postchatrequestbody.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateNewChatRequestBody](../../models/operations/createnewchatrequestbody.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostChatResponse](../../models/operations/postchatresponse.md)\>**
+**Promise\<[operations.CreateNewChatResponse](../../models/operations/createnewchatresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## getChat
+## listChats
 
 List Chats
 
@@ -78,7 +78,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.getChat();
+  const result = await athenaCopilot.chat.listChats();
 
   // Handle the result
   console.log(result)
@@ -97,14 +97,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetChatResponse](../../models/operations/getchatresponse.md)\>**
+**Promise\<[operations.ListChatsResponse](../../models/operations/listchatsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## getChatChatId
+## getChatById
 
 Get Chat
 
@@ -121,7 +121,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.getChatChatId("{{chat_id}}");
+  const result = await athenaCopilot.chat.getChatById("{{chat_id}}");
 
   // Handle the result
   console.log(result)
@@ -141,14 +141,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetChatChatIdResponse](../../models/operations/getchatchatidresponse.md)\>**
+**Promise\<[operations.GetChatByIdResponse](../../models/operations/getchatbyidresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## putChatChatId
+## updateChat
 
 Update Chat
 
@@ -165,7 +165,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.putChatChatId("{{chat_id}}", {
+  const result = await athenaCopilot.chat.updateChat("{{chat_id}}", {
     temperature: null,
     name: "Test_chat2",
     systemMessage: "test system message",
@@ -186,21 +186,21 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `chatId`                                                                                                                                                                       | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
-| `requestBody`                                                                                                                                                                  | [operations.PutChatChatIdRequestBody](../../models/operations/putchatchatidrequestbody.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.UpdateChatRequestBody](../../models/operations/updatechatrequestbody.md)                                                                                           | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 
 
 ### Response
 
-**Promise\<[operations.PutChatChatIdResponse](../../models/operations/putchatchatidresponse.md)\>**
+**Promise\<[operations.UpdateChatResponse](../../models/operations/updatechatresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## deleteChatChatId
+## deleteChat
 
 Delete Chat
 
@@ -217,7 +217,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.deleteChatChatId("8474f310-a2a9-4cf8-b16f-8d01a5a6b5fa");
+  const result = await athenaCopilot.chat.deleteChat("8474f310-a2a9-4cf8-b16f-8d01a5a6b5fa");
 
   // Handle the result
   console.log(result)
@@ -237,14 +237,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeleteChatChatIdResponse](../../models/operations/deletechatchatidresponse.md)\>**
+**Promise\<[operations.DeleteChatResponse](../../models/operations/deletechatresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## postChatNewChat
+## createNewChatWithMsg
 
 Create a new chat with the specified brain and message.
 
@@ -261,7 +261,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChatNewChat({
+  const result = await athenaCopilot.chat.createNewChatWithMsg({
     brainIds: [
       "2ad136c5-d2a2-4bbc-bc3d-974f9f88e86d",
     ],
@@ -280,21 +280,21 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostChatNewChatRequestBody](../../models/operations/postchatnewchatrequestbody.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateNewChatWithMsgRequestBody](../../models/operations/createnewchatwithmsgrequestbody.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostChatNewChatResponse](../../models/operations/postchatnewchatresponse.md)\>**
+**Promise\<[operations.CreateNewChatWithMsgResponse](../../models/operations/createnewchatwithmsgresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## postChatGetResponse
+## getResponse
 
 Get Response
 
@@ -311,7 +311,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChatGetResponse({
+  const result = await athenaCopilot.chat.getResponse({
     chatThreadId: "d504386d-6cba-4e38-96f0-aa16b83e1cd8",
     text: "hi",
   });
@@ -327,21 +327,21 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostChatGetResponseRequestBody](../../models/operations/postchatgetresponserequestbody.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetResponseRequestBody](../../models/operations/getresponserequestbody.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostChatGetResponseResponse](../../models/operations/postchatgetresponseresponse.md)\>**
+**Promise\<[operations.GetResponseResponse](../../models/operations/getresponseresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## postChatListInteractions
+## listInteractions
 
 List Interactions
 
@@ -358,7 +358,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.chat.postChatListInteractions({
+  const result = await athenaCopilot.chat.listInteractions({
     chatThreadId: "d504386d-6cba-4e38-96f0-aa16b83e1cd8",
   });
 
@@ -373,14 +373,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostChatListInteractionsRequestBody](../../models/operations/postchatlistinteractionsrequestbody.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListInteractionsRequestBody](../../models/operations/listinteractionsrequestbody.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostChatListInteractionsResponse](../../models/operations/postchatlistinteractionsresponse.md)\>**
+**Promise\<[operations.ListInteractionsResponse](../../models/operations/listinteractionsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

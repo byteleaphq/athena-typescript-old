@@ -46,10 +46,6 @@ export type Chat = {
      */
     createdAt?: string | undefined;
     /**
-     * The unique identifier of the chat record
-     */
-    id?: number | undefined;
-    /**
      * The timestamp when the chat was last updated
      */
     lastUpdated?: string | null | undefined;
@@ -206,7 +202,6 @@ export namespace Chat$ {
             brain_id: z.nullable(z.string()).optional(),
             chat_id: z.string().optional(),
             created_at: z.string().optional(),
-            id: z.number().int().optional(),
             last_updated: z.nullable(z.string()).optional(),
             model: z.string().optional(),
             recent_chat_history: z.array(z.lazy(() => RecentChatHistory$.inboundSchema)).optional(),
@@ -233,7 +228,6 @@ export namespace Chat$ {
         brain_id?: string | null | undefined;
         chat_id?: string | undefined;
         created_at?: string | undefined;
-        id?: number | undefined;
         last_updated?: string | null | undefined;
         model?: string | undefined;
         recent_chat_history?: Array<RecentChatHistory$.Outbound> | undefined;
@@ -249,7 +243,6 @@ export namespace Chat$ {
             brainId: z.nullable(z.string()).optional(),
             chatId: z.string().optional(),
             createdAt: z.string().optional(),
-            id: z.number().int().optional(),
             lastUpdated: z.nullable(z.string()).optional(),
             model: z.string().optional(),
             recentChatHistory: z.array(z.lazy(() => RecentChatHistory$.outboundSchema)).optional(),

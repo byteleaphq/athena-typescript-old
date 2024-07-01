@@ -3,13 +3,13 @@
 
 ### Available Operations
 
-* [postBrain](#postbrain) - Create Brain
-* [getBrain](#getbrain) - Get All Brains
-* [putBrainBrainId](#putbrainbrainid) - Update Brain
-* [getBrainBrainId](#getbrainbrainid) - Get Brain by ID
-* [deleteBrainBrainId](#deletebrainbrainid) - Delete Brain
+* [createNewBrain](#createnewbrain) - Create Brain
+* [getAllBrains](#getallbrains) - Get All Brains
+* [updateBrain](#updatebrain) - Update Brain
+* [getBrainById](#getbrainbyid) - Get Brain by ID
+* [deleteBrain](#deletebrain) - Delete Brain
 
-## postBrain
+## createNewBrain
 
 Create Brain
 
@@ -26,7 +26,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({
+  const result = await athenaCopilot.brain.createNewBrain({
     name: "Test - brain",
   });
 
@@ -41,23 +41,23 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostBrainRequestBody](../../models/operations/postbrainrequestbody.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateNewBrainRequestBody](../../models/operations/createnewbrainrequestbody.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise\<[operations.PostBrainResponse](../../models/operations/postbrainresponse.md)\>**
+**Promise\<[operations.CreateNewBrainResponse](../../models/operations/createnewbrainresponse.md)\>**
 ### Errors
 
-| Error Object                      | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| errors.PostBrainResponseBody      | 401                               | application/json                  |
-| errors.PostBrainBrainResponseBody | 500                               | application/json                  |
-| errors.SDKError                   | 4xx-5xx                           | */*                               |
+| Error Object                           | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.CreateNewBrainResponseBody      | 401                                    | application/json                       |
+| errors.CreateNewBrainBrainResponseBody | 500                                    | application/json                       |
+| errors.SDKError                        | 4xx-5xx                                | */*                                    |
 
-## getBrain
+## getAllBrains
 
 Get All Brains
 
@@ -74,7 +74,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.getBrain();
+  const result = await athenaCopilot.brain.getAllBrains();
 
   // Handle the result
   console.log(result)
@@ -93,14 +93,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetBrainResponse](../../models/operations/getbrainresponse.md)\>**
+**Promise\<[operations.GetAllBrainsResponse](../../models/operations/getallbrainsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
-## putBrainBrainId
+## updateBrain
 
 Update Brain
 
@@ -117,7 +117,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.putBrainBrainId("<value>", {
+  const result = await athenaCopilot.brain.updateBrain("<value>", {
     name: "Test Updated Brain",
   });
 
@@ -133,22 +133,22 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `brainId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
-| `requestBody`                                                                                                                                                                  | [operations.PutBrainBrainIdRequestBody](../../models/operations/putbrainbrainidrequestbody.md)                                                                                 | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
+| `requestBody`                                                                                                                                                                  | [operations.UpdateBrainRequestBody](../../models/operations/updatebrainrequestbody.md)                                                                                         | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            | [object Object]                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
 
 
 ### Response
 
-**Promise\<[operations.PutBrainBrainIdResponse](../../models/operations/putbrainbrainidresponse.md)\>**
+**Promise\<[operations.UpdateBrainResponse](../../models/operations/updatebrainresponse.md)\>**
 ### Errors
 
-| Error Object                       | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.PutBrainBrainIdResponseBody | 500                                | application/json                   |
-| errors.SDKError                    | 4xx-5xx                            | */*                                |
+| Error Object                   | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.UpdateBrainResponseBody | 500                            | application/json               |
+| errors.SDKError                | 4xx-5xx                        | */*                            |
 
-## getBrainBrainId
+## getBrainById
 
 Get Brain by ID
 
@@ -165,7 +165,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.getBrainBrainId("{{brain_id}}");
+  const result = await athenaCopilot.brain.getBrainById("{{brain_id}}");
 
   // Handle the result
   console.log(result)
@@ -185,15 +185,15 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetBrainBrainIdResponse](../../models/operations/getbrainbrainidresponse.md)\>**
+**Promise\<[operations.GetBrainByIdResponse](../../models/operations/getbrainbyidresponse.md)\>**
 ### Errors
 
-| Error Object                       | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.GetBrainBrainIdResponseBody | 404                                | application/json                   |
-| errors.SDKError                    | 4xx-5xx                            | */*                                |
+| Error Object                    | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.GetBrainByIdResponseBody | 404                             | application/json                |
+| errors.SDKError                 | 4xx-5xx                         | */*                             |
 
-## deleteBrainBrainId
+## deleteBrain
 
 Delete Brain
 
@@ -210,7 +210,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.deleteBrainBrainId("{{brain_id}}");
+  const result = await athenaCopilot.brain.deleteBrain("{{brain_id}}");
 
   // Handle the result
   console.log(result)
@@ -230,7 +230,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeleteBrainBrainIdResponse](../../models/operations/deletebrainbrainidresponse.md)\>**
+**Promise\<[operations.DeleteBrainResponse](../../models/operations/deletebrainresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

@@ -1,7 +1,7 @@
 {
   "name": "@athena-ai/sdk",
-  "version": "0.1.1",
-  "author": "Speakeasy",  
+  "version": "0.2.0",
+  "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
   "scripts": {
@@ -22,7 +22,5 @@
     "typescript": "^5.4.5",
     "zod": "^3.23.4"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }

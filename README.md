@@ -41,7 +41,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({
+  const result = await athenaCopilot.brain.createNewBrain({
     name: "Test - brain",
   });
 
@@ -60,32 +60,32 @@ run();
 
 ### [brain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md)
 
-- [postBrain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#postbrain) - Create Brain
-- [getBrain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#getbrain) - Get All Brains
-- [putBrainBrainId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#putbrainbrainid) - Update Brain
-- [getBrainBrainId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#getbrainbrainid) - Get Brain by ID
-- [deleteBrainBrainId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#deletebrainbrainid) - Delete Brain
+- [createNewBrain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#createnewbrain) - Create Brain
+- [getAllBrains](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#getallbrains) - Get All Brains
+- [updateBrain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#updatebrain) - Update Brain
+- [getBrainById](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#getbrainbyid) - Get Brain by ID
+- [deleteBrain](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/brain/README.md#deletebrain) - Delete Brain
 
 ### [document](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md)
 
-- [postDocumentBrainIdText](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#postdocumentbrainidtext) - Create Text Document
-- [postDocumentBrainIdUrl](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#postdocumentbrainidurl) - Create Document by URL
-- [getDocumentBrainIdDocumentIdDownload](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getdocumentbrainiddocumentiddownload) - Download
-- [getDocumentBrainId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getdocumentbrainid) - List Documents
-- [getDocumentBrainIdDocumentId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getdocumentbrainiddocumentid) - Get Document
-- [deleteDocumentBrainIdDocumentId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#deletedocumentbrainiddocumentid) - Delete Document
-- [postDocumentBrainIdFile](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#postdocumentbrainidfile) - Upload Document
+- [createTextDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#createtextdocument) - Create Text Document
+- [createUrlDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#createurldocument) - Create Document by URL
+- [downloadDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#downloaddocument) - Download
+- [getAllDocuments](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getalldocuments) - List Documents
+- [getDocumentById](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getdocumentbyid) - Get Document
+- [deleteDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#deletedocument) - Delete Document
+- [uploadDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#uploaddocument) - Upload Document
 
 ### [chat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md)
 
-- [postChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchat) - Create New Chat
-- [getChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#getchat) - List Chats
-- [getChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#getchatchatid) - Get Chat
-- [putChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#putchatchatid) - Update Chat
-- [deleteChatChatId](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#deletechatchatid) - Delete Chat
-- [postChatNewChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatnewchat) - Create New Chat
-- [postChatGetResponse](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatgetresponse) - Get Response
-- [postChatListInteractions](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#postchatlistinteractions) - List Interactions
+- [createNewChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#createnewchat) - Create New Chat
+- [listChats](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#listchats) - List Chats
+- [getChatById](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#getchatbyid) - Get Chat
+- [updateChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#updatechat) - Update Chat
+- [deleteChat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#deletechat) - Delete Chat
+- [createNewChatWithMsg](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#createnewchatwithmsg) - Create New Chat With Message
+- [getResponse](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#getresponse) - Get Response
+- [listInteractions](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md#listinteractions) - List Interactions
 
 ### [chatbot](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chatbot/README.md)
 
@@ -136,10 +136,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.document.postDocumentBrainIdFile(
-    "{{brain_id}}",
-    {}
-  );
+  const result = await athenaCopilot.document.uploadDocument("<value>", {});
 
   // Handle the result
   console.log(result);
@@ -156,11 +153,11 @@ run();
 
 All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object                      | Status Code | Content Type     |
-| --------------------------------- | ----------- | ---------------- |
-| errors.PostBrainResponseBody      | 401         | application/json |
-| errors.PostBrainBrainResponseBody | 500         | application/json |
-| errors.SDKError                   | 4xx-5xx     | _/_              |
+| Error Object                           | Status Code | Content Type     |
+| -------------------------------------- | ----------- | ---------------- |
+| errors.CreateNewBrainResponseBody      | 401         | application/json |
+| errors.CreateNewBrainBrainResponseBody | 500         | application/json |
+| errors.SDKError                        | 4xx-5xx     | _/_              |
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 
@@ -178,7 +175,7 @@ const athenaCopilot = new AthenaCopilot({
 async function run() {
   let result;
   try {
-    result = await athenaCopilot.brain.postBrain({
+    result = await athenaCopilot.brain.createNewBrain({
       name: "Test - brain",
     });
   } catch (err) {
@@ -190,11 +187,11 @@ async function run() {
         console.error(err.rawValue);
         return;
       }
-      case err instanceof errors.PostBrainResponseBody: {
+      case err instanceof errors.CreateNewBrainResponseBody: {
         console.error(err); // handle exception
         return;
       }
-      case err instanceof errors.PostBrainBrainResponseBody: {
+      case err instanceof errors.CreateNewBrainBrainResponseBody: {
         console.error(err); // handle exception
         return;
       }
@@ -237,7 +234,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({
+  const result = await athenaCopilot.brain.createNewBrain({
     name: "Test - brain",
   });
 
@@ -264,7 +261,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({
+  const result = await athenaCopilot.brain.createNewBrain({
     name: "Test - brain",
   });
 
@@ -353,7 +350,7 @@ const athenaCopilot = new AthenaCopilot({
 });
 
 async function run() {
-  const result = await athenaCopilot.brain.postBrain({
+  const result = await athenaCopilot.brain.createNewBrain({
     name: "Test - brain",
   });
 

@@ -41,10 +41,10 @@ export class Brain extends ClientSDK {
     /**
      * Create Brain
      */
-    async postBrain(
-        request?: operations.PostBrainRequestBody | undefined,
+    async createNewBrain(
+        request?: operations.CreateNewBrainRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostBrainResponse> {
+    ): Promise<operations.CreateNewBrainResponse> {
         const input$ = request;
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
@@ -53,7 +53,8 @@ export class Brain extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostBrainRequestBody$.outboundSchema.optional().parse(value$),
+            (value$) =>
+                operations.CreateNewBrainRequestBody$.outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -69,7 +70,7 @@ export class Brain extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/brain/",
+            operationID: "create_new_brain",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -95,10 +96,10 @@ export class Brain extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostBrainResponse>()
-            .json(200, operations.PostBrainResponse$, { hdrs: true, key: "Brain" })
-            .json(401, errors.PostBrainResponseBody$, { hdrs: true, err: true })
-            .json(500, errors.PostBrainBrainResponseBody$, { hdrs: true, err: true })
+        const [result$] = await this.matcher<operations.CreateNewBrainResponse>()
+            .json(200, operations.CreateNewBrainResponse$, { hdrs: true, key: "Brain" })
+            .json(401, errors.CreateNewBrainResponseBody$, { hdrs: true, err: true })
+            .json(500, errors.CreateNewBrainBrainResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -108,7 +109,7 @@ export class Brain extends ClientSDK {
     /**
      * Get All Brains
      */
-    async getBrain(options?: RequestOptions): Promise<operations.GetBrainResponse> {
+    async getAllBrains(options?: RequestOptions): Promise<operations.GetAllBrainsResponse> {
         const headers$ = new Headers();
         headers$.set("user-agent", SDK_METADATA.userAgent);
         headers$.set("Accept", "application/json");
@@ -123,7 +124,7 @@ export class Brain extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/brain/",
+            operationID: "get_all_brains",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -148,8 +149,8 @@ export class Brain extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetBrainResponse>()
-            .json(200, operations.GetBrainResponse$, { hdrs: true, key: "Brains" })
+        const [result$] = await this.matcher<operations.GetAllBrainsResponse>()
+            .json(200, operations.GetAllBrainsResponse$, { hdrs: true, key: "Brains" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -159,12 +160,12 @@ export class Brain extends ClientSDK {
     /**
      * Update Brain
      */
-    async putBrainBrainId(
+    async updateBrain(
         brainId: string,
-        requestBody?: operations.PutBrainBrainIdRequestBody | undefined,
+        requestBody?: operations.UpdateBrainRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PutBrainBrainIdResponse> {
-        const input$: operations.PutBrainBrainIdRequest = {
+    ): Promise<operations.UpdateBrainResponse> {
+        const input$: operations.UpdateBrainRequest = {
             brainId: brainId,
             requestBody: requestBody,
         };
@@ -175,7 +176,7 @@ export class Brain extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PutBrainBrainIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.UpdateBrainRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -196,7 +197,7 @@ export class Brain extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "put_/brain/{brain_id}",
+            operationID: "update_brain",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -222,9 +223,9 @@ export class Brain extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PutBrainBrainIdResponse>()
-            .json(200, operations.PutBrainBrainIdResponse$, { hdrs: true, key: "Brain" })
-            .json(500, errors.PutBrainBrainIdResponseBody$, { hdrs: true, err: true })
+        const [result$] = await this.matcher<operations.UpdateBrainResponse>()
+            .json(200, operations.UpdateBrainResponse$, { hdrs: true, key: "Brain" })
+            .json(500, errors.UpdateBrainResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -234,11 +235,11 @@ export class Brain extends ClientSDK {
     /**
      * Get Brain by ID
      */
-    async getBrainBrainId(
+    async getBrainById(
         brainId: string,
         options?: RequestOptions
-    ): Promise<operations.GetBrainBrainIdResponse> {
-        const input$: operations.GetBrainBrainIdRequest = {
+    ): Promise<operations.GetBrainByIdResponse> {
+        const input$: operations.GetBrainByIdRequest = {
             brainId: brainId,
         };
         const headers$ = new Headers();
@@ -247,7 +248,7 @@ export class Brain extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetBrainBrainIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetBrainByIdRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -268,7 +269,7 @@ export class Brain extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/brain/{brain_id}",
+            operationID: "get_brain_by_id",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -294,9 +295,9 @@ export class Brain extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetBrainBrainIdResponse>()
-            .json(200, operations.GetBrainBrainIdResponse$, { hdrs: true, key: "Brain" })
-            .json(404, errors.GetBrainBrainIdResponseBody$, { hdrs: true, err: true })
+        const [result$] = await this.matcher<operations.GetBrainByIdResponse>()
+            .json(200, operations.GetBrainByIdResponse$, { hdrs: true, key: "Brain" })
+            .json(404, errors.GetBrainByIdResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -306,11 +307,11 @@ export class Brain extends ClientSDK {
     /**
      * Delete Brain
      */
-    async deleteBrainBrainId(
+    async deleteBrain(
         brainId: string,
         options?: RequestOptions
-    ): Promise<operations.DeleteBrainBrainIdResponse> {
-        const input$: operations.DeleteBrainBrainIdRequest = {
+    ): Promise<operations.DeleteBrainResponse> {
+        const input$: operations.DeleteBrainRequest = {
             brainId: brainId,
         };
         const headers$ = new Headers();
@@ -319,7 +320,7 @@ export class Brain extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.DeleteBrainBrainIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DeleteBrainRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -340,7 +341,7 @@ export class Brain extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "delete_/brain/{brain_id}",
+            operationID: "delete_brain",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -366,11 +367,8 @@ export class Brain extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.DeleteBrainBrainIdResponse>()
-            .json(200, operations.DeleteBrainBrainIdResponse$, {
-                hdrs: true,
-                key: "DeleteResponse",
-            })
+        const [result$] = await this.matcher<operations.DeleteBrainResponse>()
+            .json(200, operations.DeleteBrainResponse$, { hdrs: true, key: "DeleteResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

@@ -42,12 +42,12 @@ export class Document extends ClientSDK {
     /**
      * Create Text Document
      */
-    async postDocumentBrainIdText(
+    async createTextDocument(
         brainId: string,
-        requestBody?: operations.PostDocumentBrainIdTextRequestBody | undefined,
+        requestBody?: operations.CreateTextDocumentRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostDocumentBrainIdTextResponse> {
-        const input$: operations.PostDocumentBrainIdTextRequest = {
+    ): Promise<operations.CreateTextDocumentResponse> {
+        const input$: operations.CreateTextDocumentRequest = {
             brainId: brainId,
             requestBody: requestBody,
         };
@@ -58,7 +58,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostDocumentBrainIdTextRequest$.outboundSchema.parse(value$),
+            (value$) => operations.CreateTextDocumentRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -79,7 +79,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/document/{brain_id}/text",
+            operationID: "create_text_document",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -105,8 +105,8 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostDocumentBrainIdTextResponse>()
-            .json(200, operations.PostDocumentBrainIdTextResponse$, { hdrs: true, key: "Document" })
+        const [result$] = await this.matcher<operations.CreateTextDocumentResponse>()
+            .json(200, operations.CreateTextDocumentResponse$, { hdrs: true, key: "Document" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -116,12 +116,12 @@ export class Document extends ClientSDK {
     /**
      * Create Document by URL
      */
-    async postDocumentBrainIdUrl(
+    async createUrlDocument(
         brainId: string,
-        requestBody?: operations.PostDocumentBrainIdUrlRequestBody | undefined,
+        requestBody?: operations.CreateUrlDocumentRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostDocumentBrainIdUrlResponse> {
-        const input$: operations.PostDocumentBrainIdUrlRequest = {
+    ): Promise<operations.CreateUrlDocumentResponse> {
+        const input$: operations.CreateUrlDocumentRequest = {
             brainId: brainId,
             requestBody: requestBody,
         };
@@ -132,7 +132,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostDocumentBrainIdUrlRequest$.outboundSchema.parse(value$),
+            (value$) => operations.CreateUrlDocumentRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -153,7 +153,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/document/{brain_id}/url",
+            operationID: "create_url_document",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -179,9 +179,9 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostDocumentBrainIdUrlResponse>()
-            .json(200, operations.PostDocumentBrainIdUrlResponse$, { hdrs: true, key: "Document" })
-            .json(500, errors.PostDocumentBrainIdUrlResponseBody$, { hdrs: true, err: true })
+        const [result$] = await this.matcher<operations.CreateUrlDocumentResponse>()
+            .json(200, operations.CreateUrlDocumentResponse$, { hdrs: true, key: "Document" })
+            .json(500, errors.CreateUrlDocumentResponseBody$, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -191,12 +191,12 @@ export class Document extends ClientSDK {
     /**
      * Download
      */
-    async getDocumentBrainIdDocumentIdDownload(
+    async downloadDocument(
         brainId: string,
         documentId: string,
         options?: RequestOptions
-    ): Promise<operations.GetDocumentBrainIdDocumentIdDownloadResponse> {
-        const input$: operations.GetDocumentBrainIdDocumentIdDownloadRequest = {
+    ): Promise<operations.DownloadDocumentResponse> {
+        const input$: operations.DownloadDocumentRequest = {
             brainId: brainId,
             documentId: documentId,
         };
@@ -206,10 +206,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) =>
-                operations.GetDocumentBrainIdDocumentIdDownloadRequest$.outboundSchema.parse(
-                    value$
-                ),
+            (value$) => operations.DownloadDocumentRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -236,7 +233,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/document/{brain_id}/{document_id}/download",
+            operationID: "download_document",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -262,14 +259,10 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] =
-            await this.matcher<operations.GetDocumentBrainIdDocumentIdDownloadResponse>()
-                .json(200, operations.GetDocumentBrainIdDocumentIdDownloadResponse$, {
-                    hdrs: true,
-                    key: "object",
-                })
-                .fail(["4XX", "5XX"])
-                .match(response, request$, { extraFields: responseFields$ });
+        const [result$] = await this.matcher<operations.DownloadDocumentResponse>()
+            .json(200, operations.DownloadDocumentResponse$, { hdrs: true, key: "object" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
 
         return result$;
     }
@@ -277,11 +270,11 @@ export class Document extends ClientSDK {
     /**
      * List Documents
      */
-    async getDocumentBrainId(
+    async getAllDocuments(
         brainId: string,
         options?: RequestOptions
-    ): Promise<operations.GetDocumentBrainIdResponse> {
-        const input$: operations.GetDocumentBrainIdRequest = {
+    ): Promise<operations.GetAllDocumentsResponse> {
+        const input$: operations.GetAllDocumentsRequest = {
             brainId: brainId,
         };
         const headers$ = new Headers();
@@ -290,7 +283,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetDocumentBrainIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetAllDocumentsRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -311,7 +304,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/document/{brain_id}",
+            operationID: "getAllDocuments",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -337,8 +330,8 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetDocumentBrainIdResponse>()
-            .json(200, operations.GetDocumentBrainIdResponse$, { hdrs: true, key: "Documents" })
+        const [result$] = await this.matcher<operations.GetAllDocumentsResponse>()
+            .json(200, operations.GetAllDocumentsResponse$, { hdrs: true, key: "Documents" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -348,12 +341,12 @@ export class Document extends ClientSDK {
     /**
      * Get Document
      */
-    async getDocumentBrainIdDocumentId(
+    async getDocumentById(
         brainId: string,
         documentId: string,
         options?: RequestOptions
-    ): Promise<operations.GetDocumentBrainIdDocumentIdResponse> {
-        const input$: operations.GetDocumentBrainIdDocumentIdRequest = {
+    ): Promise<operations.GetDocumentByIdResponse> {
+        const input$: operations.GetDocumentByIdRequest = {
             brainId: brainId,
             documentId: documentId,
         };
@@ -363,8 +356,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) =>
-                operations.GetDocumentBrainIdDocumentIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetDocumentByIdRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -389,7 +381,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "get_/document/{brain_id}/{document_id}",
+            operationID: "get_document_by_id",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -415,11 +407,8 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.GetDocumentBrainIdDocumentIdResponse>()
-            .json(200, operations.GetDocumentBrainIdDocumentIdResponse$, {
-                hdrs: true,
-                key: "Document",
-            })
+        const [result$] = await this.matcher<operations.GetDocumentByIdResponse>()
+            .json(200, operations.GetDocumentByIdResponse$, { hdrs: true, key: "Document" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -429,12 +418,12 @@ export class Document extends ClientSDK {
     /**
      * Delete Document
      */
-    async deleteDocumentBrainIdDocumentId(
+    async deleteDocument(
         brainId: string,
         documentId: string,
         options?: RequestOptions
-    ): Promise<operations.DeleteDocumentBrainIdDocumentIdResponse> {
-        const input$: operations.DeleteDocumentBrainIdDocumentIdRequest = {
+    ): Promise<operations.DeleteDocumentResponse> {
+        const input$: operations.DeleteDocumentRequest = {
             brainId: brainId,
             documentId: documentId,
         };
@@ -444,8 +433,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) =>
-                operations.DeleteDocumentBrainIdDocumentIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DeleteDocumentRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -470,7 +458,7 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "delete_/document/{brain_id}/{document_id}",
+            operationID: "delete_document",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
@@ -496,11 +484,8 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.DeleteDocumentBrainIdDocumentIdResponse>()
-            .json(200, operations.DeleteDocumentBrainIdDocumentIdResponse$, {
-                hdrs: true,
-                key: "DeleteResponse",
-            })
+        const [result$] = await this.matcher<operations.DeleteDocumentResponse>()
+            .json(200, operations.DeleteDocumentResponse$, { hdrs: true, key: "DeleteResponse" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -510,12 +495,12 @@ export class Document extends ClientSDK {
     /**
      * Upload Document
      */
-    async postDocumentBrainIdFile(
+    async uploadDocument(
         brainId: string,
-        requestBody?: operations.PostDocumentBrainIdFileRequestBody | undefined,
+        requestBody?: operations.UploadDocumentRequestBody | undefined,
         options?: RequestOptions
-    ): Promise<operations.PostDocumentBrainIdFileResponse> {
-        const input$: operations.PostDocumentBrainIdFileRequest = {
+    ): Promise<operations.UploadDocumentResponse> {
+        const input$: operations.UploadDocumentRequest = {
             brainId: brainId,
             requestBody: requestBody,
         };
@@ -525,7 +510,7 @@ export class Document extends ClientSDK {
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostDocumentBrainIdFileRequest$.outboundSchema.parse(value$),
+            (value$) => operations.UploadDocumentRequest$.outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = new FormData();
@@ -561,13 +546,13 @@ export class Document extends ClientSDK {
                 : this.options$.security;
 
         const context = {
-            operationID: "post_/document/{brain_id}/file",
+            operationID: "upload_document",
             oAuth2Scopes: [],
             securitySource: this.options$.security,
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
+        const doOptions = { context, errorCodes: ["400", "4XX", "500", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -587,8 +572,10 @@ export class Document extends ClientSDK {
             HttpMeta: { Response: response, Request: request$ },
         };
 
-        const [result$] = await this.matcher<operations.PostDocumentBrainIdFileResponse>()
-            .json(200, operations.PostDocumentBrainIdFileResponse$, { hdrs: true, key: "Document" })
+        const [result$] = await this.matcher<operations.UploadDocumentResponse>()
+            .json(200, operations.UploadDocumentResponse$, { key: "Document" })
+            .json(400, errors.UploadDocumentResponseBody$, { err: true })
+            .json(500, errors.UploadDocumentDocumentResponseBody$, { err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
