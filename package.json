@@ -1,6 +1,6 @@
 {
   "name": "@athena-ai/sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
@@ -13,7 +13,6 @@
     "zod": ">= 3"
   },
   "devDependencies": {
-    "@types/jsonpath": "^0.2.4",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^8.57.0",

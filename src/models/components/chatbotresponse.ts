@@ -37,52 +37,69 @@ export type ChatbotResponse = {
 };
 
 /** @internal */
+export const ChatbotResponse$inboundSchema: z.ZodType<ChatbotResponse, z.ZodTypeDef, unknown> = z
+    .object({
+        api_key: z.nullable(z.string()).optional(),
+        brain_id: z.string().optional(),
+        created_at: z.string().optional(),
+        id: z.string().optional(),
+        name: z.string().optional(),
+        urls: z.nullable(z.array(z.string())).optional(),
+        user_id: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            api_key: "apiKey",
+            brain_id: "brainId",
+            created_at: "createdAt",
+            user_id: "userId",
+        });
+    });
+
+/** @internal */
+export type ChatbotResponse$Outbound = {
+    api_key?: string | null | undefined;
+    brain_id?: string | undefined;
+    created_at?: string | undefined;
+    id?: string | undefined;
+    name?: string | undefined;
+    urls?: Array<string> | null | undefined;
+    user_id?: string | undefined;
+};
+
+/** @internal */
+export const ChatbotResponse$outboundSchema: z.ZodType<
+    ChatbotResponse$Outbound,
+    z.ZodTypeDef,
+    ChatbotResponse
+> = z
+    .object({
+        apiKey: z.nullable(z.string()).optional(),
+        brainId: z.string().optional(),
+        createdAt: z.string().optional(),
+        id: z.string().optional(),
+        name: z.string().optional(),
+        urls: z.nullable(z.array(z.string())).optional(),
+        userId: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            apiKey: "api_key",
+            brainId: "brain_id",
+            createdAt: "created_at",
+            userId: "user_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace ChatbotResponse$ {
-    export const inboundSchema: z.ZodType<ChatbotResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            api_key: z.nullable(z.string()).optional(),
-            brain_id: z.string().optional(),
-            created_at: z.string().optional(),
-            id: z.string().optional(),
-            name: z.string().optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
-            user_id: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                api_key: "apiKey",
-                brain_id: "brainId",
-                created_at: "createdAt",
-                user_id: "userId",
-            });
-        });
-
-    export type Outbound = {
-        api_key?: string | null | undefined;
-        brain_id?: string | undefined;
-        created_at?: string | undefined;
-        id?: string | undefined;
-        name?: string | undefined;
-        urls?: Array<string> | null | undefined;
-        user_id?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ChatbotResponse> = z
-        .object({
-            apiKey: z.nullable(z.string()).optional(),
-            brainId: z.string().optional(),
-            createdAt: z.string().optional(),
-            id: z.string().optional(),
-            name: z.string().optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
-            userId: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                apiKey: "api_key",
-                brainId: "brain_id",
-                createdAt: "created_at",
-                userId: "user_id",
-            });
-        });
+    /** @deprecated use `ChatbotResponse$inboundSchema` instead. */
+    export const inboundSchema = ChatbotResponse$inboundSchema;
+    /** @deprecated use `ChatbotResponse$outboundSchema` instead. */
+    export const outboundSchema = ChatbotResponse$outboundSchema;
+    /** @deprecated use `ChatbotResponse$Outbound` instead. */
+    export type Outbound = ChatbotResponse$Outbound;
 }

@@ -20,65 +20,107 @@ export type DeleteBrainResponse = {
 };
 
 /** @internal */
+export const DeleteBrainRequest$inboundSchema: z.ZodType<
+    DeleteBrainRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+        });
+    });
+
+/** @internal */
+export type DeleteBrainRequest$Outbound = {
+    brain_id: string;
+};
+
+/** @internal */
+export const DeleteBrainRequest$outboundSchema: z.ZodType<
+    DeleteBrainRequest$Outbound,
+    z.ZodTypeDef,
+    DeleteBrainRequest
+> = z
+    .object({
+        brainId: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace DeleteBrainRequest$ {
-    export const inboundSchema: z.ZodType<DeleteBrainRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteBrainRequest> = z
-        .object({
-            brainId: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-            });
-        });
+    /** @deprecated use `DeleteBrainRequest$inboundSchema` instead. */
+    export const inboundSchema = DeleteBrainRequest$inboundSchema;
+    /** @deprecated use `DeleteBrainRequest$outboundSchema` instead. */
+    export const outboundSchema = DeleteBrainRequest$outboundSchema;
+    /** @deprecated use `DeleteBrainRequest$Outbound` instead. */
+    export type Outbound = DeleteBrainRequest$Outbound;
 }
 
 /** @internal */
+export const DeleteBrainResponse$inboundSchema: z.ZodType<
+    DeleteBrainResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        DeleteResponse: components.DeleteResponse$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            DeleteResponse: "deleteResponse",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type DeleteBrainResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    DeleteResponse?: components.DeleteResponse$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const DeleteBrainResponse$outboundSchema: z.ZodType<
+    DeleteBrainResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteBrainResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        deleteResponse: components.DeleteResponse$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            deleteResponse: "DeleteResponse",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace DeleteBrainResponse$ {
-    export const inboundSchema: z.ZodType<DeleteBrainResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            DeleteResponse: components.DeleteResponse$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                DeleteResponse: "deleteResponse",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        DeleteResponse?: components.DeleteResponse$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteBrainResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            deleteResponse: components.DeleteResponse$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                deleteResponse: "DeleteResponse",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `DeleteBrainResponse$inboundSchema` instead. */
+    export const inboundSchema = DeleteBrainResponse$inboundSchema;
+    /** @deprecated use `DeleteBrainResponse$outboundSchema` instead. */
+    export const outboundSchema = DeleteBrainResponse$outboundSchema;
+    /** @deprecated use `DeleteBrainResponse$Outbound` instead. */
+    export type Outbound = DeleteBrainResponse$Outbound;
 }

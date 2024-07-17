@@ -1,17 +1,17 @@
-speakeasyVersion: 1.324.0
+speakeasyVersion: 1.337.1
 sources:
     athenaCopilot:
         sourceNamespace: athena-copilot
-        sourceRevisionDigest: sha256:db46a5140041af9605e06efe2731406cab3a8e018ee5ab46510d65f53b7f0742
-        sourceBlobDigest: sha256:9b9094fd2d607cbdbf7666c7a84d17a428e11c896124d005c5ab6e694d1d1b75
+        sourceRevisionDigest: sha256:8095a1a9259465489a1f81e2cebcd67ef7bb600c39f0a51fce79f92eb1ba9a47
+        sourceBlobDigest: sha256:6d6df12c620160d806b73553d2f5fa40f6fd2fe824525c87fc70e88f761abac1
         tags:
             - latest
 targets:
     my-first-target:
         source: athenaCopilot
         sourceNamespace: athena-copilot
-        sourceRevisionDigest: sha256:db46a5140041af9605e06efe2731406cab3a8e018ee5ab46510d65f53b7f0742
-        sourceBlobDigest: sha256:9b9094fd2d607cbdbf7666c7a84d17a428e11c896124d005c5ab6e694d1d1b75
+        sourceRevisionDigest: sha256:8095a1a9259465489a1f81e2cebcd67ef7bb600c39f0a51fce79f92eb1ba9a47
+        sourceBlobDigest: sha256:6d6df12c620160d806b73553d2f5fa40f6fd2fe824525c87fc70e88f761abac1
         outLocation: /Users/shreyaan/Desktop/sdk/athena-copilot-typescript
 workflow:
     workflowVersion: 1.0.0

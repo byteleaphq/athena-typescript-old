@@ -12,16 +12,34 @@ export type DeleteResponse = {
 };
 
 /** @internal */
+export const DeleteResponse$inboundSchema: z.ZodType<DeleteResponse, z.ZodTypeDef, unknown> =
+    z.object({
+        message: z.string().optional(),
+    });
+
+/** @internal */
+export type DeleteResponse$Outbound = {
+    message?: string | undefined;
+};
+
+/** @internal */
+export const DeleteResponse$outboundSchema: z.ZodType<
+    DeleteResponse$Outbound,
+    z.ZodTypeDef,
+    DeleteResponse
+> = z.object({
+    message: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace DeleteResponse$ {
-    export const inboundSchema: z.ZodType<DeleteResponse, z.ZodTypeDef, unknown> = z.object({
-        message: z.string().optional(),
-    });
-
-    export type Outbound = {
-        message?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DeleteResponse> = z.object({
-        message: z.string().optional(),
-    });
+    /** @deprecated use `DeleteResponse$inboundSchema` instead. */
+    export const inboundSchema = DeleteResponse$inboundSchema;
+    /** @deprecated use `DeleteResponse$outboundSchema` instead. */
+    export const outboundSchema = DeleteResponse$outboundSchema;
+    /** @deprecated use `DeleteResponse$Outbound` instead. */
+    export type Outbound = DeleteResponse$Outbound;
 }

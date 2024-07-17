@@ -16,38 +16,59 @@ export type GetAllBrainsResponse = {
 };
 
 /** @internal */
+export const GetAllBrainsResponse$inboundSchema: z.ZodType<
+    GetAllBrainsResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Brains: z.array(components.Brain$inboundSchema).optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Brains: "brains",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type GetAllBrainsResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Brains?: Array<components.Brain$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const GetAllBrainsResponse$outboundSchema: z.ZodType<
+    GetAllBrainsResponse$Outbound,
+    z.ZodTypeDef,
+    GetAllBrainsResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        brains: z.array(components.Brain$outboundSchema).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            brains: "Brains",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetAllBrainsResponse$ {
-    export const inboundSchema: z.ZodType<GetAllBrainsResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Brains: z.array(components.Brain$.inboundSchema).optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Brains: "brains",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Brains?: Array<components.Brain$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetAllBrainsResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            brains: z.array(components.Brain$.outboundSchema).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                brains: "Brains",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `GetAllBrainsResponse$inboundSchema` instead. */
+    export const inboundSchema = GetAllBrainsResponse$inboundSchema;
+    /** @deprecated use `GetAllBrainsResponse$outboundSchema` instead. */
+    export const outboundSchema = GetAllBrainsResponse$outboundSchema;
+    /** @deprecated use `GetAllBrainsResponse$Outbound` instead. */
+    export type Outbound = GetAllBrainsResponse$Outbound;
 }

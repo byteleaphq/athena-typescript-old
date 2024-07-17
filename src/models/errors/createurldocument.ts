@@ -23,51 +23,70 @@ export class CreateUrlDocumentResponseBody extends Error {
     data$: CreateUrlDocumentResponseBodyData;
 
     constructor(err: CreateUrlDocumentResponseBodyData) {
-        super("");
+        const message =
+            "message" in err && typeof err.message === "string"
+                ? err.message
+                : `API error occurred: ${JSON.stringify(err)}`;
+        super(message);
         this.data$ = err;
 
         this.httpMeta = err.httpMeta;
-
-        this.message =
-            "message" in err && typeof err.message === "string"
-                ? err.message
-                : "API error occurred";
 
         this.name = "CreateUrlDocumentResponseBody";
     }
 }
 
 /** @internal */
-export namespace CreateUrlDocumentResponseBody$ {
-    export const inboundSchema: z.ZodType<CreateUrlDocumentResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-        })
-        .transform((v) => {
-            const remapped = remap$(v, {
-                HttpMeta: "httpMeta",
-            });
-
-            return new CreateUrlDocumentResponseBody(remapped);
+export const CreateUrlDocumentResponseBody$inboundSchema: z.ZodType<
+    CreateUrlDocumentResponseBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+    })
+    .transform((v) => {
+        const remapped = remap$(v, {
+            HttpMeta: "httpMeta",
         });
 
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-    };
+        return new CreateUrlDocumentResponseBody(remapped);
+    });
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateUrlDocumentResponseBody> =
+/** @internal */
+export type CreateUrlDocumentResponseBody$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+};
+
+/** @internal */
+export const CreateUrlDocumentResponseBody$outboundSchema: z.ZodType<
+    CreateUrlDocumentResponseBody$Outbound,
+    z.ZodTypeDef,
+    CreateUrlDocumentResponseBody
+> = z
+    .instanceof(CreateUrlDocumentResponseBody)
+    .transform((v) => v.data$)
+    .pipe(
         z
-            .instanceof(CreateUrlDocumentResponseBody)
-            .transform((v) => v.data$)
-            .pipe(
-                z
-                    .object({
-                        httpMeta: components.HTTPMetadata$.outboundSchema,
-                    })
-                    .transform((v) => {
-                        return remap$(v, {
-                            httpMeta: "HttpMeta",
-                        });
-                    })
-            );
+            .object({
+                httpMeta: components.HTTPMetadata$outboundSchema,
+            })
+            .transform((v) => {
+                return remap$(v, {
+                    httpMeta: "HttpMeta",
+                });
+            })
+    );
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateUrlDocumentResponseBody$ {
+    /** @deprecated use `CreateUrlDocumentResponseBody$inboundSchema` instead. */
+    export const inboundSchema = CreateUrlDocumentResponseBody$inboundSchema;
+    /** @deprecated use `CreateUrlDocumentResponseBody$outboundSchema` instead. */
+    export const outboundSchema = CreateUrlDocumentResponseBody$outboundSchema;
+    /** @deprecated use `CreateUrlDocumentResponseBody$Outbound` instead. */
+    export type Outbound = CreateUrlDocumentResponseBody$Outbound;
 }

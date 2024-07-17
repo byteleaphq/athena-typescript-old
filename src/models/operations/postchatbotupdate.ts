@@ -28,71 +28,113 @@ export type PostChatbotUpdateResponse = {
 };
 
 /** @internal */
+export const PostChatbotUpdateRequestBody$inboundSchema: z.ZodType<
+    PostChatbotUpdateRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        chatbot_id: z.string().optional(),
+        name: z.nullable(z.string()).optional(),
+        urls: z.nullable(z.array(z.string())).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbot_id: "chatbotId",
+        });
+    });
+
+/** @internal */
+export type PostChatbotUpdateRequestBody$Outbound = {
+    chatbot_id?: string | undefined;
+    name?: string | null | undefined;
+    urls?: Array<string> | null | undefined;
+};
+
+/** @internal */
+export const PostChatbotUpdateRequestBody$outboundSchema: z.ZodType<
+    PostChatbotUpdateRequestBody$Outbound,
+    z.ZodTypeDef,
+    PostChatbotUpdateRequestBody
+> = z
+    .object({
+        chatbotId: z.string().optional(),
+        name: z.nullable(z.string()).optional(),
+        urls: z.nullable(z.array(z.string())).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbotId: "chatbot_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostChatbotUpdateRequestBody$ {
-    export const inboundSchema: z.ZodType<PostChatbotUpdateRequestBody, z.ZodTypeDef, unknown> = z
-        .object({
-            chatbot_id: z.string().optional(),
-            name: z.nullable(z.string()).optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbot_id: "chatbotId",
-            });
-        });
-
-    export type Outbound = {
-        chatbot_id?: string | undefined;
-        name?: string | null | undefined;
-        urls?: Array<string> | null | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateRequestBody> = z
-        .object({
-            chatbotId: z.string().optional(),
-            name: z.nullable(z.string()).optional(),
-            urls: z.nullable(z.array(z.string())).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbotId: "chatbot_id",
-            });
-        });
+    /** @deprecated use `PostChatbotUpdateRequestBody$inboundSchema` instead. */
+    export const inboundSchema = PostChatbotUpdateRequestBody$inboundSchema;
+    /** @deprecated use `PostChatbotUpdateRequestBody$outboundSchema` instead. */
+    export const outboundSchema = PostChatbotUpdateRequestBody$outboundSchema;
+    /** @deprecated use `PostChatbotUpdateRequestBody$Outbound` instead. */
+    export type Outbound = PostChatbotUpdateRequestBody$Outbound;
 }
 
 /** @internal */
+export const PostChatbotUpdateResponse$inboundSchema: z.ZodType<
+    PostChatbotUpdateResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        ChatbotResponses: z.array(components.ChatbotResponse$inboundSchema).optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            ChatbotResponses: "chatbotResponses",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type PostChatbotUpdateResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    ChatbotResponses?: Array<components.ChatbotResponse$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const PostChatbotUpdateResponse$outboundSchema: z.ZodType<
+    PostChatbotUpdateResponse$Outbound,
+    z.ZodTypeDef,
+    PostChatbotUpdateResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        chatbotResponses: z.array(components.ChatbotResponse$outboundSchema).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            chatbotResponses: "ChatbotResponses",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostChatbotUpdateResponse$ {
-    export const inboundSchema: z.ZodType<PostChatbotUpdateResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            ChatbotResponses: z.array(components.ChatbotResponse$.inboundSchema).optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                ChatbotResponses: "chatbotResponses",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        ChatbotResponses?: Array<components.ChatbotResponse$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotUpdateResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            chatbotResponses: z.array(components.ChatbotResponse$.outboundSchema).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                chatbotResponses: "ChatbotResponses",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `PostChatbotUpdateResponse$inboundSchema` instead. */
+    export const inboundSchema = PostChatbotUpdateResponse$inboundSchema;
+    /** @deprecated use `PostChatbotUpdateResponse$outboundSchema` instead. */
+    export const outboundSchema = PostChatbotUpdateResponse$outboundSchema;
+    /** @deprecated use `PostChatbotUpdateResponse$Outbound` instead. */
+    export type Outbound = PostChatbotUpdateResponse$Outbound;
 }

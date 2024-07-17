@@ -3,7 +3,7 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
 import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
@@ -47,14 +47,11 @@ export class Integration extends ClientSDK {
         const input$: operations.PostIntegrationIntegrationNameConnectRequest = {
             integrationName: integrationName,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostIntegrationIntegrationNameConnectRequest$.outboundSchema.parse(
+                operations.PostIntegrationIntegrationNameConnectRequest$outboundSchema.parse(
                     value$
                 ),
             "Input validation failed"
@@ -73,6 +70,10 @@ export class Integration extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -85,7 +86,6 @@ export class Integration extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -95,11 +95,17 @@ export class Integration extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
@@ -107,7 +113,7 @@ export class Integration extends ClientSDK {
 
         const [result$] =
             await this.matcher<operations.PostIntegrationIntegrationNameConnectResponse>()
-                .json(200, operations.PostIntegrationIntegrationNameConnectResponse$, {
+                .json(200, operations.PostIntegrationIntegrationNameConnectResponse$inboundSchema, {
                     hdrs: true,
                     key: "object",
                 })
@@ -127,14 +133,11 @@ export class Integration extends ClientSDK {
         const input$: operations.PostIntegrationIntegrationNameDisconnectRequest = {
             integrationName: integrationName,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostIntegrationIntegrationNameDisconnectRequest$.outboundSchema.parse(
+                operations.PostIntegrationIntegrationNameDisconnectRequest$outboundSchema.parse(
                     value$
                 ),
             "Input validation failed"
@@ -153,6 +156,10 @@ export class Integration extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -165,7 +172,6 @@ export class Integration extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -175,11 +181,17 @@ export class Integration extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
@@ -187,9 +199,11 @@ export class Integration extends ClientSDK {
 
         const [result$] =
             await this.matcher<operations.PostIntegrationIntegrationNameDisconnectResponse>()
-                .json(200, operations.PostIntegrationIntegrationNameDisconnectResponse$, {
-                    key: "object",
-                })
+                .json(
+                    200,
+                    operations.PostIntegrationIntegrationNameDisconnectResponse$inboundSchema,
+                    { key: "object" }
+                )
                 .fail(["4XX", "5XX"])
                 .match(response, request$, { extraFields: responseFields$ });
 
@@ -209,14 +223,11 @@ export class Integration extends ClientSDK {
         const input$: operations.GetIntegrationIntegrationNameListRequest = {
             integrationName: integrationName,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.GetIntegrationIntegrationNameListRequest$.outboundSchema.parse(value$),
+                operations.GetIntegrationIntegrationNameListRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -233,6 +244,10 @@ export class Integration extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -245,7 +260,6 @@ export class Integration extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -255,18 +269,24 @@ export class Integration extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetIntegrationIntegrationNameListResponse>()
-            .json(200, operations.GetIntegrationIntegrationNameListResponse$, {
+            .json(200, operations.GetIntegrationIntegrationNameListResponse$inboundSchema, {
                 hdrs: true,
                 key: "responseBodies",
             })
@@ -291,15 +311,11 @@ export class Integration extends ClientSDK {
             integrationName: integrationName,
             requestBody: requestBody,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostIntegrationIntegrationNameAddRequest$.outboundSchema.parse(value$),
+                operations.PostIntegrationIntegrationNameAddRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -314,6 +330,11 @@ export class Integration extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -326,7 +347,6 @@ export class Integration extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -336,18 +356,24 @@ export class Integration extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostIntegrationIntegrationNameAddResponse>()
-            .json(200, operations.PostIntegrationIntegrationNameAddResponse$, {
+            .json(200, operations.PostIntegrationIntegrationNameAddResponse$inboundSchema, {
                 hdrs: true,
                 key: "object",
             })

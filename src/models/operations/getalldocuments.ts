@@ -20,65 +20,107 @@ export type GetAllDocumentsResponse = {
 };
 
 /** @internal */
+export const GetAllDocumentsRequest$inboundSchema: z.ZodType<
+    GetAllDocumentsRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+        });
+    });
+
+/** @internal */
+export type GetAllDocumentsRequest$Outbound = {
+    brain_id: string;
+};
+
+/** @internal */
+export const GetAllDocumentsRequest$outboundSchema: z.ZodType<
+    GetAllDocumentsRequest$Outbound,
+    z.ZodTypeDef,
+    GetAllDocumentsRequest
+> = z
+    .object({
+        brainId: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetAllDocumentsRequest$ {
-    export const inboundSchema: z.ZodType<GetAllDocumentsRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetAllDocumentsRequest> = z
-        .object({
-            brainId: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-            });
-        });
+    /** @deprecated use `GetAllDocumentsRequest$inboundSchema` instead. */
+    export const inboundSchema = GetAllDocumentsRequest$inboundSchema;
+    /** @deprecated use `GetAllDocumentsRequest$outboundSchema` instead. */
+    export const outboundSchema = GetAllDocumentsRequest$outboundSchema;
+    /** @deprecated use `GetAllDocumentsRequest$Outbound` instead. */
+    export type Outbound = GetAllDocumentsRequest$Outbound;
 }
 
 /** @internal */
+export const GetAllDocumentsResponse$inboundSchema: z.ZodType<
+    GetAllDocumentsResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Documents: z.array(components.Document$inboundSchema).optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Documents: "documents",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type GetAllDocumentsResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Documents?: Array<components.Document$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const GetAllDocumentsResponse$outboundSchema: z.ZodType<
+    GetAllDocumentsResponse$Outbound,
+    z.ZodTypeDef,
+    GetAllDocumentsResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        documents: z.array(components.Document$outboundSchema).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            documents: "Documents",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetAllDocumentsResponse$ {
-    export const inboundSchema: z.ZodType<GetAllDocumentsResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Documents: z.array(components.Document$.inboundSchema).optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Documents: "documents",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Documents?: Array<components.Document$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetAllDocumentsResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            documents: z.array(components.Document$.outboundSchema).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                documents: "Documents",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `GetAllDocumentsResponse$inboundSchema` instead. */
+    export const inboundSchema = GetAllDocumentsResponse$inboundSchema;
+    /** @deprecated use `GetAllDocumentsResponse$outboundSchema` instead. */
+    export const outboundSchema = GetAllDocumentsResponse$outboundSchema;
+    /** @deprecated use `GetAllDocumentsResponse$Outbound` instead. */
+    export type Outbound = GetAllDocumentsResponse$Outbound;
 }

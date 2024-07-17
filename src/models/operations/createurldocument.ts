@@ -28,87 +28,148 @@ export type CreateUrlDocumentResponse = {
 };
 
 /** @internal */
+export const CreateUrlDocumentRequestBody$inboundSchema: z.ZodType<
+    CreateUrlDocumentRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    url: z.string().optional(),
+});
+
+/** @internal */
+export type CreateUrlDocumentRequestBody$Outbound = {
+    url?: string | undefined;
+};
+
+/** @internal */
+export const CreateUrlDocumentRequestBody$outboundSchema: z.ZodType<
+    CreateUrlDocumentRequestBody$Outbound,
+    z.ZodTypeDef,
+    CreateUrlDocumentRequestBody
+> = z.object({
+    url: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateUrlDocumentRequestBody$ {
-    export const inboundSchema: z.ZodType<CreateUrlDocumentRequestBody, z.ZodTypeDef, unknown> =
-        z.object({
-            url: z.string().optional(),
-        });
-
-    export type Outbound = {
-        url?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateUrlDocumentRequestBody> =
-        z.object({
-            url: z.string().optional(),
-        });
+    /** @deprecated use `CreateUrlDocumentRequestBody$inboundSchema` instead. */
+    export const inboundSchema = CreateUrlDocumentRequestBody$inboundSchema;
+    /** @deprecated use `CreateUrlDocumentRequestBody$outboundSchema` instead. */
+    export const outboundSchema = CreateUrlDocumentRequestBody$outboundSchema;
+    /** @deprecated use `CreateUrlDocumentRequestBody$Outbound` instead. */
+    export type Outbound = CreateUrlDocumentRequestBody$Outbound;
 }
 
 /** @internal */
+export const CreateUrlDocumentRequest$inboundSchema: z.ZodType<
+    CreateUrlDocumentRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+        RequestBody: z.lazy(() => CreateUrlDocumentRequestBody$inboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            RequestBody: "requestBody",
+        });
+    });
+
+/** @internal */
+export type CreateUrlDocumentRequest$Outbound = {
+    brain_id: string;
+    RequestBody?: CreateUrlDocumentRequestBody$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateUrlDocumentRequest$outboundSchema: z.ZodType<
+    CreateUrlDocumentRequest$Outbound,
+    z.ZodTypeDef,
+    CreateUrlDocumentRequest
+> = z
+    .object({
+        brainId: z.string(),
+        requestBody: z.lazy(() => CreateUrlDocumentRequestBody$outboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            requestBody: "RequestBody",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateUrlDocumentRequest$ {
-    export const inboundSchema: z.ZodType<CreateUrlDocumentRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-            RequestBody: z.lazy(() => CreateUrlDocumentRequestBody$.inboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                RequestBody: "requestBody",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-        RequestBody?: CreateUrlDocumentRequestBody$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateUrlDocumentRequest> = z
-        .object({
-            brainId: z.string(),
-            requestBody: z.lazy(() => CreateUrlDocumentRequestBody$.outboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                requestBody: "RequestBody",
-            });
-        });
+    /** @deprecated use `CreateUrlDocumentRequest$inboundSchema` instead. */
+    export const inboundSchema = CreateUrlDocumentRequest$inboundSchema;
+    /** @deprecated use `CreateUrlDocumentRequest$outboundSchema` instead. */
+    export const outboundSchema = CreateUrlDocumentRequest$outboundSchema;
+    /** @deprecated use `CreateUrlDocumentRequest$Outbound` instead. */
+    export type Outbound = CreateUrlDocumentRequest$Outbound;
 }
 
 /** @internal */
+export const CreateUrlDocumentResponse$inboundSchema: z.ZodType<
+    CreateUrlDocumentResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Document: components.Document$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Document: "document",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type CreateUrlDocumentResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Document?: components.Document$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const CreateUrlDocumentResponse$outboundSchema: z.ZodType<
+    CreateUrlDocumentResponse$Outbound,
+    z.ZodTypeDef,
+    CreateUrlDocumentResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        document: components.Document$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            document: "Document",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateUrlDocumentResponse$ {
-    export const inboundSchema: z.ZodType<CreateUrlDocumentResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Document: components.Document$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Document: "document",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Document?: components.Document$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateUrlDocumentResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            document: components.Document$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                document: "Document",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `CreateUrlDocumentResponse$inboundSchema` instead. */
+    export const inboundSchema = CreateUrlDocumentResponse$inboundSchema;
+    /** @deprecated use `CreateUrlDocumentResponse$outboundSchema` instead. */
+    export const outboundSchema = CreateUrlDocumentResponse$outboundSchema;
+    /** @deprecated use `CreateUrlDocumentResponse$Outbound` instead. */
+    export type Outbound = CreateUrlDocumentResponse$Outbound;
 }

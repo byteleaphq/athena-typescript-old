@@ -16,11 +16,11 @@ export type ListChatsResponse = {
 };
 
 /** @internal */
-export namespace ListChatsResponse$ {
-    export const inboundSchema: z.ZodType<ListChatsResponse, z.ZodTypeDef, unknown> = z
+export const ListChatsResponse$inboundSchema: z.ZodType<ListChatsResponse, z.ZodTypeDef, unknown> =
+    z
         .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Chats: z.array(components.Chat$.inboundSchema).optional(),
+            HttpMeta: components.HTTPMetadata$inboundSchema,
+            Chats: z.array(components.Chat$inboundSchema).optional(),
             Headers: z.record(z.array(z.string())),
         })
         .transform((v) => {
@@ -31,23 +31,41 @@ export namespace ListChatsResponse$ {
             });
         });
 
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Chats?: Array<components.Chat$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
+/** @internal */
+export type ListChatsResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Chats?: Array<components.Chat$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ListChatsResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            chats: z.array(components.Chat$.outboundSchema).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                chats: "Chats",
-                headers: "Headers",
-            });
+/** @internal */
+export const ListChatsResponse$outboundSchema: z.ZodType<
+    ListChatsResponse$Outbound,
+    z.ZodTypeDef,
+    ListChatsResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        chats: z.array(components.Chat$outboundSchema).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            chats: "Chats",
+            headers: "Headers",
         });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListChatsResponse$ {
+    /** @deprecated use `ListChatsResponse$inboundSchema` instead. */
+    export const inboundSchema = ListChatsResponse$inboundSchema;
+    /** @deprecated use `ListChatsResponse$outboundSchema` instead. */
+    export const outboundSchema = ListChatsResponse$outboundSchema;
+    /** @deprecated use `ListChatsResponse$Outbound` instead. */
+    export type Outbound = ListChatsResponse$Outbound;
 }

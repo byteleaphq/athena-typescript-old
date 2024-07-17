@@ -3,8 +3,12 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
-import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import {
+    encodeFormQuery as encodeFormQuery$,
+    encodeJSON as encodeJSON$,
+    encodeSimple as encodeSimple$,
+} from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -51,14 +55,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             requestBody: requestBody,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.CreateTextDocumentRequest$.outboundSchema.parse(value$),
+            (value$) => operations.CreateTextDocumentRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -73,6 +73,11 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -85,7 +90,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -95,18 +99,27 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.CreateTextDocumentResponse>()
-            .json(200, operations.CreateTextDocumentResponse$, { hdrs: true, key: "Document" })
+            .json(200, operations.CreateTextDocumentResponse$inboundSchema, {
+                hdrs: true,
+                key: "Document",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -125,14 +138,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             requestBody: requestBody,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.CreateUrlDocumentRequest$.outboundSchema.parse(value$),
+            (value$) => operations.CreateUrlDocumentRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -147,6 +156,11 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -159,7 +173,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "500", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -169,19 +182,31 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "500", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.CreateUrlDocumentResponse>()
-            .json(200, operations.CreateUrlDocumentResponse$, { hdrs: true, key: "Document" })
-            .json(500, errors.CreateUrlDocumentResponseBody$, { hdrs: true, err: true })
+            .json(200, operations.CreateUrlDocumentResponse$inboundSchema, {
+                hdrs: true,
+                key: "Document",
+            })
+            .json(500, errors.CreateUrlDocumentResponseBody$inboundSchema, {
+                hdrs: true,
+                err: true,
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -200,13 +225,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             documentId: documentId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.DownloadDocumentRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DownloadDocumentRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -227,6 +249,10 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -239,7 +265,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -249,18 +274,27 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.DownloadDocumentResponse>()
-            .json(200, operations.DownloadDocumentResponse$, { hdrs: true, key: "object" })
+            .json(200, operations.DownloadDocumentResponse$inboundSchema, {
+                hdrs: true,
+                key: "object",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -277,13 +311,10 @@ export class Document extends ClientSDK {
         const input$: operations.GetAllDocumentsRequest = {
             brainId: brainId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetAllDocumentsRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetAllDocumentsRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -298,6 +329,10 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -310,7 +345,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -320,18 +354,27 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetAllDocumentsResponse>()
-            .json(200, operations.GetAllDocumentsResponse$, { hdrs: true, key: "Documents" })
+            .json(200, operations.GetAllDocumentsResponse$inboundSchema, {
+                hdrs: true,
+                key: "Documents",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -350,13 +393,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             documentId: documentId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetDocumentByIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetDocumentByIdRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -375,6 +415,10 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -387,7 +431,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -397,18 +440,27 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetDocumentByIdResponse>()
-            .json(200, operations.GetDocumentByIdResponse$, { hdrs: true, key: "Document" })
+            .json(200, operations.GetDocumentByIdResponse$inboundSchema, {
+                hdrs: true,
+                key: "Document",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -427,13 +479,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             documentId: documentId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.DeleteDocumentRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DeleteDocumentRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -452,6 +501,10 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -464,7 +517,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -474,18 +526,27 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.DeleteDocumentResponse>()
-            .json(200, operations.DeleteDocumentResponse$, { hdrs: true, key: "DeleteResponse" })
+            .json(200, operations.DeleteDocumentResponse$inboundSchema, {
+                hdrs: true,
+                key: "DeleteResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -504,13 +565,10 @@ export class Document extends ClientSDK {
             brainId: brainId,
             requestBody: requestBody,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.UploadDocumentRequest$.outboundSchema.parse(value$),
+            (value$) => operations.UploadDocumentRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = new FormData();
@@ -540,6 +598,10 @@ export class Document extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -552,7 +614,6 @@ export class Document extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["400", "4XX", "500", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -562,20 +623,263 @@ export class Document extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["400", "4XX", "500", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.UploadDocumentResponse>()
-            .json(200, operations.UploadDocumentResponse$, { key: "Document" })
-            .json(400, errors.UploadDocumentResponseBody$, { err: true })
-            .json(500, errors.UploadDocumentDocumentResponseBody$, { err: true })
+            .json(200, operations.UploadDocumentResponse$inboundSchema, { key: "Document" })
+            .json(400, errors.UploadDocumentResponseBody$inboundSchema, { err: true })
+            .json(500, errors.UploadDocumentDocumentResponseBody$inboundSchema, { err: true })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
+    }
+
+    /**
+     * Search documents
+     *
+     * @remarks
+     * Search for documents within a specific brain
+     */
+    async searchDocuments(
+        brainId: string,
+        searchQuery?: string | undefined,
+        options?: RequestOptions
+    ): Promise<operations.SearchDocumentsResponse> {
+        const input$: operations.SearchDocumentsRequest = {
+            searchQuery: searchQuery,
+            brainId: brainId,
+        };
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.SearchDocumentsRequest$outboundSchema.parse(value$),
+            "Input validation failed"
+        );
+        const body$ = null;
+
+        const pathParams$ = {
+            brain_id: encodeSimple$("brain_id", payload$.brain_id, {
+                explode: false,
+                charEncoding: "percent",
+            }),
+        };
+        const path$ = this.templateURLComponent("/document/{brain_id}/search")(pathParams$);
+
+        const query$ = encodeFormQuery$({
+            search_query: payload$.search_query,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
+        const security$ =
+            typeof this.options$.security === "function"
+                ? await this.options$.security()
+                : this.options$.security;
+
+        const context = {
+            operationID: "searchDocuments",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
+        const securitySettings$ = this.resolveGlobalSecurity(security$);
+
+        const request$ = this.createRequest$(
+            context,
+            {
+                security: securitySettings$,
+                method: "GET",
+                path: path$,
+                headers: headers$,
+                query: query$,
+                body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
+            },
+            options
+        );
+
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
+
+        const responseFields$ = {
+            HttpMeta: { Response: response, Request: request$ },
+        };
+
+        const [result$] = await this.matcher<operations.SearchDocumentsResponse>()
+            .json(200, operations.SearchDocumentsResponse$inboundSchema, { key: "Documents" })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
+    }
+
+    /**
+     * Create document review
+     *
+     * @remarks
+     * Create a new document review
+     */
+    async createDocumentReview(
+        request: operations.CreateDocumentReviewRequestBody,
+        options?: RequestOptions
+    ): Promise<operations.CreateDocumentReviewResponse> {
+        const input$ = request;
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.CreateDocumentReviewRequestBody$outboundSchema.parse(value$),
+            "Input validation failed"
+        );
+        const body$ = encodeJSON$("body", payload$, { explode: true });
+
+        const path$ = this.templateURLComponent("/document/review")();
+
+        const query$ = "";
+
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+
+        const security$ =
+            typeof this.options$.security === "function"
+                ? await this.options$.security()
+                : this.options$.security;
+
+        const context = {
+            operationID: "createDocumentReview",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
+        const securitySettings$ = this.resolveGlobalSecurity(security$);
+
+        const request$ = this.createRequest$(
+            context,
+            {
+                security: securitySettings$,
+                method: "POST",
+                path: path$,
+                headers: headers$,
+                query: query$,
+                body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
+            },
+            options
+        );
+
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
+
+        const responseFields$ = {
+            HttpMeta: { Response: response, Request: request$ },
+        };
+
+        const [result$] = await this.matcher<operations.CreateDocumentReviewResponse>()
+            .json(200, operations.CreateDocumentReviewResponse$inboundSchema, {
+                key: "DocumentReview",
+            })
+            .fail(["4XX", "5XX"])
+            .match(response, request$, { extraFields: responseFields$ });
+
+        return result$;
+    }
+
+    /**
+     * List document reviews
+     *
+     * @remarks
+     * Retrieve a list of document reviews
+     */
+    async listDocumentReviews(
+        brainId?: string | undefined,
+        options?: RequestOptions
+    ): Promise<operations.ListDocumentReviewsResponse> {
+        const input$: operations.ListDocumentReviewsRequest = {
+            brainId: brainId,
+        };
+
+        const payload$ = schemas$.parse(
+            input$,
+            (value$) => operations.ListDocumentReviewsRequest$outboundSchema.parse(value$),
+            "Input validation failed"
+        );
+        const body$ = null;
+
+        const path$ = this.templateURLComponent("/document/review")();
+
+        const query$ = encodeFormQuery$({
+            brain_id: payload$.brain_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
+        const security$ =
+            typeof this.options$.security === "function"
+                ? await this.options$.security()
+                : this.options$.security;
+
+        const context = {
+            operationID: "listDocumentReviews",
+            oAuth2Scopes: [],
+            securitySource: this.options$.security,
+        };
+        const securitySettings$ = this.resolveGlobalSecurity(security$);
+
+        const request$ = this.createRequest$(
+            context,
+            {
+                security: securitySettings$,
+                method: "GET",
+                path: path$,
+                headers: headers$,
+                query: query$,
+                body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
+            },
+            options
+        );
+
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
+
+        const responseFields$ = {
+            HttpMeta: { Response: response, Request: request$ },
+        };
+
+        const [result$] = await this.matcher<operations.ListDocumentReviewsResponse>()
+            .json(200, operations.ListDocumentReviewsResponse$inboundSchema, {
+                key: "DocumentReviewDetails",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

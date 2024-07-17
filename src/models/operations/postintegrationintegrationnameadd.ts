@@ -45,155 +45,207 @@ export type PostIntegrationIntegrationNameAddResponse = {
 };
 
 /** @internal */
+export const PostIntegrationIntegrationNameAddRequestBody$inboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string().optional(),
+        page_ids: z.array(z.string()).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            page_ids: "pageIds",
+        });
+    });
+
+/** @internal */
+export type PostIntegrationIntegrationNameAddRequestBody$Outbound = {
+    brain_id?: string | undefined;
+    page_ids?: Array<string> | undefined;
+};
+
+/** @internal */
+export const PostIntegrationIntegrationNameAddRequestBody$outboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddRequestBody$Outbound,
+    z.ZodTypeDef,
+    PostIntegrationIntegrationNameAddRequestBody
+> = z
+    .object({
+        brainId: z.string().optional(),
+        pageIds: z.array(z.string()).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            pageIds: "page_ids",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostIntegrationIntegrationNameAddRequestBody$ {
-    export const inboundSchema: z.ZodType<
-        PostIntegrationIntegrationNameAddRequestBody,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            brain_id: z.string().optional(),
-            page_ids: z.array(z.string()).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                page_ids: "pageIds",
-            });
-        });
-
-    export type Outbound = {
-        brain_id?: string | undefined;
-        page_ids?: Array<string> | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostIntegrationIntegrationNameAddRequestBody
-    > = z
-        .object({
-            brainId: z.string().optional(),
-            pageIds: z.array(z.string()).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                pageIds: "page_ids",
-            });
-        });
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequestBody$inboundSchema` instead. */
+    export const inboundSchema = PostIntegrationIntegrationNameAddRequestBody$inboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequestBody$outboundSchema` instead. */
+    export const outboundSchema = PostIntegrationIntegrationNameAddRequestBody$outboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequestBody$Outbound` instead. */
+    export type Outbound = PostIntegrationIntegrationNameAddRequestBody$Outbound;
 }
 
 /** @internal */
+export const PostIntegrationIntegrationNameAddRequest$inboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        integration_name: z.string(),
+        RequestBody: z
+            .lazy(() => PostIntegrationIntegrationNameAddRequestBody$inboundSchema)
+            .optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            integration_name: "integrationName",
+            RequestBody: "requestBody",
+        });
+    });
+
+/** @internal */
+export type PostIntegrationIntegrationNameAddRequest$Outbound = {
+    integration_name: string;
+    RequestBody?: PostIntegrationIntegrationNameAddRequestBody$Outbound | undefined;
+};
+
+/** @internal */
+export const PostIntegrationIntegrationNameAddRequest$outboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddRequest$Outbound,
+    z.ZodTypeDef,
+    PostIntegrationIntegrationNameAddRequest
+> = z
+    .object({
+        integrationName: z.string(),
+        requestBody: z
+            .lazy(() => PostIntegrationIntegrationNameAddRequestBody$outboundSchema)
+            .optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            integrationName: "integration_name",
+            requestBody: "RequestBody",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostIntegrationIntegrationNameAddRequest$ {
-    export const inboundSchema: z.ZodType<
-        PostIntegrationIntegrationNameAddRequest,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            integration_name: z.string(),
-            RequestBody: z
-                .lazy(() => PostIntegrationIntegrationNameAddRequestBody$.inboundSchema)
-                .optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                integration_name: "integrationName",
-                RequestBody: "requestBody",
-            });
-        });
-
-    export type Outbound = {
-        integration_name: string;
-        RequestBody?: PostIntegrationIntegrationNameAddRequestBody$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostIntegrationIntegrationNameAddRequest
-    > = z
-        .object({
-            integrationName: z.string(),
-            requestBody: z
-                .lazy(() => PostIntegrationIntegrationNameAddRequestBody$.outboundSchema)
-                .optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                integrationName: "integration_name",
-                requestBody: "RequestBody",
-            });
-        });
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequest$inboundSchema` instead. */
+    export const inboundSchema = PostIntegrationIntegrationNameAddRequest$inboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequest$outboundSchema` instead. */
+    export const outboundSchema = PostIntegrationIntegrationNameAddRequest$outboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddRequest$Outbound` instead. */
+    export type Outbound = PostIntegrationIntegrationNameAddRequest$Outbound;
 }
 
 /** @internal */
+export const PostIntegrationIntegrationNameAddResponseBody$inboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddResponseBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    message: z.string().optional(),
+});
+
+/** @internal */
+export type PostIntegrationIntegrationNameAddResponseBody$Outbound = {
+    message?: string | undefined;
+};
+
+/** @internal */
+export const PostIntegrationIntegrationNameAddResponseBody$outboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddResponseBody$Outbound,
+    z.ZodTypeDef,
+    PostIntegrationIntegrationNameAddResponseBody
+> = z.object({
+    message: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostIntegrationIntegrationNameAddResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        PostIntegrationIntegrationNameAddResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z.object({
-        message: z.string().optional(),
-    });
-
-    export type Outbound = {
-        message?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostIntegrationIntegrationNameAddResponseBody
-    > = z.object({
-        message: z.string().optional(),
-    });
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponseBody$inboundSchema` instead. */
+    export const inboundSchema = PostIntegrationIntegrationNameAddResponseBody$inboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponseBody$outboundSchema` instead. */
+    export const outboundSchema = PostIntegrationIntegrationNameAddResponseBody$outboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponseBody$Outbound` instead. */
+    export type Outbound = PostIntegrationIntegrationNameAddResponseBody$Outbound;
 }
 
 /** @internal */
+export const PostIntegrationIntegrationNameAddResponse$inboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        object: z
+            .lazy(() => PostIntegrationIntegrationNameAddResponseBody$inboundSchema)
+            .optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type PostIntegrationIntegrationNameAddResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    object?: PostIntegrationIntegrationNameAddResponseBody$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const PostIntegrationIntegrationNameAddResponse$outboundSchema: z.ZodType<
+    PostIntegrationIntegrationNameAddResponse$Outbound,
+    z.ZodTypeDef,
+    PostIntegrationIntegrationNameAddResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        object: z
+            .lazy(() => PostIntegrationIntegrationNameAddResponseBody$outboundSchema)
+            .optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostIntegrationIntegrationNameAddResponse$ {
-    export const inboundSchema: z.ZodType<
-        PostIntegrationIntegrationNameAddResponse,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            object: z
-                .lazy(() => PostIntegrationIntegrationNameAddResponseBody$.inboundSchema)
-                .optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        object?: PostIntegrationIntegrationNameAddResponseBody$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        PostIntegrationIntegrationNameAddResponse
-    > = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            object: z
-                .lazy(() => PostIntegrationIntegrationNameAddResponseBody$.outboundSchema)
-                .optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponse$inboundSchema` instead. */
+    export const inboundSchema = PostIntegrationIntegrationNameAddResponse$inboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponse$outboundSchema` instead. */
+    export const outboundSchema = PostIntegrationIntegrationNameAddResponse$outboundSchema;
+    /** @deprecated use `PostIntegrationIntegrationNameAddResponse$Outbound` instead. */
+    export type Outbound = PostIntegrationIntegrationNameAddResponse$Outbound;
 }

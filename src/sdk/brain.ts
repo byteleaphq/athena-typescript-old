@@ -3,7 +3,7 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
 import { encodeJSON as encodeJSON$, encodeSimple as encodeSimple$ } from "../lib/encodings.js";
 import { HTTPClient } from "../lib/http.js";
 import * as schemas$ from "../lib/schemas.js";
@@ -46,15 +46,11 @@ export class Brain extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.CreateNewBrainResponse> {
         const input$ = request;
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.CreateNewBrainRequestBody$.outboundSchema.optional().parse(value$),
+                operations.CreateNewBrainRequestBody$outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -63,6 +59,11 @@ export class Brain extends ClientSDK {
         const path$ = this.templateURLComponent("/brain/")();
 
         const query$ = "";
+
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
 
         const security$ =
             typeof this.options$.security === "function"
@@ -76,7 +77,6 @@ export class Brain extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["401", "4XX", "500", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -86,20 +86,32 @@ export class Brain extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["401", "4XX", "500", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.CreateNewBrainResponse>()
-            .json(200, operations.CreateNewBrainResponse$, { hdrs: true, key: "Brain" })
-            .json(401, errors.CreateNewBrainResponseBody$, { hdrs: true, err: true })
-            .json(500, errors.CreateNewBrainBrainResponseBody$, { hdrs: true, err: true })
+            .json(200, operations.CreateNewBrainResponse$inboundSchema, {
+                hdrs: true,
+                key: "Brain",
+            })
+            .json(401, errors.CreateNewBrainResponseBody$inboundSchema, { hdrs: true, err: true })
+            .json(500, errors.CreateNewBrainBrainResponseBody$inboundSchema, {
+                hdrs: true,
+                err: true,
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -110,13 +122,13 @@ export class Brain extends ClientSDK {
      * Get All Brains
      */
     async getAllBrains(options?: RequestOptions): Promise<operations.GetAllBrainsResponse> {
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
-
         const path$ = this.templateURLComponent("/brain/")();
 
         const query$ = "";
+
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
 
         const security$ =
             typeof this.options$.security === "function"
@@ -130,7 +142,6 @@ export class Brain extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -139,18 +150,24 @@ export class Brain extends ClientSDK {
                 path: path$,
                 headers: headers$,
                 query: query$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetAllBrainsResponse>()
-            .json(200, operations.GetAllBrainsResponse$, { hdrs: true, key: "Brains" })
+            .json(200, operations.GetAllBrainsResponse$inboundSchema, { hdrs: true, key: "Brains" })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -169,14 +186,10 @@ export class Brain extends ClientSDK {
             brainId: brainId,
             requestBody: requestBody,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.UpdateBrainRequest$.outboundSchema.parse(value$),
+            (value$) => operations.UpdateBrainRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = encodeJSON$("body", payload$.RequestBody, { explode: true });
@@ -191,6 +204,11 @@ export class Brain extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -203,7 +221,6 @@ export class Brain extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "500", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -213,19 +230,25 @@ export class Brain extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "500", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.UpdateBrainResponse>()
-            .json(200, operations.UpdateBrainResponse$, { hdrs: true, key: "Brain" })
-            .json(500, errors.UpdateBrainResponseBody$, { hdrs: true, err: true })
+            .json(200, operations.UpdateBrainResponse$inboundSchema, { hdrs: true, key: "Brain" })
+            .json(500, errors.UpdateBrainResponseBody$inboundSchema, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -242,13 +265,10 @@ export class Brain extends ClientSDK {
         const input$: operations.GetBrainByIdRequest = {
             brainId: brainId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetBrainByIdRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetBrainByIdRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -263,6 +283,10 @@ export class Brain extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -275,7 +299,6 @@ export class Brain extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["404", "4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -285,19 +308,25 @@ export class Brain extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["404", "4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetBrainByIdResponse>()
-            .json(200, operations.GetBrainByIdResponse$, { hdrs: true, key: "Brain" })
-            .json(404, errors.GetBrainByIdResponseBody$, { hdrs: true, err: true })
+            .json(200, operations.GetBrainByIdResponse$inboundSchema, { hdrs: true, key: "Brain" })
+            .json(404, errors.GetBrainByIdResponseBody$inboundSchema, { hdrs: true, err: true })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -314,13 +343,10 @@ export class Brain extends ClientSDK {
         const input$: operations.DeleteBrainRequest = {
             brainId: brainId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.DeleteBrainRequest$.outboundSchema.parse(value$),
+            (value$) => operations.DeleteBrainRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -335,6 +361,10 @@ export class Brain extends ClientSDK {
 
         const query$ = "";
 
+        const headers$ = new Headers({
+            Accept: "application/json",
+        });
+
         const security$ =
             typeof this.options$.security === "function"
                 ? await this.options$.security()
@@ -347,7 +377,6 @@ export class Brain extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -357,18 +386,27 @@ export class Brain extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.DeleteBrainResponse>()
-            .json(200, operations.DeleteBrainResponse$, { hdrs: true, key: "DeleteResponse" })
+            .json(200, operations.DeleteBrainResponse$inboundSchema, {
+                hdrs: true,
+                key: "DeleteResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

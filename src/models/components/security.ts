@@ -11,33 +11,46 @@ export type Security = {
 };
 
 /** @internal */
+export const Security$inboundSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
+    .object({
+        Username: z.string(),
+        Password: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            Username: "username",
+            Password: "password",
+        });
+    });
+
+/** @internal */
+export type Security$Outbound = {
+    Username: string;
+    Password: string;
+};
+
+/** @internal */
+export const Security$outboundSchema: z.ZodType<Security$Outbound, z.ZodTypeDef, Security> = z
+    .object({
+        username: z.string(),
+        password: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            username: "Username",
+            password: "Password",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace Security$ {
-    export const inboundSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
-        .object({
-            Username: z.string(),
-            Password: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                Username: "username",
-                Password: "password",
-            });
-        });
-
-    export type Outbound = {
-        Username: string;
-        Password: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Security> = z
-        .object({
-            username: z.string(),
-            password: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                username: "Username",
-                password: "Password",
-            });
-        });
+    /** @deprecated use `Security$inboundSchema` instead. */
+    export const inboundSchema = Security$inboundSchema;
+    /** @deprecated use `Security$outboundSchema` instead. */
+    export const outboundSchema = Security$outboundSchema;
+    /** @deprecated use `Security$Outbound` instead. */
+    export type Outbound = Security$Outbound;
 }

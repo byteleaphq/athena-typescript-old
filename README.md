@@ -75,6 +75,9 @@ run();
 - [getDocumentById](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#getdocumentbyid) - Get Document
 - [deleteDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#deletedocument) - Delete Document
 - [uploadDocument](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#uploaddocument) - Upload Document
+- [searchDocuments](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#searchdocuments) - Search documents
+- [createDocumentReview](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#createdocumentreview) - Create document review
+- [listDocumentReviews](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/document/README.md#listdocumentreviews) - List document reviews
 
 ### [chat](https://github.com/byteleaphq/athena-typescript/blob/main/docs/sdks/chat/README.md)
 
@@ -361,7 +364,83 @@ async function run() {
 run();
 ```
 
-<!-- End Authentication [security] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+
+```typescript
+import { AthenaCopilot } from "@athena-ai/sdk";
+
+const athenaCopilot = new AthenaCopilot({
+  security: {
+    username: "<YOUR_USERNAME_HERE>",
+    password: "<YOUR_PASSWORD_HERE>",
+  },
+});
+
+async function run() {
+  const result = await athenaCopilot.brain.createNewBrain(
+    {
+      name: "Test - brain",
+    },
+    {
+      retries: {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 1,
+          maxInterval: 50,
+          exponent: 1.1,
+          maxElapsedTime: 100,
+        },
+        retryConnectionErrors: false,
+      },
+    }
+  );
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+
+```typescript
+import { AthenaCopilot } from "@athena-ai/sdk";
+
+const athenaCopilot = new AthenaCopilot({
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
+    },
+    retryConnectionErrors: false,
+  },
+  security: {
+    username: "<YOUR_USERNAME_HERE>",
+    password: "<YOUR_PASSWORD_HERE>",
+  },
+});
+
+async function run() {
+  const result = await athenaCopilot.brain.createNewBrain({
+    name: "Test - brain",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+<!-- End Retries [retries] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

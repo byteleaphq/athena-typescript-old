@@ -21,70 +21,112 @@ export type GetDocumentByIdResponse = {
 };
 
 /** @internal */
+export const GetDocumentByIdRequest$inboundSchema: z.ZodType<
+    GetDocumentByIdRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+        document_id: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            document_id: "documentId",
+        });
+    });
+
+/** @internal */
+export type GetDocumentByIdRequest$Outbound = {
+    brain_id: string;
+    document_id: string;
+};
+
+/** @internal */
+export const GetDocumentByIdRequest$outboundSchema: z.ZodType<
+    GetDocumentByIdRequest$Outbound,
+    z.ZodTypeDef,
+    GetDocumentByIdRequest
+> = z
+    .object({
+        brainId: z.string(),
+        documentId: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            documentId: "document_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetDocumentByIdRequest$ {
-    export const inboundSchema: z.ZodType<GetDocumentByIdRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-            document_id: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                document_id: "documentId",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-        document_id: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetDocumentByIdRequest> = z
-        .object({
-            brainId: z.string(),
-            documentId: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                documentId: "document_id",
-            });
-        });
+    /** @deprecated use `GetDocumentByIdRequest$inboundSchema` instead. */
+    export const inboundSchema = GetDocumentByIdRequest$inboundSchema;
+    /** @deprecated use `GetDocumentByIdRequest$outboundSchema` instead. */
+    export const outboundSchema = GetDocumentByIdRequest$outboundSchema;
+    /** @deprecated use `GetDocumentByIdRequest$Outbound` instead. */
+    export type Outbound = GetDocumentByIdRequest$Outbound;
 }
 
 /** @internal */
+export const GetDocumentByIdResponse$inboundSchema: z.ZodType<
+    GetDocumentByIdResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Document: components.Document$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Document: "document",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type GetDocumentByIdResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Document?: components.Document$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const GetDocumentByIdResponse$outboundSchema: z.ZodType<
+    GetDocumentByIdResponse$Outbound,
+    z.ZodTypeDef,
+    GetDocumentByIdResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        document: components.Document$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            document: "Document",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetDocumentByIdResponse$ {
-    export const inboundSchema: z.ZodType<GetDocumentByIdResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Document: components.Document$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Document: "document",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Document?: components.Document$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetDocumentByIdResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            document: components.Document$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                document: "Document",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `GetDocumentByIdResponse$inboundSchema` instead. */
+    export const inboundSchema = GetDocumentByIdResponse$inboundSchema;
+    /** @deprecated use `GetDocumentByIdResponse$outboundSchema` instead. */
+    export const outboundSchema = GetDocumentByIdResponse$outboundSchema;
+    /** @deprecated use `GetDocumentByIdResponse$Outbound` instead. */
+    export type Outbound = GetDocumentByIdResponse$Outbound;
 }

@@ -34,103 +34,177 @@ export type UploadDocumentResponse = {
 };
 
 /** @internal */
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z.object({
+    fileName: z.string(),
+    content: b64$.zodInbound,
+});
+
+/** @internal */
+export type FileT$Outbound = {
+    fileName: string;
+    content: Uint8Array;
+};
+
+/** @internal */
+export const FileT$outboundSchema: z.ZodType<FileT$Outbound, z.ZodTypeDef, FileT> = z.object({
+    fileName: z.string(),
+    content: b64$.zodOutbound,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace FileT$ {
-    export const inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z.object({
-        fileName: z.string(),
-        content: b64$.zodInbound,
-    });
-
-    export type Outbound = {
-        fileName: string;
-        content: Uint8Array;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, FileT> = z.object({
-        fileName: z.string(),
-        content: b64$.zodOutbound,
-    });
+    /** @deprecated use `FileT$inboundSchema` instead. */
+    export const inboundSchema = FileT$inboundSchema;
+    /** @deprecated use `FileT$outboundSchema` instead. */
+    export const outboundSchema = FileT$outboundSchema;
+    /** @deprecated use `FileT$Outbound` instead. */
+    export type Outbound = FileT$Outbound;
 }
 
 /** @internal */
+export const UploadDocumentRequestBody$inboundSchema: z.ZodType<
+    UploadDocumentRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    file: z.lazy(() => FileT$inboundSchema).optional(),
+});
+
+/** @internal */
+export type UploadDocumentRequestBody$Outbound = {
+    file?: FileT$Outbound | Blob | undefined;
+};
+
+/** @internal */
+export const UploadDocumentRequestBody$outboundSchema: z.ZodType<
+    UploadDocumentRequestBody$Outbound,
+    z.ZodTypeDef,
+    UploadDocumentRequestBody
+> = z.object({
+    file: z
+        .lazy(() => FileT$outboundSchema)
+        .or(blobLikeSchema)
+        .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UploadDocumentRequestBody$ {
-    export const inboundSchema: z.ZodType<UploadDocumentRequestBody, z.ZodTypeDef, unknown> =
-        z.object({
-            file: z.lazy(() => FileT$.inboundSchema).optional(),
-        });
-
-    export type Outbound = {
-        file?: FileT$.Outbound | Blob | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UploadDocumentRequestBody> =
-        z.object({
-            file: z
-                .lazy(() => FileT$.outboundSchema)
-                .or(blobLikeSchema)
-                .optional(),
-        });
+    /** @deprecated use `UploadDocumentRequestBody$inboundSchema` instead. */
+    export const inboundSchema = UploadDocumentRequestBody$inboundSchema;
+    /** @deprecated use `UploadDocumentRequestBody$outboundSchema` instead. */
+    export const outboundSchema = UploadDocumentRequestBody$outboundSchema;
+    /** @deprecated use `UploadDocumentRequestBody$Outbound` instead. */
+    export type Outbound = UploadDocumentRequestBody$Outbound;
 }
 
 /** @internal */
+export const UploadDocumentRequest$inboundSchema: z.ZodType<
+    UploadDocumentRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+        RequestBody: z.lazy(() => UploadDocumentRequestBody$inboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            RequestBody: "requestBody",
+        });
+    });
+
+/** @internal */
+export type UploadDocumentRequest$Outbound = {
+    brain_id: string;
+    RequestBody?: UploadDocumentRequestBody$Outbound | undefined;
+};
+
+/** @internal */
+export const UploadDocumentRequest$outboundSchema: z.ZodType<
+    UploadDocumentRequest$Outbound,
+    z.ZodTypeDef,
+    UploadDocumentRequest
+> = z
+    .object({
+        brainId: z.string(),
+        requestBody: z.lazy(() => UploadDocumentRequestBody$outboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            requestBody: "RequestBody",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UploadDocumentRequest$ {
-    export const inboundSchema: z.ZodType<UploadDocumentRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-            RequestBody: z.lazy(() => UploadDocumentRequestBody$.inboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                RequestBody: "requestBody",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-        RequestBody?: UploadDocumentRequestBody$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UploadDocumentRequest> = z
-        .object({
-            brainId: z.string(),
-            requestBody: z.lazy(() => UploadDocumentRequestBody$.outboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                requestBody: "RequestBody",
-            });
-        });
+    /** @deprecated use `UploadDocumentRequest$inboundSchema` instead. */
+    export const inboundSchema = UploadDocumentRequest$inboundSchema;
+    /** @deprecated use `UploadDocumentRequest$outboundSchema` instead. */
+    export const outboundSchema = UploadDocumentRequest$outboundSchema;
+    /** @deprecated use `UploadDocumentRequest$Outbound` instead. */
+    export type Outbound = UploadDocumentRequest$Outbound;
 }
 
 /** @internal */
+export const UploadDocumentResponse$inboundSchema: z.ZodType<
+    UploadDocumentResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Document: components.Document$inboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Document: "document",
+        });
+    });
+
+/** @internal */
+export type UploadDocumentResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Document?: components.Document$Outbound | undefined;
+};
+
+/** @internal */
+export const UploadDocumentResponse$outboundSchema: z.ZodType<
+    UploadDocumentResponse$Outbound,
+    z.ZodTypeDef,
+    UploadDocumentResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        document: components.Document$outboundSchema.optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            document: "Document",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UploadDocumentResponse$ {
-    export const inboundSchema: z.ZodType<UploadDocumentResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Document: components.Document$.inboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Document: "document",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Document?: components.Document$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UploadDocumentResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            document: components.Document$.outboundSchema.optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                document: "Document",
-            });
-        });
+    /** @deprecated use `UploadDocumentResponse$inboundSchema` instead. */
+    export const inboundSchema = UploadDocumentResponse$inboundSchema;
+    /** @deprecated use `UploadDocumentResponse$outboundSchema` instead. */
+    export const outboundSchema = UploadDocumentResponse$outboundSchema;
+    /** @deprecated use `UploadDocumentResponse$Outbound` instead. */
+    export type Outbound = UploadDocumentResponse$Outbound;
 }

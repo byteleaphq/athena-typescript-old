@@ -20,65 +20,107 @@ export type PostChatbotDeleteResponse = {
 };
 
 /** @internal */
+export const PostChatbotDeleteRequest$inboundSchema: z.ZodType<
+    PostChatbotDeleteRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        chatbot_id: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbot_id: "chatbotId",
+        });
+    });
+
+/** @internal */
+export type PostChatbotDeleteRequest$Outbound = {
+    chatbot_id?: string | undefined;
+};
+
+/** @internal */
+export const PostChatbotDeleteRequest$outboundSchema: z.ZodType<
+    PostChatbotDeleteRequest$Outbound,
+    z.ZodTypeDef,
+    PostChatbotDeleteRequest
+> = z
+    .object({
+        chatbotId: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbotId: "chatbot_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostChatbotDeleteRequest$ {
-    export const inboundSchema: z.ZodType<PostChatbotDeleteRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            chatbot_id: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbot_id: "chatbotId",
-            });
-        });
-
-    export type Outbound = {
-        chatbot_id?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotDeleteRequest> = z
-        .object({
-            chatbotId: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbotId: "chatbot_id",
-            });
-        });
+    /** @deprecated use `PostChatbotDeleteRequest$inboundSchema` instead. */
+    export const inboundSchema = PostChatbotDeleteRequest$inboundSchema;
+    /** @deprecated use `PostChatbotDeleteRequest$outboundSchema` instead. */
+    export const outboundSchema = PostChatbotDeleteRequest$outboundSchema;
+    /** @deprecated use `PostChatbotDeleteRequest$Outbound` instead. */
+    export type Outbound = PostChatbotDeleteRequest$Outbound;
 }
 
 /** @internal */
+export const PostChatbotDeleteResponse$inboundSchema: z.ZodType<
+    PostChatbotDeleteResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        DeleteResponse: components.DeleteResponse$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            DeleteResponse: "deleteResponse",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type PostChatbotDeleteResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    DeleteResponse?: components.DeleteResponse$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const PostChatbotDeleteResponse$outboundSchema: z.ZodType<
+    PostChatbotDeleteResponse$Outbound,
+    z.ZodTypeDef,
+    PostChatbotDeleteResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        deleteResponse: components.DeleteResponse$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            deleteResponse: "DeleteResponse",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace PostChatbotDeleteResponse$ {
-    export const inboundSchema: z.ZodType<PostChatbotDeleteResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            DeleteResponse: components.DeleteResponse$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                DeleteResponse: "deleteResponse",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        DeleteResponse?: components.DeleteResponse$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, PostChatbotDeleteResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            deleteResponse: components.DeleteResponse$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                deleteResponse: "DeleteResponse",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `PostChatbotDeleteResponse$inboundSchema` instead. */
+    export const inboundSchema = PostChatbotDeleteResponse$inboundSchema;
+    /** @deprecated use `PostChatbotDeleteResponse$outboundSchema` instead. */
+    export const outboundSchema = PostChatbotDeleteResponse$outboundSchema;
+    /** @deprecated use `PostChatbotDeleteResponse$Outbound` instead. */
+    export type Outbound = PostChatbotDeleteResponse$Outbound;
 }

@@ -55,132 +55,190 @@ export type GetIntegrationIntegrationNameListResponse = {
 };
 
 /** @internal */
+export const GetIntegrationIntegrationNameListRequest$inboundSchema: z.ZodType<
+    GetIntegrationIntegrationNameListRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        integration_name: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            integration_name: "integrationName",
+        });
+    });
+
+/** @internal */
+export type GetIntegrationIntegrationNameListRequest$Outbound = {
+    integration_name: string;
+};
+
+/** @internal */
+export const GetIntegrationIntegrationNameListRequest$outboundSchema: z.ZodType<
+    GetIntegrationIntegrationNameListRequest$Outbound,
+    z.ZodTypeDef,
+    GetIntegrationIntegrationNameListRequest
+> = z
+    .object({
+        integrationName: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            integrationName: "integration_name",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetIntegrationIntegrationNameListRequest$ {
-    export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameListRequest,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            integration_name: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                integration_name: "integrationName",
-            });
-        });
-
-    export type Outbound = {
-        integration_name: string;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GetIntegrationIntegrationNameListRequest
-    > = z
-        .object({
-            integrationName: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                integrationName: "integration_name",
-            });
-        });
+    /** @deprecated use `GetIntegrationIntegrationNameListRequest$inboundSchema` instead. */
+    export const inboundSchema = GetIntegrationIntegrationNameListRequest$inboundSchema;
+    /** @deprecated use `GetIntegrationIntegrationNameListRequest$outboundSchema` instead. */
+    export const outboundSchema = GetIntegrationIntegrationNameListRequest$outboundSchema;
+    /** @deprecated use `GetIntegrationIntegrationNameListRequest$Outbound` instead. */
+    export type Outbound = GetIntegrationIntegrationNameListRequest$Outbound;
 }
 
 /** @internal */
+export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> = z.object({});
+
+/** @internal */
+export type Content$Outbound = {};
+
+/** @internal */
+export const Content$outboundSchema: z.ZodType<Content$Outbound, z.ZodTypeDef, Content> = z.object(
+    {}
+);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace Content$ {
-    export const inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> = z.object({});
-
-    export type Outbound = {};
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Content> = z.object({});
+    /** @deprecated use `Content$inboundSchema` instead. */
+    export const inboundSchema = Content$inboundSchema;
+    /** @deprecated use `Content$outboundSchema` instead. */
+    export const outboundSchema = Content$outboundSchema;
+    /** @deprecated use `Content$Outbound` instead. */
+    export type Outbound = Content$Outbound;
 }
 
 /** @internal */
+export const ResponseBody$inboundSchema: z.ZodType<ResponseBody, z.ZodTypeDef, unknown> = z
+    .object({
+        content: z.lazy(() => Content$inboundSchema).optional(),
+        created_at: z.string().optional(),
+        id: z.string().optional(),
+        title: z.string().optional(),
+        updated_at: z.string().optional(),
+        url: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            created_at: "createdAt",
+            updated_at: "updatedAt",
+        });
+    });
+
+/** @internal */
+export type ResponseBody$Outbound = {
+    content?: Content$Outbound | undefined;
+    created_at?: string | undefined;
+    id?: string | undefined;
+    title?: string | undefined;
+    updated_at?: string | undefined;
+    url?: string | undefined;
+};
+
+/** @internal */
+export const ResponseBody$outboundSchema: z.ZodType<
+    ResponseBody$Outbound,
+    z.ZodTypeDef,
+    ResponseBody
+> = z
+    .object({
+        content: z.lazy(() => Content$outboundSchema).optional(),
+        createdAt: z.string().optional(),
+        id: z.string().optional(),
+        title: z.string().optional(),
+        updatedAt: z.string().optional(),
+        url: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            createdAt: "created_at",
+            updatedAt: "updated_at",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace ResponseBody$ {
-    export const inboundSchema: z.ZodType<ResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            content: z.lazy(() => Content$.inboundSchema).optional(),
-            created_at: z.string().optional(),
-            id: z.string().optional(),
-            title: z.string().optional(),
-            updated_at: z.string().optional(),
-            url: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                created_at: "createdAt",
-                updated_at: "updatedAt",
-            });
-        });
-
-    export type Outbound = {
-        content?: Content$.Outbound | undefined;
-        created_at?: string | undefined;
-        id?: string | undefined;
-        title?: string | undefined;
-        updated_at?: string | undefined;
-        url?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ResponseBody> = z
-        .object({
-            content: z.lazy(() => Content$.outboundSchema).optional(),
-            createdAt: z.string().optional(),
-            id: z.string().optional(),
-            title: z.string().optional(),
-            updatedAt: z.string().optional(),
-            url: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                createdAt: "created_at",
-                updatedAt: "updated_at",
-            });
-        });
+    /** @deprecated use `ResponseBody$inboundSchema` instead. */
+    export const inboundSchema = ResponseBody$inboundSchema;
+    /** @deprecated use `ResponseBody$outboundSchema` instead. */
+    export const outboundSchema = ResponseBody$outboundSchema;
+    /** @deprecated use `ResponseBody$Outbound` instead. */
+    export type Outbound = ResponseBody$Outbound;
 }
 
 /** @internal */
+export const GetIntegrationIntegrationNameListResponse$inboundSchema: z.ZodType<
+    GetIntegrationIntegrationNameListResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        responseBodies: z.array(z.lazy(() => ResponseBody$inboundSchema)).optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type GetIntegrationIntegrationNameListResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    responseBodies?: Array<ResponseBody$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const GetIntegrationIntegrationNameListResponse$outboundSchema: z.ZodType<
+    GetIntegrationIntegrationNameListResponse$Outbound,
+    z.ZodTypeDef,
+    GetIntegrationIntegrationNameListResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        responseBodies: z.array(z.lazy(() => ResponseBody$outboundSchema)).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetIntegrationIntegrationNameListResponse$ {
-    export const inboundSchema: z.ZodType<
-        GetIntegrationIntegrationNameListResponse,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            responseBodies: z.array(z.lazy(() => ResponseBody$.inboundSchema)).optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        responseBodies?: Array<ResponseBody$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        GetIntegrationIntegrationNameListResponse
-    > = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            responseBodies: z.array(z.lazy(() => ResponseBody$.outboundSchema)).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `GetIntegrationIntegrationNameListResponse$inboundSchema` instead. */
+    export const inboundSchema = GetIntegrationIntegrationNameListResponse$inboundSchema;
+    /** @deprecated use `GetIntegrationIntegrationNameListResponse$outboundSchema` instead. */
+    export const outboundSchema = GetIntegrationIntegrationNameListResponse$outboundSchema;
+    /** @deprecated use `GetIntegrationIntegrationNameListResponse$Outbound` instead. */
+    export type Outbound = GetIntegrationIntegrationNameListResponse$Outbound;
 }

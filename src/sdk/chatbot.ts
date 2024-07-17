@@ -3,7 +3,7 @@
  */
 
 import { SDKHooks } from "../hooks/hooks.js";
-import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "../lib/config.js";
+import { SDKOptions, serverURLFromOptions } from "../lib/config.js";
 import {
     encodeFormQuery as encodeFormQuery$,
     encodeJSON as encodeJSON$,
@@ -48,15 +48,11 @@ export class Chatbot extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.PostChatbotCreateResponse> {
         const input$ = request;
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostChatbotCreateRequestBody$.outboundSchema.optional().parse(value$),
+                operations.PostChatbotCreateRequestBody$outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -65,6 +61,11 @@ export class Chatbot extends ClientSDK {
         const path$ = this.templateURLComponent("/chatbot/create")();
 
         const query$ = "";
+
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
 
         const security$ =
             typeof this.options$.security === "function"
@@ -78,7 +79,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -88,18 +88,24 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostChatbotCreateResponse>()
-            .json(200, operations.PostChatbotCreateResponse$, {
+            .json(200, operations.PostChatbotCreateResponse$inboundSchema, {
                 hdrs: true,
                 key: "ChatbotResponses",
             })
@@ -119,13 +125,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.GetChatbotListRequest = {
             brainId: brainId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetChatbotListRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetChatbotListRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -134,6 +137,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             brain_id: payload$.brain_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -148,7 +155,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -158,18 +164,27 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetChatbotListResponse>()
-            .json(200, operations.GetChatbotListResponse$, { hdrs: true, key: "ChatbotResponses" })
+            .json(200, operations.GetChatbotListResponse$inboundSchema, {
+                hdrs: true,
+                key: "ChatbotResponses",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -186,13 +201,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.PostChatbotGetRequest = {
             chatbotId: chatbotId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostChatbotGetRequest$.outboundSchema.parse(value$),
+            (value$) => operations.PostChatbotGetRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -201,6 +213,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             chatbot_id: payload$.chatbot_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -215,7 +231,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -225,18 +240,27 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostChatbotGetResponse>()
-            .json(200, operations.PostChatbotGetResponse$, { hdrs: true, key: "ChatbotResponse" })
+            .json(200, operations.PostChatbotGetResponse$inboundSchema, {
+                hdrs: true,
+                key: "ChatbotResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -253,13 +277,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.GetChatbotAnalyticsRequest = {
             chatbotId: chatbotId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetChatbotAnalyticsRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetChatbotAnalyticsRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -268,6 +289,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             chatbot_id: payload$.chatbot_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -282,7 +307,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -292,18 +316,24 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetChatbotAnalyticsResponse>()
-            .json(200, operations.GetChatbotAnalyticsResponse$, {
+            .json(200, operations.GetChatbotAnalyticsResponse$inboundSchema, {
                 hdrs: true,
                 key: "ChatbotAnalytics",
             })
@@ -326,13 +356,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.GetChatbotGetMessagesRequest = {
             chatbotId: chatbotId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.GetChatbotGetMessagesRequest$.outboundSchema.parse(value$),
+            (value$) => operations.GetChatbotGetMessagesRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -341,6 +368,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             chatbot_id: payload$.chatbot_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -355,7 +386,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -365,18 +395,24 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.GetChatbotGetMessagesResponse>()
-            .json(200, operations.GetChatbotGetMessagesResponse$, {
+            .json(200, operations.GetChatbotGetMessagesResponse$inboundSchema, {
                 hdrs: true,
                 key: "ChatbotMessages",
             })
@@ -394,15 +430,11 @@ export class Chatbot extends ClientSDK {
         options?: RequestOptions
     ): Promise<operations.PostChatbotUpdateResponse> {
         const input$ = request;
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Content-Type", "application/json");
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
             (value$) =>
-                operations.PostChatbotUpdateRequestBody$.outboundSchema.optional().parse(value$),
+                operations.PostChatbotUpdateRequestBody$outboundSchema.optional().parse(value$),
             "Input validation failed"
         );
         const body$ =
@@ -411,6 +443,11 @@ export class Chatbot extends ClientSDK {
         const path$ = this.templateURLComponent("/chatbot/update")();
 
         const query$ = "";
+
+        const headers$ = new Headers({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
 
         const security$ =
             typeof this.options$.security === "function"
@@ -424,7 +461,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -434,18 +470,24 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostChatbotUpdateResponse>()
-            .json(200, operations.PostChatbotUpdateResponse$, {
+            .json(200, operations.PostChatbotUpdateResponse$inboundSchema, {
                 hdrs: true,
                 key: "ChatbotResponses",
             })
@@ -465,13 +507,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.PostChatbotDeleteRequest = {
             chatbotId: chatbotId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostChatbotDeleteRequest$.outboundSchema.parse(value$),
+            (value$) => operations.PostChatbotDeleteRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -480,6 +519,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             chatbot_id: payload$.chatbot_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -494,7 +537,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -504,18 +546,27 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostChatbotDeleteResponse>()
-            .json(200, operations.PostChatbotDeleteResponse$, { hdrs: true, key: "DeleteResponse" })
+            .json(200, operations.PostChatbotDeleteResponse$inboundSchema, {
+                hdrs: true,
+                key: "DeleteResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 
@@ -532,13 +583,10 @@ export class Chatbot extends ClientSDK {
         const input$: operations.PostChatbotResetRequest = {
             chatbotId: chatbotId,
         };
-        const headers$ = new Headers();
-        headers$.set("user-agent", SDK_METADATA.userAgent);
-        headers$.set("Accept", "application/json");
 
         const payload$ = schemas$.parse(
             input$,
-            (value$) => operations.PostChatbotResetRequest$.outboundSchema.parse(value$),
+            (value$) => operations.PostChatbotResetRequest$outboundSchema.parse(value$),
             "Input validation failed"
         );
         const body$ = null;
@@ -547,6 +595,10 @@ export class Chatbot extends ClientSDK {
 
         const query$ = encodeFormQuery$({
             chatbot_id: payload$.chatbot_id,
+        });
+
+        const headers$ = new Headers({
+            Accept: "application/json",
         });
 
         const security$ =
@@ -561,7 +613,6 @@ export class Chatbot extends ClientSDK {
         };
         const securitySettings$ = this.resolveGlobalSecurity(security$);
 
-        const doOptions = { context, errorCodes: ["4XX", "5XX"] };
         const request$ = this.createRequest$(
             context,
             {
@@ -571,18 +622,27 @@ export class Chatbot extends ClientSDK {
                 headers: headers$,
                 query: query$,
                 body: body$,
+                timeoutMs: options?.timeoutMs || this.options$.timeoutMs || -1,
             },
             options
         );
 
-        const response = await this.do$(request$, doOptions);
+        const response = await this.do$(request$, {
+            context,
+            errorCodes: ["4XX", "5XX"],
+            retryConfig: options?.retries || this.options$.retryConfig,
+            retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+        });
 
         const responseFields$ = {
             HttpMeta: { Response: response, Request: request$ },
         };
 
         const [result$] = await this.matcher<operations.PostChatbotResetResponse>()
-            .json(200, operations.PostChatbotResetResponse$, { hdrs: true, key: "ChatbotResponse" })
+            .json(200, operations.PostChatbotResetResponse$inboundSchema, {
+                hdrs: true,
+                key: "ChatbotResponse",
+            })
             .fail(["4XX", "5XX"])
             .match(response, request$, { extraFields: responseFields$ });
 

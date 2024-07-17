@@ -20,66 +20,107 @@ export type GetChatbotGetMessagesResponse = {
 };
 
 /** @internal */
+export const GetChatbotGetMessagesRequest$inboundSchema: z.ZodType<
+    GetChatbotGetMessagesRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        chatbot_id: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbot_id: "chatbotId",
+        });
+    });
+
+/** @internal */
+export type GetChatbotGetMessagesRequest$Outbound = {
+    chatbot_id?: string | undefined;
+};
+
+/** @internal */
+export const GetChatbotGetMessagesRequest$outboundSchema: z.ZodType<
+    GetChatbotGetMessagesRequest$Outbound,
+    z.ZodTypeDef,
+    GetChatbotGetMessagesRequest
+> = z
+    .object({
+        chatbotId: z.string().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatbotId: "chatbot_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetChatbotGetMessagesRequest$ {
-    export const inboundSchema: z.ZodType<GetChatbotGetMessagesRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            chatbot_id: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbot_id: "chatbotId",
-            });
-        });
-
-    export type Outbound = {
-        chatbot_id?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatbotGetMessagesRequest> = z
-        .object({
-            chatbotId: z.string().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatbotId: "chatbot_id",
-            });
-        });
+    /** @deprecated use `GetChatbotGetMessagesRequest$inboundSchema` instead. */
+    export const inboundSchema = GetChatbotGetMessagesRequest$inboundSchema;
+    /** @deprecated use `GetChatbotGetMessagesRequest$outboundSchema` instead. */
+    export const outboundSchema = GetChatbotGetMessagesRequest$outboundSchema;
+    /** @deprecated use `GetChatbotGetMessagesRequest$Outbound` instead. */
+    export type Outbound = GetChatbotGetMessagesRequest$Outbound;
 }
 
 /** @internal */
-export namespace GetChatbotGetMessagesResponse$ {
-    export const inboundSchema: z.ZodType<GetChatbotGetMessagesResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            ChatbotMessages: components.ChatbotMessages$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                ChatbotMessages: "chatbotMessages",
-                Headers: "headers",
-            });
+export const GetChatbotGetMessagesResponse$inboundSchema: z.ZodType<
+    GetChatbotGetMessagesResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        ChatbotMessages: components.ChatbotMessages$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            ChatbotMessages: "chatbotMessages",
+            Headers: "headers",
         });
+    });
 
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        ChatbotMessages?: components.ChatbotMessages$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
+/** @internal */
+export type GetChatbotGetMessagesResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    ChatbotMessages?: components.ChatbotMessages$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatbotGetMessagesResponse> =
-        z
-            .object({
-                httpMeta: components.HTTPMetadata$.outboundSchema,
-                chatbotMessages: components.ChatbotMessages$.outboundSchema.optional(),
-                headers: z.record(z.array(z.string())),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    httpMeta: "HttpMeta",
-                    chatbotMessages: "ChatbotMessages",
-                    headers: "Headers",
-                });
-            });
+/** @internal */
+export const GetChatbotGetMessagesResponse$outboundSchema: z.ZodType<
+    GetChatbotGetMessagesResponse$Outbound,
+    z.ZodTypeDef,
+    GetChatbotGetMessagesResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        chatbotMessages: components.ChatbotMessages$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            chatbotMessages: "ChatbotMessages",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetChatbotGetMessagesResponse$ {
+    /** @deprecated use `GetChatbotGetMessagesResponse$inboundSchema` instead. */
+    export const inboundSchema = GetChatbotGetMessagesResponse$inboundSchema;
+    /** @deprecated use `GetChatbotGetMessagesResponse$outboundSchema` instead. */
+    export const outboundSchema = GetChatbotGetMessagesResponse$outboundSchema;
+    /** @deprecated use `GetChatbotGetMessagesResponse$Outbound` instead. */
+    export type Outbound = GetChatbotGetMessagesResponse$Outbound;
 }

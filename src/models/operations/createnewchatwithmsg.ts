@@ -31,76 +31,113 @@ export type CreateNewChatWithMsgResponse = {
 };
 
 /** @internal */
-export namespace CreateNewChatWithMsgRequestBody$ {
-    export const inboundSchema: z.ZodType<CreateNewChatWithMsgRequestBody, z.ZodTypeDef, unknown> =
-        z
-            .object({
-                brain_ids: z.array(z.string()),
-                name: z.string(),
-                message: z.string(),
-            })
-            .transform((v) => {
-                return remap$(v, {
-                    brain_ids: "brainIds",
-                });
-            });
-
-    export type Outbound = {
-        brain_ids: Array<string>;
-        name: string;
-        message: string;
-    };
-
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        CreateNewChatWithMsgRequestBody
-    > = z
-        .object({
-            brainIds: z.array(z.string()),
-            name: z.string(),
-            message: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainIds: "brain_ids",
-            });
+export const CreateNewChatWithMsgRequestBody$inboundSchema: z.ZodType<
+    CreateNewChatWithMsgRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_ids: z.array(z.string()),
+        name: z.string(),
+        message: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_ids: "brainIds",
         });
+    });
+
+/** @internal */
+export type CreateNewChatWithMsgRequestBody$Outbound = {
+    brain_ids: Array<string>;
+    name: string;
+    message: string;
+};
+
+/** @internal */
+export const CreateNewChatWithMsgRequestBody$outboundSchema: z.ZodType<
+    CreateNewChatWithMsgRequestBody$Outbound,
+    z.ZodTypeDef,
+    CreateNewChatWithMsgRequestBody
+> = z
+    .object({
+        brainIds: z.array(z.string()),
+        name: z.string(),
+        message: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainIds: "brain_ids",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateNewChatWithMsgRequestBody$ {
+    /** @deprecated use `CreateNewChatWithMsgRequestBody$inboundSchema` instead. */
+    export const inboundSchema = CreateNewChatWithMsgRequestBody$inboundSchema;
+    /** @deprecated use `CreateNewChatWithMsgRequestBody$outboundSchema` instead. */
+    export const outboundSchema = CreateNewChatWithMsgRequestBody$outboundSchema;
+    /** @deprecated use `CreateNewChatWithMsgRequestBody$Outbound` instead. */
+    export type Outbound = CreateNewChatWithMsgRequestBody$Outbound;
 }
 
 /** @internal */
+export const CreateNewChatWithMsgResponse$inboundSchema: z.ZodType<
+    CreateNewChatWithMsgResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        ChatInteractions: z.array(components.ChatInteraction$inboundSchema).optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            ChatInteractions: "chatInteractions",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type CreateNewChatWithMsgResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    ChatInteractions?: Array<components.ChatInteraction$Outbound> | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const CreateNewChatWithMsgResponse$outboundSchema: z.ZodType<
+    CreateNewChatWithMsgResponse$Outbound,
+    z.ZodTypeDef,
+    CreateNewChatWithMsgResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        chatInteractions: z.array(components.ChatInteraction$outboundSchema).optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            chatInteractions: "ChatInteractions",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateNewChatWithMsgResponse$ {
-    export const inboundSchema: z.ZodType<CreateNewChatWithMsgResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            ChatInteractions: z.array(components.ChatInteraction$.inboundSchema).optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                ChatInteractions: "chatInteractions",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        ChatInteractions?: Array<components.ChatInteraction$.Outbound> | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateNewChatWithMsgResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            chatInteractions: z.array(components.ChatInteraction$.outboundSchema).optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                chatInteractions: "ChatInteractions",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `CreateNewChatWithMsgResponse$inboundSchema` instead. */
+    export const inboundSchema = CreateNewChatWithMsgResponse$inboundSchema;
+    /** @deprecated use `CreateNewChatWithMsgResponse$outboundSchema` instead. */
+    export const outboundSchema = CreateNewChatWithMsgResponse$outboundSchema;
+    /** @deprecated use `CreateNewChatWithMsgResponse$Outbound` instead. */
+    export type Outbound = CreateNewChatWithMsgResponse$Outbound;
 }

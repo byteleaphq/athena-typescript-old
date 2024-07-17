@@ -23,50 +23,70 @@ export class UpdateBrainResponseBody extends Error {
     data$: UpdateBrainResponseBodyData;
 
     constructor(err: UpdateBrainResponseBodyData) {
-        super("");
+        const message =
+            "message" in err && typeof err.message === "string"
+                ? err.message
+                : `API error occurred: ${JSON.stringify(err)}`;
+        super(message);
         this.data$ = err;
 
         this.httpMeta = err.httpMeta;
-
-        this.message =
-            "message" in err && typeof err.message === "string"
-                ? err.message
-                : "API error occurred";
 
         this.name = "UpdateBrainResponseBody";
     }
 }
 
 /** @internal */
-export namespace UpdateBrainResponseBody$ {
-    export const inboundSchema: z.ZodType<UpdateBrainResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-        })
-        .transform((v) => {
-            const remapped = remap$(v, {
-                HttpMeta: "httpMeta",
-            });
-
-            return new UpdateBrainResponseBody(remapped);
+export const UpdateBrainResponseBody$inboundSchema: z.ZodType<
+    UpdateBrainResponseBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+    })
+    .transform((v) => {
+        const remapped = remap$(v, {
+            HttpMeta: "httpMeta",
         });
 
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-    };
+        return new UpdateBrainResponseBody(remapped);
+    });
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UpdateBrainResponseBody> = z
-        .instanceof(UpdateBrainResponseBody)
-        .transform((v) => v.data$)
-        .pipe(
-            z
-                .object({
-                    httpMeta: components.HTTPMetadata$.outboundSchema,
-                })
-                .transform((v) => {
-                    return remap$(v, {
-                        httpMeta: "HttpMeta",
-                    });
-                })
-        );
+/** @internal */
+export type UpdateBrainResponseBody$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+};
+
+/** @internal */
+export const UpdateBrainResponseBody$outboundSchema: z.ZodType<
+    UpdateBrainResponseBody$Outbound,
+    z.ZodTypeDef,
+    UpdateBrainResponseBody
+> = z
+    .instanceof(UpdateBrainResponseBody)
+    .transform((v) => v.data$)
+    .pipe(
+        z
+            .object({
+                httpMeta: components.HTTPMetadata$outboundSchema,
+            })
+            .transform((v) => {
+                return remap$(v, {
+                    httpMeta: "HttpMeta",
+                });
+            })
+    );
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateBrainResponseBody$ {
+    /** @deprecated use `UpdateBrainResponseBody$inboundSchema` instead. */
+    export const inboundSchema = UpdateBrainResponseBody$inboundSchema;
+    /** @deprecated use `UpdateBrainResponseBody$outboundSchema` instead. */
+    export const outboundSchema = UpdateBrainResponseBody$outboundSchema;
+    /** @deprecated use `UpdateBrainResponseBody$Outbound` instead. */
+    export type Outbound = UpdateBrainResponseBody$Outbound;
 }

@@ -25,18 +25,17 @@ export class UploadDocumentDocumentResponseBody extends Error {
     data$: UploadDocumentDocumentResponseBodyData;
 
     constructor(err: UploadDocumentDocumentResponseBodyData) {
-        super("");
+        const message =
+            "message" in err && typeof err.message === "string"
+                ? err.message
+                : `API error occurred: ${JSON.stringify(err)}`;
+        super(message);
         this.data$ = err;
 
         if (err.error != null) {
             this.error = err.error;
         }
         this.httpMeta = err.httpMeta;
-
-        this.message =
-            "message" in err && typeof err.message === "string"
-                ? err.message
-                : "API error occurred";
 
         this.name = "UploadDocumentDocumentResponseBody";
     }
@@ -61,7 +60,11 @@ export class UploadDocumentResponseBody extends Error {
     data$: UploadDocumentResponseBodyData;
 
     constructor(err: UploadDocumentResponseBodyData) {
-        super("");
+        const message =
+            "message" in err && typeof err.message === "string"
+                ? err.message
+                : `API error occurred: ${JSON.stringify(err)}`;
+        super(message);
         this.data$ = err;
 
         if (err.error != null) {
@@ -69,93 +72,122 @@ export class UploadDocumentResponseBody extends Error {
         }
         this.httpMeta = err.httpMeta;
 
-        this.message =
-            "message" in err && typeof err.message === "string"
-                ? err.message
-                : "API error occurred";
-
         this.name = "UploadDocumentResponseBody";
     }
 }
 
 /** @internal */
-export namespace UploadDocumentDocumentResponseBody$ {
-    export const inboundSchema: z.ZodType<
-        UploadDocumentDocumentResponseBody,
-        z.ZodTypeDef,
-        unknown
-    > = z
-        .object({
-            error: z.string().optional(),
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-        })
-        .transform((v) => {
-            const remapped = remap$(v, {
-                HttpMeta: "httpMeta",
-            });
-
-            return new UploadDocumentDocumentResponseBody(remapped);
+export const UploadDocumentDocumentResponseBody$inboundSchema: z.ZodType<
+    UploadDocumentDocumentResponseBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        error: z.string().optional(),
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+    })
+    .transform((v) => {
+        const remapped = remap$(v, {
+            HttpMeta: "httpMeta",
         });
 
-    export type Outbound = {
-        error?: string | undefined;
-        HttpMeta: components.HTTPMetadata$.Outbound;
-    };
+        return new UploadDocumentDocumentResponseBody(remapped);
+    });
 
-    export const outboundSchema: z.ZodType<
-        Outbound,
-        z.ZodTypeDef,
-        UploadDocumentDocumentResponseBody
-    > = z
-        .instanceof(UploadDocumentDocumentResponseBody)
-        .transform((v) => v.data$)
-        .pipe(
-            z
-                .object({
-                    error: z.string().optional(),
-                    httpMeta: components.HTTPMetadata$.outboundSchema,
-                })
-                .transform((v) => {
-                    return remap$(v, {
-                        httpMeta: "HttpMeta",
-                    });
-                })
-        );
+/** @internal */
+export type UploadDocumentDocumentResponseBody$Outbound = {
+    error?: string | undefined;
+    HttpMeta: components.HTTPMetadata$Outbound;
+};
+
+/** @internal */
+export const UploadDocumentDocumentResponseBody$outboundSchema: z.ZodType<
+    UploadDocumentDocumentResponseBody$Outbound,
+    z.ZodTypeDef,
+    UploadDocumentDocumentResponseBody
+> = z
+    .instanceof(UploadDocumentDocumentResponseBody)
+    .transform((v) => v.data$)
+    .pipe(
+        z
+            .object({
+                error: z.string().optional(),
+                httpMeta: components.HTTPMetadata$outboundSchema,
+            })
+            .transform((v) => {
+                return remap$(v, {
+                    httpMeta: "HttpMeta",
+                });
+            })
+    );
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UploadDocumentDocumentResponseBody$ {
+    /** @deprecated use `UploadDocumentDocumentResponseBody$inboundSchema` instead. */
+    export const inboundSchema = UploadDocumentDocumentResponseBody$inboundSchema;
+    /** @deprecated use `UploadDocumentDocumentResponseBody$outboundSchema` instead. */
+    export const outboundSchema = UploadDocumentDocumentResponseBody$outboundSchema;
+    /** @deprecated use `UploadDocumentDocumentResponseBody$Outbound` instead. */
+    export type Outbound = UploadDocumentDocumentResponseBody$Outbound;
 }
 
 /** @internal */
-export namespace UploadDocumentResponseBody$ {
-    export const inboundSchema: z.ZodType<UploadDocumentResponseBody, z.ZodTypeDef, unknown> = z
-        .object({
-            error: z.string().optional(),
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-        })
-        .transform((v) => {
-            const remapped = remap$(v, {
-                HttpMeta: "httpMeta",
-            });
-
-            return new UploadDocumentResponseBody(remapped);
+export const UploadDocumentResponseBody$inboundSchema: z.ZodType<
+    UploadDocumentResponseBody,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        error: z.string().optional(),
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+    })
+    .transform((v) => {
+        const remapped = remap$(v, {
+            HttpMeta: "httpMeta",
         });
 
-    export type Outbound = {
-        error?: string | undefined;
-        HttpMeta: components.HTTPMetadata$.Outbound;
-    };
+        return new UploadDocumentResponseBody(remapped);
+    });
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UploadDocumentResponseBody> = z
-        .instanceof(UploadDocumentResponseBody)
-        .transform((v) => v.data$)
-        .pipe(
-            z
-                .object({
-                    error: z.string().optional(),
-                    httpMeta: components.HTTPMetadata$.outboundSchema,
-                })
-                .transform((v) => {
-                    return remap$(v, {
-                        httpMeta: "HttpMeta",
-                    });
-                })
-        );
+/** @internal */
+export type UploadDocumentResponseBody$Outbound = {
+    error?: string | undefined;
+    HttpMeta: components.HTTPMetadata$Outbound;
+};
+
+/** @internal */
+export const UploadDocumentResponseBody$outboundSchema: z.ZodType<
+    UploadDocumentResponseBody$Outbound,
+    z.ZodTypeDef,
+    UploadDocumentResponseBody
+> = z
+    .instanceof(UploadDocumentResponseBody)
+    .transform((v) => v.data$)
+    .pipe(
+        z
+            .object({
+                error: z.string().optional(),
+                httpMeta: components.HTTPMetadata$outboundSchema,
+            })
+            .transform((v) => {
+                return remap$(v, {
+                    httpMeta: "HttpMeta",
+                });
+            })
+    );
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UploadDocumentResponseBody$ {
+    /** @deprecated use `UploadDocumentResponseBody$inboundSchema` instead. */
+    export const inboundSchema = UploadDocumentResponseBody$inboundSchema;
+    /** @deprecated use `UploadDocumentResponseBody$outboundSchema` instead. */
+    export const outboundSchema = UploadDocumentResponseBody$outboundSchema;
+    /** @deprecated use `UploadDocumentResponseBody$Outbound` instead. */
+    export type Outbound = UploadDocumentResponseBody$Outbound;
 }

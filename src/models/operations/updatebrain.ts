@@ -28,88 +28,148 @@ export type UpdateBrainResponse = {
 };
 
 /** @internal */
+export const UpdateBrainRequestBody$inboundSchema: z.ZodType<
+    UpdateBrainRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    name: z.string(),
+});
+
+/** @internal */
+export type UpdateBrainRequestBody$Outbound = {
+    name: string;
+};
+
+/** @internal */
+export const UpdateBrainRequestBody$outboundSchema: z.ZodType<
+    UpdateBrainRequestBody$Outbound,
+    z.ZodTypeDef,
+    UpdateBrainRequestBody
+> = z.object({
+    name: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UpdateBrainRequestBody$ {
-    export const inboundSchema: z.ZodType<UpdateBrainRequestBody, z.ZodTypeDef, unknown> = z.object(
-        {
-            name: z.string(),
-        }
-    );
-
-    export type Outbound = {
-        name: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UpdateBrainRequestBody> =
-        z.object({
-            name: z.string(),
-        });
+    /** @deprecated use `UpdateBrainRequestBody$inboundSchema` instead. */
+    export const inboundSchema = UpdateBrainRequestBody$inboundSchema;
+    /** @deprecated use `UpdateBrainRequestBody$outboundSchema` instead. */
+    export const outboundSchema = UpdateBrainRequestBody$outboundSchema;
+    /** @deprecated use `UpdateBrainRequestBody$Outbound` instead. */
+    export type Outbound = UpdateBrainRequestBody$Outbound;
 }
 
 /** @internal */
+export const UpdateBrainRequest$inboundSchema: z.ZodType<
+    UpdateBrainRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+        RequestBody: z.lazy(() => UpdateBrainRequestBody$inboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            RequestBody: "requestBody",
+        });
+    });
+
+/** @internal */
+export type UpdateBrainRequest$Outbound = {
+    brain_id: string;
+    RequestBody?: UpdateBrainRequestBody$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateBrainRequest$outboundSchema: z.ZodType<
+    UpdateBrainRequest$Outbound,
+    z.ZodTypeDef,
+    UpdateBrainRequest
+> = z
+    .object({
+        brainId: z.string(),
+        requestBody: z.lazy(() => UpdateBrainRequestBody$outboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            requestBody: "RequestBody",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UpdateBrainRequest$ {
-    export const inboundSchema: z.ZodType<UpdateBrainRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-            RequestBody: z.lazy(() => UpdateBrainRequestBody$.inboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                RequestBody: "requestBody",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-        RequestBody?: UpdateBrainRequestBody$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UpdateBrainRequest> = z
-        .object({
-            brainId: z.string(),
-            requestBody: z.lazy(() => UpdateBrainRequestBody$.outboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                requestBody: "RequestBody",
-            });
-        });
+    /** @deprecated use `UpdateBrainRequest$inboundSchema` instead. */
+    export const inboundSchema = UpdateBrainRequest$inboundSchema;
+    /** @deprecated use `UpdateBrainRequest$outboundSchema` instead. */
+    export const outboundSchema = UpdateBrainRequest$outboundSchema;
+    /** @deprecated use `UpdateBrainRequest$Outbound` instead. */
+    export type Outbound = UpdateBrainRequest$Outbound;
 }
 
 /** @internal */
+export const UpdateBrainResponse$inboundSchema: z.ZodType<
+    UpdateBrainResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Brain: components.Brain$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Brain: "brain",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type UpdateBrainResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Brain?: components.Brain$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const UpdateBrainResponse$outboundSchema: z.ZodType<
+    UpdateBrainResponse$Outbound,
+    z.ZodTypeDef,
+    UpdateBrainResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        brain: components.Brain$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            brain: "Brain",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UpdateBrainResponse$ {
-    export const inboundSchema: z.ZodType<UpdateBrainResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Brain: components.Brain$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Brain: "brain",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Brain?: components.Brain$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UpdateBrainResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            brain: components.Brain$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                brain: "Brain",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `UpdateBrainResponse$inboundSchema` instead. */
+    export const inboundSchema = UpdateBrainResponse$inboundSchema;
+    /** @deprecated use `UpdateBrainResponse$outboundSchema` instead. */
+    export const outboundSchema = UpdateBrainResponse$outboundSchema;
+    /** @deprecated use `UpdateBrainResponse$Outbound` instead. */
+    export type Outbound = UpdateBrainResponse$Outbound;
 }

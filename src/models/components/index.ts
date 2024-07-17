@@ -10,5 +10,7 @@ export * from "./chatbotresponse.js";
 export * from "./chatinteraction.js";
 export * from "./deleteresponse.js";
 export * from "./document.js";
+export * from "./documentreview.js";
+export * from "./documentreviewdetail.js";
 export * from "./httpmetadata.js";
 export * from "./security.js";

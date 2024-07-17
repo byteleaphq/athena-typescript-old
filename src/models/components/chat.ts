@@ -80,48 +80,80 @@ export type Chat = {
 };
 
 /** @internal */
+export const ModelResponse$inboundSchema: z.ZodType<ModelResponse, z.ZodTypeDef, unknown> =
+    z.object({
+        content: z.string().optional(),
+        timestamp: z.number().int().optional(),
+    });
+
+/** @internal */
+export type ModelResponse$Outbound = {
+    content?: string | undefined;
+    timestamp?: number | undefined;
+};
+
+/** @internal */
+export const ModelResponse$outboundSchema: z.ZodType<
+    ModelResponse$Outbound,
+    z.ZodTypeDef,
+    ModelResponse
+> = z.object({
+    content: z.string().optional(),
+    timestamp: z.number().int().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace ModelResponse$ {
-    export const inboundSchema: z.ZodType<ModelResponse, z.ZodTypeDef, unknown> = z.object({
-        content: z.string().optional(),
-        timestamp: z.number().int().optional(),
-    });
-
-    export type Outbound = {
-        content?: string | undefined;
-        timestamp?: number | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ModelResponse> = z.object({
-        content: z.string().optional(),
-        timestamp: z.number().int().optional(),
-    });
+    /** @deprecated use `ModelResponse$inboundSchema` instead. */
+    export const inboundSchema = ModelResponse$inboundSchema;
+    /** @deprecated use `ModelResponse$outboundSchema` instead. */
+    export const outboundSchema = ModelResponse$outboundSchema;
+    /** @deprecated use `ModelResponse$Outbound` instead. */
+    export type Outbound = ModelResponse$Outbound;
 }
 
 /** @internal */
+export const UserInput$inboundSchema: z.ZodType<UserInput, z.ZodTypeDef, unknown> = z.object({
+    content: z.string().optional(),
+    timestamp: z.number().int().optional(),
+});
+
+/** @internal */
+export type UserInput$Outbound = {
+    content?: string | undefined;
+    timestamp?: number | undefined;
+};
+
+/** @internal */
+export const UserInput$outboundSchema: z.ZodType<UserInput$Outbound, z.ZodTypeDef, UserInput> =
+    z.object({
+        content: z.string().optional(),
+        timestamp: z.number().int().optional(),
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace UserInput$ {
-    export const inboundSchema: z.ZodType<UserInput, z.ZodTypeDef, unknown> = z.object({
-        content: z.string().optional(),
-        timestamp: z.number().int().optional(),
-    });
-
-    export type Outbound = {
-        content?: string | undefined;
-        timestamp?: number | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, UserInput> = z.object({
-        content: z.string().optional(),
-        timestamp: z.number().int().optional(),
-    });
+    /** @deprecated use `UserInput$inboundSchema` instead. */
+    export const inboundSchema = UserInput$inboundSchema;
+    /** @deprecated use `UserInput$outboundSchema` instead. */
+    export const outboundSchema = UserInput$outboundSchema;
+    /** @deprecated use `UserInput$Outbound` instead. */
+    export type Outbound = UserInput$Outbound;
 }
 
 /** @internal */
-export namespace RecentChatHistory$ {
-    export const inboundSchema: z.ZodType<RecentChatHistory, z.ZodTypeDef, unknown> = z
+export const RecentChatHistory$inboundSchema: z.ZodType<RecentChatHistory, z.ZodTypeDef, unknown> =
+    z
         .object({
             id: z.string().optional(),
-            model_response: z.lazy(() => ModelResponse$.inboundSchema).optional(),
-            user_input: z.lazy(() => UserInput$.inboundSchema).optional(),
+            model_response: z.lazy(() => ModelResponse$inboundSchema).optional(),
+            user_input: z.lazy(() => UserInput$inboundSchema).optional(),
         })
         .transform((v) => {
             return remap$(v, {
@@ -130,138 +162,186 @@ export namespace RecentChatHistory$ {
             });
         });
 
-    export type Outbound = {
-        id?: string | undefined;
-        model_response?: ModelResponse$.Outbound | undefined;
-        user_input?: UserInput$.Outbound | undefined;
-    };
+/** @internal */
+export type RecentChatHistory$Outbound = {
+    id?: string | undefined;
+    model_response?: ModelResponse$Outbound | undefined;
+    user_input?: UserInput$Outbound | undefined;
+};
 
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, RecentChatHistory> = z
-        .object({
-            id: z.string().optional(),
-            modelResponse: z.lazy(() => ModelResponse$.outboundSchema).optional(),
-            userInput: z.lazy(() => UserInput$.outboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                modelResponse: "model_response",
-                userInput: "user_input",
-            });
+/** @internal */
+export const RecentChatHistory$outboundSchema: z.ZodType<
+    RecentChatHistory$Outbound,
+    z.ZodTypeDef,
+    RecentChatHistory
+> = z
+    .object({
+        id: z.string().optional(),
+        modelResponse: z.lazy(() => ModelResponse$outboundSchema).optional(),
+        userInput: z.lazy(() => UserInput$outboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            modelResponse: "model_response",
+            userInput: "user_input",
         });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RecentChatHistory$ {
+    /** @deprecated use `RecentChatHistory$inboundSchema` instead. */
+    export const inboundSchema = RecentChatHistory$inboundSchema;
+    /** @deprecated use `RecentChatHistory$outboundSchema` instead. */
+    export const outboundSchema = RecentChatHistory$outboundSchema;
+    /** @deprecated use `RecentChatHistory$Outbound` instead. */
+    export type Outbound = RecentChatHistory$Outbound;
 }
 
 /** @internal */
+export const DefaultOptions$inboundSchema: z.ZodType<DefaultOptions, z.ZodTypeDef, unknown> =
+    collectExtraKeys$(
+        z
+            .object({
+                auto_query_guidance: z.nullable(z.string()).optional(),
+                knowledge_base_ids: z.nullable(z.array(z.string())).optional(),
+                model: z.nullable(z.string()).optional(),
+            })
+            .catchall(z.any()),
+        "additionalProperties"
+    ).transform((v) => {
+        return remap$(v, {
+            auto_query_guidance: "autoQueryGuidance",
+            knowledge_base_ids: "knowledgeBaseIds",
+        });
+    });
+
+/** @internal */
+export type DefaultOptions$Outbound = {
+    auto_query_guidance?: string | null | undefined;
+    knowledge_base_ids?: Array<string> | null | undefined;
+    model?: string | null | undefined;
+    [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const DefaultOptions$outboundSchema: z.ZodType<
+    DefaultOptions$Outbound,
+    z.ZodTypeDef,
+    DefaultOptions
+> = z
+    .object({
+        autoQueryGuidance: z.nullable(z.string()).optional(),
+        knowledgeBaseIds: z.nullable(z.array(z.string())).optional(),
+        model: z.nullable(z.string()).optional(),
+        additionalProperties: z.record(z.any()),
+    })
+    .transform((v) => {
+        return {
+            ...v.additionalProperties,
+            ...remap$(v, {
+                autoQueryGuidance: "auto_query_guidance",
+                knowledgeBaseIds: "knowledge_base_ids",
+                additionalProperties: null,
+            }),
+        };
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace DefaultOptions$ {
-    export const inboundSchema: z.ZodType<DefaultOptions, z.ZodTypeDef, unknown> =
-        collectExtraKeys$(
-            z
-                .object({
-                    auto_query_guidance: z.nullable(z.string()).optional(),
-                    knowledge_base_ids: z.nullable(z.array(z.string())).optional(),
-                    model: z.nullable(z.string()).optional(),
-                })
-                .catchall(z.any()),
-            "additionalProperties"
-        ).transform((v) => {
-            return remap$(v, {
-                auto_query_guidance: "autoQueryGuidance",
-                knowledge_base_ids: "knowledgeBaseIds",
-            });
-        });
-
-    export type Outbound = {
-        auto_query_guidance?: string | null | undefined;
-        knowledge_base_ids?: Array<string> | null | undefined;
-        model?: string | null | undefined;
-        [additionalProperties: string]: unknown;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, DefaultOptions> = z
-        .object({
-            autoQueryGuidance: z.nullable(z.string()).optional(),
-            knowledgeBaseIds: z.nullable(z.array(z.string())).optional(),
-            model: z.nullable(z.string()).optional(),
-            additionalProperties: z.record(z.any()),
-        })
-        .transform((v) => {
-            return {
-                ...v.additionalProperties,
-                ...remap$(v, {
-                    autoQueryGuidance: "auto_query_guidance",
-                    knowledgeBaseIds: "knowledge_base_ids",
-                    additionalProperties: null,
-                }),
-            };
-        });
+    /** @deprecated use `DefaultOptions$inboundSchema` instead. */
+    export const inboundSchema = DefaultOptions$inboundSchema;
+    /** @deprecated use `DefaultOptions$outboundSchema` instead. */
+    export const outboundSchema = DefaultOptions$outboundSchema;
+    /** @deprecated use `DefaultOptions$Outbound` instead. */
+    export type Outbound = DefaultOptions$Outbound;
 }
 
 /** @internal */
+export const Chat$inboundSchema: z.ZodType<Chat, z.ZodTypeDef, unknown> = z
+    .object({
+        brain_id: z.nullable(z.string()).optional(),
+        chat_id: z.string().optional(),
+        created_at: z.string().optional(),
+        last_updated: z.nullable(z.string()).optional(),
+        model: z.string().optional(),
+        recent_chat_history: z.array(z.lazy(() => RecentChatHistory$inboundSchema)).optional(),
+        system_message: z.nullable(z.string()).optional(),
+        temperature: z.nullable(z.number()).optional(),
+        title: z.string().optional(),
+        user_id: z.string().optional(),
+        default_options: z.nullable(z.lazy(() => DefaultOptions$inboundSchema)).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            chat_id: "chatId",
+            created_at: "createdAt",
+            last_updated: "lastUpdated",
+            recent_chat_history: "recentChatHistory",
+            system_message: "systemMessage",
+            user_id: "userId",
+            default_options: "defaultOptions",
+        });
+    });
+
+/** @internal */
+export type Chat$Outbound = {
+    brain_id?: string | null | undefined;
+    chat_id?: string | undefined;
+    created_at?: string | undefined;
+    last_updated?: string | null | undefined;
+    model?: string | undefined;
+    recent_chat_history?: Array<RecentChatHistory$Outbound> | undefined;
+    system_message?: string | null | undefined;
+    temperature?: number | null | undefined;
+    title?: string | undefined;
+    user_id?: string | undefined;
+    default_options?: DefaultOptions$Outbound | null | undefined;
+};
+
+/** @internal */
+export const Chat$outboundSchema: z.ZodType<Chat$Outbound, z.ZodTypeDef, Chat> = z
+    .object({
+        brainId: z.nullable(z.string()).optional(),
+        chatId: z.string().optional(),
+        createdAt: z.string().optional(),
+        lastUpdated: z.nullable(z.string()).optional(),
+        model: z.string().optional(),
+        recentChatHistory: z.array(z.lazy(() => RecentChatHistory$outboundSchema)).optional(),
+        systemMessage: z.nullable(z.string()).optional(),
+        temperature: z.nullable(z.number()).optional(),
+        title: z.string().optional(),
+        userId: z.string().optional(),
+        defaultOptions: z.nullable(z.lazy(() => DefaultOptions$outboundSchema)).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            chatId: "chat_id",
+            createdAt: "created_at",
+            lastUpdated: "last_updated",
+            recentChatHistory: "recent_chat_history",
+            systemMessage: "system_message",
+            userId: "user_id",
+            defaultOptions: "default_options",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace Chat$ {
-    export const inboundSchema: z.ZodType<Chat, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.nullable(z.string()).optional(),
-            chat_id: z.string().optional(),
-            created_at: z.string().optional(),
-            last_updated: z.nullable(z.string()).optional(),
-            model: z.string().optional(),
-            recent_chat_history: z.array(z.lazy(() => RecentChatHistory$.inboundSchema)).optional(),
-            system_message: z.nullable(z.string()).optional(),
-            temperature: z.nullable(z.number()).optional(),
-            title: z.string().optional(),
-            user_id: z.string().optional(),
-            default_options: z.nullable(z.lazy(() => DefaultOptions$.inboundSchema)).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                chat_id: "chatId",
-                created_at: "createdAt",
-                last_updated: "lastUpdated",
-                recent_chat_history: "recentChatHistory",
-                system_message: "systemMessage",
-                user_id: "userId",
-                default_options: "defaultOptions",
-            });
-        });
-
-    export type Outbound = {
-        brain_id?: string | null | undefined;
-        chat_id?: string | undefined;
-        created_at?: string | undefined;
-        last_updated?: string | null | undefined;
-        model?: string | undefined;
-        recent_chat_history?: Array<RecentChatHistory$.Outbound> | undefined;
-        system_message?: string | null | undefined;
-        temperature?: number | null | undefined;
-        title?: string | undefined;
-        user_id?: string | undefined;
-        default_options?: DefaultOptions$.Outbound | null | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, Chat> = z
-        .object({
-            brainId: z.nullable(z.string()).optional(),
-            chatId: z.string().optional(),
-            createdAt: z.string().optional(),
-            lastUpdated: z.nullable(z.string()).optional(),
-            model: z.string().optional(),
-            recentChatHistory: z.array(z.lazy(() => RecentChatHistory$.outboundSchema)).optional(),
-            systemMessage: z.nullable(z.string()).optional(),
-            temperature: z.nullable(z.number()).optional(),
-            title: z.string().optional(),
-            userId: z.string().optional(),
-            defaultOptions: z.nullable(z.lazy(() => DefaultOptions$.outboundSchema)).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                chatId: "chat_id",
-                createdAt: "created_at",
-                lastUpdated: "last_updated",
-                recentChatHistory: "recent_chat_history",
-                systemMessage: "system_message",
-                userId: "user_id",
-                defaultOptions: "default_options",
-            });
-        });
+    /** @deprecated use `Chat$inboundSchema` instead. */
+    export const inboundSchema = Chat$inboundSchema;
+    /** @deprecated use `Chat$outboundSchema` instead. */
+    export const outboundSchema = Chat$outboundSchema;
+    /** @deprecated use `Chat$Outbound` instead. */
+    export type Outbound = Chat$Outbound;
 }

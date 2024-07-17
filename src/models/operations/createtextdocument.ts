@@ -28,87 +28,148 @@ export type CreateTextDocumentResponse = {
 };
 
 /** @internal */
+export const CreateTextDocumentRequestBody$inboundSchema: z.ZodType<
+    CreateTextDocumentRequestBody,
+    z.ZodTypeDef,
+    unknown
+> = z.object({
+    content: z.string().optional(),
+});
+
+/** @internal */
+export type CreateTextDocumentRequestBody$Outbound = {
+    content?: string | undefined;
+};
+
+/** @internal */
+export const CreateTextDocumentRequestBody$outboundSchema: z.ZodType<
+    CreateTextDocumentRequestBody$Outbound,
+    z.ZodTypeDef,
+    CreateTextDocumentRequestBody
+> = z.object({
+    content: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateTextDocumentRequestBody$ {
-    export const inboundSchema: z.ZodType<CreateTextDocumentRequestBody, z.ZodTypeDef, unknown> =
-        z.object({
-            content: z.string().optional(),
-        });
-
-    export type Outbound = {
-        content?: string | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateTextDocumentRequestBody> =
-        z.object({
-            content: z.string().optional(),
-        });
+    /** @deprecated use `CreateTextDocumentRequestBody$inboundSchema` instead. */
+    export const inboundSchema = CreateTextDocumentRequestBody$inboundSchema;
+    /** @deprecated use `CreateTextDocumentRequestBody$outboundSchema` instead. */
+    export const outboundSchema = CreateTextDocumentRequestBody$outboundSchema;
+    /** @deprecated use `CreateTextDocumentRequestBody$Outbound` instead. */
+    export type Outbound = CreateTextDocumentRequestBody$Outbound;
 }
 
 /** @internal */
+export const CreateTextDocumentRequest$inboundSchema: z.ZodType<
+    CreateTextDocumentRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        brain_id: z.string(),
+        RequestBody: z.lazy(() => CreateTextDocumentRequestBody$inboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brain_id: "brainId",
+            RequestBody: "requestBody",
+        });
+    });
+
+/** @internal */
+export type CreateTextDocumentRequest$Outbound = {
+    brain_id: string;
+    RequestBody?: CreateTextDocumentRequestBody$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateTextDocumentRequest$outboundSchema: z.ZodType<
+    CreateTextDocumentRequest$Outbound,
+    z.ZodTypeDef,
+    CreateTextDocumentRequest
+> = z
+    .object({
+        brainId: z.string(),
+        requestBody: z.lazy(() => CreateTextDocumentRequestBody$outboundSchema).optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            brainId: "brain_id",
+            requestBody: "RequestBody",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateTextDocumentRequest$ {
-    export const inboundSchema: z.ZodType<CreateTextDocumentRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            brain_id: z.string(),
-            RequestBody: z.lazy(() => CreateTextDocumentRequestBody$.inboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brain_id: "brainId",
-                RequestBody: "requestBody",
-            });
-        });
-
-    export type Outbound = {
-        brain_id: string;
-        RequestBody?: CreateTextDocumentRequestBody$.Outbound | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateTextDocumentRequest> = z
-        .object({
-            brainId: z.string(),
-            requestBody: z.lazy(() => CreateTextDocumentRequestBody$.outboundSchema).optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                brainId: "brain_id",
-                requestBody: "RequestBody",
-            });
-        });
+    /** @deprecated use `CreateTextDocumentRequest$inboundSchema` instead. */
+    export const inboundSchema = CreateTextDocumentRequest$inboundSchema;
+    /** @deprecated use `CreateTextDocumentRequest$outboundSchema` instead. */
+    export const outboundSchema = CreateTextDocumentRequest$outboundSchema;
+    /** @deprecated use `CreateTextDocumentRequest$Outbound` instead. */
+    export type Outbound = CreateTextDocumentRequest$Outbound;
 }
 
 /** @internal */
+export const CreateTextDocumentResponse$inboundSchema: z.ZodType<
+    CreateTextDocumentResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Document: components.Document$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Document: "document",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type CreateTextDocumentResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Document?: components.Document$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const CreateTextDocumentResponse$outboundSchema: z.ZodType<
+    CreateTextDocumentResponse$Outbound,
+    z.ZodTypeDef,
+    CreateTextDocumentResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        document: components.Document$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            document: "Document",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace CreateTextDocumentResponse$ {
-    export const inboundSchema: z.ZodType<CreateTextDocumentResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Document: components.Document$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Document: "document",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Document?: components.Document$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, CreateTextDocumentResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            document: components.Document$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                document: "Document",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `CreateTextDocumentResponse$inboundSchema` instead. */
+    export const inboundSchema = CreateTextDocumentResponse$inboundSchema;
+    /** @deprecated use `CreateTextDocumentResponse$outboundSchema` instead. */
+    export const outboundSchema = CreateTextDocumentResponse$outboundSchema;
+    /** @deprecated use `CreateTextDocumentResponse$Outbound` instead. */
+    export type Outbound = CreateTextDocumentResponse$Outbound;
 }

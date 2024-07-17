@@ -17,33 +17,50 @@ export type ChatbotAnalytics = {
 };
 
 /** @internal */
+export const ChatbotAnalytics$inboundSchema: z.ZodType<ChatbotAnalytics, z.ZodTypeDef, unknown> = z
+    .object({
+        number_of_chats: z.number().int().optional(),
+        number_of_messages: z.number().int().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            number_of_chats: "numberOfChats",
+            number_of_messages: "numberOfMessages",
+        });
+    });
+
+/** @internal */
+export type ChatbotAnalytics$Outbound = {
+    number_of_chats?: number | undefined;
+    number_of_messages?: number | undefined;
+};
+
+/** @internal */
+export const ChatbotAnalytics$outboundSchema: z.ZodType<
+    ChatbotAnalytics$Outbound,
+    z.ZodTypeDef,
+    ChatbotAnalytics
+> = z
+    .object({
+        numberOfChats: z.number().int().optional(),
+        numberOfMessages: z.number().int().optional(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            numberOfChats: "number_of_chats",
+            numberOfMessages: "number_of_messages",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace ChatbotAnalytics$ {
-    export const inboundSchema: z.ZodType<ChatbotAnalytics, z.ZodTypeDef, unknown> = z
-        .object({
-            number_of_chats: z.number().int().optional(),
-            number_of_messages: z.number().int().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                number_of_chats: "numberOfChats",
-                number_of_messages: "numberOfMessages",
-            });
-        });
-
-    export type Outbound = {
-        number_of_chats?: number | undefined;
-        number_of_messages?: number | undefined;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, ChatbotAnalytics> = z
-        .object({
-            numberOfChats: z.number().int().optional(),
-            numberOfMessages: z.number().int().optional(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                numberOfChats: "number_of_chats",
-                numberOfMessages: "number_of_messages",
-            });
-        });
+    /** @deprecated use `ChatbotAnalytics$inboundSchema` instead. */
+    export const inboundSchema = ChatbotAnalytics$inboundSchema;
+    /** @deprecated use `ChatbotAnalytics$outboundSchema` instead. */
+    export const outboundSchema = ChatbotAnalytics$outboundSchema;
+    /** @deprecated use `ChatbotAnalytics$Outbound` instead. */
+    export type Outbound = ChatbotAnalytics$Outbound;
 }

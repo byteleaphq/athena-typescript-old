@@ -20,65 +20,107 @@ export type GetChatByIdResponse = {
 };
 
 /** @internal */
+export const GetChatByIdRequest$inboundSchema: z.ZodType<
+    GetChatByIdRequest,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        chat_id: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chat_id: "chatId",
+        });
+    });
+
+/** @internal */
+export type GetChatByIdRequest$Outbound = {
+    chat_id: string;
+};
+
+/** @internal */
+export const GetChatByIdRequest$outboundSchema: z.ZodType<
+    GetChatByIdRequest$Outbound,
+    z.ZodTypeDef,
+    GetChatByIdRequest
+> = z
+    .object({
+        chatId: z.string(),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            chatId: "chat_id",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetChatByIdRequest$ {
-    export const inboundSchema: z.ZodType<GetChatByIdRequest, z.ZodTypeDef, unknown> = z
-        .object({
-            chat_id: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chat_id: "chatId",
-            });
-        });
-
-    export type Outbound = {
-        chat_id: string;
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatByIdRequest> = z
-        .object({
-            chatId: z.string(),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                chatId: "chat_id",
-            });
-        });
+    /** @deprecated use `GetChatByIdRequest$inboundSchema` instead. */
+    export const inboundSchema = GetChatByIdRequest$inboundSchema;
+    /** @deprecated use `GetChatByIdRequest$outboundSchema` instead. */
+    export const outboundSchema = GetChatByIdRequest$outboundSchema;
+    /** @deprecated use `GetChatByIdRequest$Outbound` instead. */
+    export type Outbound = GetChatByIdRequest$Outbound;
 }
 
 /** @internal */
+export const GetChatByIdResponse$inboundSchema: z.ZodType<
+    GetChatByIdResponse,
+    z.ZodTypeDef,
+    unknown
+> = z
+    .object({
+        HttpMeta: components.HTTPMetadata$inboundSchema,
+        Chat: components.Chat$inboundSchema.optional(),
+        Headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            HttpMeta: "httpMeta",
+            Chat: "chat",
+            Headers: "headers",
+        });
+    });
+
+/** @internal */
+export type GetChatByIdResponse$Outbound = {
+    HttpMeta: components.HTTPMetadata$Outbound;
+    Chat?: components.Chat$Outbound | undefined;
+    Headers: { [k: string]: Array<string> };
+};
+
+/** @internal */
+export const GetChatByIdResponse$outboundSchema: z.ZodType<
+    GetChatByIdResponse$Outbound,
+    z.ZodTypeDef,
+    GetChatByIdResponse
+> = z
+    .object({
+        httpMeta: components.HTTPMetadata$outboundSchema,
+        chat: components.Chat$outboundSchema.optional(),
+        headers: z.record(z.array(z.string())),
+    })
+    .transform((v) => {
+        return remap$(v, {
+            httpMeta: "HttpMeta",
+            chat: "Chat",
+            headers: "Headers",
+        });
+    });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
 export namespace GetChatByIdResponse$ {
-    export const inboundSchema: z.ZodType<GetChatByIdResponse, z.ZodTypeDef, unknown> = z
-        .object({
-            HttpMeta: components.HTTPMetadata$.inboundSchema,
-            Chat: components.Chat$.inboundSchema.optional(),
-            Headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                HttpMeta: "httpMeta",
-                Chat: "chat",
-                Headers: "headers",
-            });
-        });
-
-    export type Outbound = {
-        HttpMeta: components.HTTPMetadata$.Outbound;
-        Chat?: components.Chat$.Outbound | undefined;
-        Headers: { [k: string]: Array<string> };
-    };
-
-    export const outboundSchema: z.ZodType<Outbound, z.ZodTypeDef, GetChatByIdResponse> = z
-        .object({
-            httpMeta: components.HTTPMetadata$.outboundSchema,
-            chat: components.Chat$.outboundSchema.optional(),
-            headers: z.record(z.array(z.string())),
-        })
-        .transform((v) => {
-            return remap$(v, {
-                httpMeta: "HttpMeta",
-                chat: "Chat",
-                headers: "Headers",
-            });
-        });
+    /** @deprecated use `GetChatByIdResponse$inboundSchema` instead. */
+    export const inboundSchema = GetChatByIdResponse$inboundSchema;
+    /** @deprecated use `GetChatByIdResponse$outboundSchema` instead. */
+    export const outboundSchema = GetChatByIdResponse$outboundSchema;
+    /** @deprecated use `GetChatByIdResponse$Outbound` instead. */
+    export type Outbound = GetChatByIdResponse$Outbound;
 }
